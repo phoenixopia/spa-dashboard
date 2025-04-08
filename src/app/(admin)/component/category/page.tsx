@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLayerGroup, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import Image from 'next/image';
+import { Pencil, Trash2 } from "lucide-react";
 import Link from 'next/link';
 
 export default function Category() {
@@ -101,14 +102,16 @@ export default function Category() {
                       </td>
                       <td className="px-6 py-4">{item.description}</td>
                       <td className="px-6 py-4 text-right space-x-2">
-                        <button className="text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
-                        <button
-                          onClick={() => alert(`Deleting ${item.name}`)}
-                          className="text-red-600 dark:text-red-500 hover:underline"
-                        >
-                          Delete
-                        </button>
-                      </td>
+  <button className="text-blue-600 dark:text-blue-500 hover:text-blue-800">
+    <Pencil size={18} />
+  </button>
+  <button
+    onClick={() => alert(`Deleting ${item.name}`)}
+    className="text-red-600 dark:text-red-500 hover:text-red-800"
+  >
+    <Trash2 size={18} />
+  </button>
+</td>
                     </tr>
                   ))}
                 </tbody>
