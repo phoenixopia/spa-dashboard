@@ -1,0 +1,9 @@
+{
+  "/(admin)/dashboard/page": "app/(admin)/dashboard/page.js",
+  "/(admin)/logout/page": "app/(admin)/logout/page.js",
+  "/(admin)/setting/page": "app/(admin)/setting/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/services/category/page": "app/services/category/page.js"
+}
