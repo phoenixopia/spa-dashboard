@@ -1,8 +1,8 @@
 // File: C:\Users\soswo\OneDrive\Desktop\spa-dashboard\src\app\(admin)\setting\page.tsx
-import * as entry from '../../../../../src/app/(admin)/setting/page.js'
+import * as entry from '../../../../../src/app/setting/page.jsx'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../../src/app/(admin)/setting/page.js')
+type TEntry = typeof import('../../../../../src/app/setting/page.jsx')
 
 type SegmentParams<T extends Object = any> = T extends Record<string, any>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }

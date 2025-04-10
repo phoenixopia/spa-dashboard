@@ -34,7 +34,7 @@ export default function Category() {
   const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
   return (
-    <div className="relative bg-cover bg-center min-h-screen" style={{ backgroundImage: 'url("/Image/banner-bg.jpg")' }}>
+    <div className="relative bg-cover bg-center min-h-screen">
       <div className="hidden md:block">
         <Sidebar />
       </div>
@@ -44,19 +44,19 @@ export default function Category() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-8">Category Management</h2>
 
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-            <div className="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <div className="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border-gray-200 rounded-3xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
               <div className="flex items-center space-x-4">
                 <div className="bg-green-100 text-green-600 p-3 rounded-full">
                   <FontAwesomeIcon icon={faLayerGroup} className="text-2xl" />
                 </div>
                 <div>
-                  <h5 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Total Categories</h5>
-                  <p className="text-3xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
+                  <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total Categories</h5>
+                  <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
                 </div>
               </div>
             </div>
 
-            <button className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-blue-700 transition">
+            <button className="w-full sm:w-auto bg-[#5932EA] text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-blue-700 transition">
               <FontAwesomeIcon icon={faPlus} />
               <span>Add Category</span>
             </button>

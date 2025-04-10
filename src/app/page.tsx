@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Sidebar from "./(admin)/component/sidebar/page";
+import LoginPage from "./(admin)/component/login/page";
 
 
 
@@ -10,8 +11,7 @@ import Sidebar from "./(admin)/component/sidebar/page";
 export default function Home() {
   return (
     <div className="relative bg-cover bg-center h-screen" style={{ backgroundImage: 'url("/Image/banner-bg.jpg")' }}>
-      <Sidebar />
-      
+ <LoginPage />      
     </div>
   );
 }

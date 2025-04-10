@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { faCalendarCheck, faGear, faRightFromBracket, faSpa, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -176,15 +178,7 @@ const Sidebar = () => {
                       : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
-                  <svg 
-                    className={`shrink-0 w-5 h-5 ${
-                      isParentActive("services") ? "text-white" : "text-gray-500 group-hover:text-white"
-                    }`} 
-                    fill="currentColor" 
-                    viewBox="0 0 18 21"
-                  >
-                    <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                  </svg>
+                 <FontAwesomeIcon icon={faSpa} />
                   <span className="flex-1 ms-3 text-left">Services</span>
                   {isServicesOpen ? (
                     <svg className="w-4 h-4 ml-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -251,15 +245,7 @@ const Sidebar = () => {
                       : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
-                  <svg
-                    className={`shrink-0 w-5 h-5 ${
-                      isParentActive("landing") ? "text-white" : "text-gray-500 group-hover:text-white"
-                    }`}
-                    fill="currentColor"
-                    viewBox="0 0 18 21"
-                  >
-                    <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                  </svg>
+                  <FontAwesomeIcon icon={faUser} />
                   <span className="flex-1 ms-3 text-left">Landing page</span>
                   {isLandingOpen ? (
                     <svg className="w-4 h-4 ml-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -327,15 +313,7 @@ const Sidebar = () => {
                       : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
-                  <svg 
-                    className={`w-5 h-5 ${
-                      activeNav === "booking" ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-white"
-                    }`} 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377Z" />
-                  </svg>
+                  <FontAwesomeIcon icon={faCalendarCheck} /> 
                   <span className="ms-3">Booking</span>
                 </a>
               </li>
@@ -353,17 +331,7 @@ const Sidebar = () => {
                       : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
-                  <svg 
-                    className={`shrink-0 w-5 h-5 ${
-                      activeNav === "user" ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-white"
-                    }`} 
-                    aria-hidden="true" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 18"
-                  >
-                    <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                  </svg>
+                  <FontAwesomeIcon icon={faUser} />
                   <span className="flex-1 ms-3 whitespace-nowrap">User</span>
                 </a>
               </li>
@@ -382,17 +350,7 @@ const Sidebar = () => {
                       : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
-                  <svg 
-                    className={`shrink-0 w-5 h-5 ${
-                      activeNav === "setting" ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-white"
-                    }`} 
-                    aria-hidden="true" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 18"
-                  >
-                    <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                  </svg>
+                  <FontAwesomeIcon icon={faGear} />
                   <span className="flex-1 ms-3 whitespace-nowrap">Setting</span>
                 </a>
               </li>
@@ -414,17 +372,8 @@ const Sidebar = () => {
                       : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
-                  <svg 
-                    className={`shrink-0 w-5 h-5 ${
-                      activeNav === "logout" ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-white"
-                    }`} 
-                    aria-hidden="true" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 18"
-                  >
-                    <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                  </svg>
+                  <FontAwesomeIcon icon={faRightFromBracket} style={{ transform: 'scaleX(-1)' }} />
+
                   <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
                 </a>
               </li>
