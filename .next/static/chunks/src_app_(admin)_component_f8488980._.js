@@ -201,10 +201,10 @@ const Sidebar = ()=>{
                                             handleNavClick("dashboard");
                                             window.location.href = "/dashboard";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "dashboard" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "dashboard" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                className: `w-5 h-5 ${activeNav === "dashboard" ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-white"}`,
+                                                className: `w-5 h-5 ${activeNav === "dashboard" ? "text-white" : "text-gray-900 dark:text-gray-400 group-hover:text-white"}`,
                                                 fill: "currentColor",
                                                 viewBox: "0 0 22 21",
                                                 children: [
@@ -255,7 +255,7 @@ const Sidebar = ()=>{
                                                 setIsServicesOpen(!isServicesOpen);
                                                 if (!isServicesOpen) handleNavClick("services");
                                             },
-                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("services") ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("services") ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faSpa"]
@@ -328,7 +328,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("services-category");
                                                             window.location.href = "/services/category";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-category" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-category" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Category"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -348,7 +348,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("services-services");
                                                             window.location.href = "/services/services";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-services" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-services" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Services"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -380,7 +380,7 @@ const Sidebar = ()=>{
                                                 setIsLandingOpen(!isLandingOpen);
                                                 if (!isLandingOpen) handleNavClick("landing");
                                             },
-                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("landing") ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("landing") ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faUser"]
@@ -453,7 +453,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("landing-blog");
                                                             window.location.href = "/landing/blog";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-blog" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-blog" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Blog"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -473,7 +473,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("landing-testimonials");
                                                             window.location.href = "/landing/testimonials";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-testimonials" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-testimonials" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Testimonials"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -505,7 +505,7 @@ const Sidebar = ()=>{
                                             handleNavClick("booking");
                                             window.location.href = "/booking";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "booking" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "booking" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faCalendarCheck"]
@@ -541,7 +541,7 @@ const Sidebar = ()=>{
                                             handleNavClick("user");
                                             window.location.href = "/user";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "user" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "user" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faUser"]
@@ -577,7 +577,7 @@ const Sidebar = ()=>{
                                             handleNavClick("setting");
                                             window.location.href = "/setting";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "setting" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "setting" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faGear"]
@@ -613,7 +613,7 @@ const Sidebar = ()=>{
                                             handleNavClick("logout");
                                             window.location.href = "/logout";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "logout" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "logout" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faRightFromBracket"],
@@ -1234,26 +1234,34 @@ function Dashboard() {
                 columnNumber: 7
             }, this),
             showModal && selectedItem && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "fixed inset-0 bg-black/60 flex justify-center items-center z-50 px-4",
+                className: "fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl w-full max-w-lg relative shadow-xl",
+                    className: "bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900",
                     children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: closeModal,
-                            className: "absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white text-2xl font-bold",
-                            "aria-label": "Close",
-                            children: "×"
-                        }, void 0, false, {
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex justify-between items-center mb-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                    className: "text-lg sm:text-xl font-semibold text-gray-800 dark:text-white",
+                                    children: "Booking Details"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
+                                    lineNumber: 159,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: closeModal,
+                                    className: "text-[#008767] hover:text-[#006d50] text-3xl font-bold",
+                                    children: "×"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
+                                    lineNumber: 160,
+                                    columnNumber: 9
+                                }, this)
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 156,
-                            columnNumber: 7
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "text-2xl font-semibold mb-3 text-center text-gray-800 dark:text-white",
-                            children: "Booking Details"
-                        }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 165,
+                            lineNumber: 158,
                             columnNumber: 7
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1264,13 +1272,13 @@ function Dashboard() {
                                     children: selectedItem.customerName
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 169,
+                                    lineNumber: 170,
                                     columnNumber: 27
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 168,
+                            lineNumber: 169,
                             columnNumber: 7
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1283,7 +1291,7 @@ function Dashboard() {
                                             children: "Date:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 175,
+                                            lineNumber: 176,
                                             columnNumber: 11
                                         }, this),
                                         " ",
@@ -1291,7 +1299,7 @@ function Dashboard() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 174,
+                                    lineNumber: 175,
                                     columnNumber: 9
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1301,7 +1309,7 @@ function Dashboard() {
                                             children: "Time:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 178,
+                                            lineNumber: 179,
                                             columnNumber: 11
                                         }, this),
                                         " ",
@@ -1309,13 +1317,13 @@ function Dashboard() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 177,
+                                    lineNumber: 178,
                                     columnNumber: 9
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 173,
+                            lineNumber: 174,
                             columnNumber: 7
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1323,11 +1331,11 @@ function Dashboard() {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     htmlFor: "status",
-                                    className: "block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300",
+                                    className: "block mb-2 text-sm font-medium text-[#008767] dark:text-gray-300",
                                     children: "Change Status"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 184,
+                                    lineNumber: 185,
                                     columnNumber: 9
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1336,14 +1344,14 @@ function Dashboard() {
                                         id: "status",
                                         value: selectedItem.status,
                                         onChange: (e)=>updateStatus(e.target.value),
-                                        className: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10",
+                                        className: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767] pr-10",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                 value: "Completed",
                                                 children: "Completed"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                lineNumber: 192,
+                                                lineNumber: 193,
                                                 columnNumber: 13
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1351,7 +1359,7 @@ function Dashboard() {
                                                 children: "Pending"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                lineNumber: 193,
+                                                lineNumber: 194,
                                                 columnNumber: 13
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1359,35 +1367,35 @@ function Dashboard() {
                                                 children: "Rejected"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                lineNumber: 194,
+                                                lineNumber: 195,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 186,
+                                        lineNumber: 187,
                                         columnNumber: 11
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 185,
+                                    lineNumber: 186,
                                     columnNumber: 9
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 183,
+                            lineNumber: 184,
                             columnNumber: 7
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                    lineNumber: 153,
+                    lineNumber: 155,
                     columnNumber: 5
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                lineNumber: 152,
+                lineNumber: 154,
                 columnNumber: 3
             }, this)
         ]
@@ -1410,12 +1418,12 @@ function StatCard({ icon, title, value }) {
                     className: "text-2xl"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                    lineNumber: 211,
+                    lineNumber: 213,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                lineNumber: 210,
+                lineNumber: 212,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1425,7 +1433,7 @@ function StatCard({ icon, title, value }) {
                         children: title
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                        lineNumber: 214,
+                        lineNumber: 216,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1433,19 +1441,19 @@ function StatCard({ icon, title, value }) {
                         children: value
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                        lineNumber: 215,
+                        lineNumber: 217,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                lineNumber: 213,
+                lineNumber: 215,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-        lineNumber: 209,
+        lineNumber: 211,
         columnNumber: 5
     }, this);
 }

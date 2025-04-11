@@ -147,22 +147,23 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Modal */}
-      {showModal && selectedItem && (
-  <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 px-4">
-    <div className="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl w-full max-w-lg relative shadow-xl">
 
+      
+{/* status edit Modal */}
+{showModal && selectedItem && (
+  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
+      
       {/* Close Button */}
-      <button
-        onClick={closeModal}
-        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white text-2xl font-bold"
-        aria-label="Close"
-      >
-        &times;
-      </button>
-
-      {/* Title */}
-      <h2 className="text-2xl font-semibold mb-3 text-center text-gray-800 dark:text-white">Booking Details</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Booking Details</h2>
+        <button
+          onClick={closeModal}
+          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
+        >
+          ×
+        </button>
+      </div>
 
       {/* Customer Info */}
       <p className="mb-5 text-sm text-center text-gray-600 dark:text-gray-300">
@@ -181,24 +182,25 @@ export default function Dashboard() {
 
       {/* Status Dropdown Field */}
       <div className="mb-4 items-center">
-        <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Change Status</label>
+        <label htmlFor="status" className="block mb-2 text-sm font-medium text-[#008767] dark:text-gray-300">Change Status</label>
         <div className="relative">
           <select
             id="status"
             value={selectedItem.status}
             onChange={(e) => updateStatus(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767] pr-10"
           >
             <option value="Completed">Completed</option>
             <option value="Pending">Pending</option>
             <option value="Rejected">Rejected</option>
           </select>
-          
         </div>
       </div>
     </div>
   </div>
 )}
+
+
 
     </div>
   );

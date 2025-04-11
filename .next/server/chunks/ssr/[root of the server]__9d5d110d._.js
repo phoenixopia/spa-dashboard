@@ -217,7 +217,7 @@ const Sidebar = ()=>{
                                             handleNavClick("dashboard");
                                             window.location.href = "/dashboard";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "dashboard" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "dashboard" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                 className: `w-5 h-5 ${activeNav === "dashboard" ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-white"}`,
@@ -271,7 +271,7 @@ const Sidebar = ()=>{
                                                 setIsServicesOpen(!isServicesOpen);
                                                 if (!isServicesOpen) handleNavClick("services");
                                             },
-                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("services") ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("services") ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faSpa"]
@@ -344,7 +344,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("services-category");
                                                             window.location.href = "/services/category";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-category" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-category" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Category"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -364,7 +364,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("services-services");
                                                             window.location.href = "/services/services";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-services" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-services" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Services"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -396,7 +396,7 @@ const Sidebar = ()=>{
                                                 setIsLandingOpen(!isLandingOpen);
                                                 if (!isLandingOpen) handleNavClick("landing");
                                             },
-                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("landing") ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("landing") ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faUser"]
@@ -469,7 +469,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("landing-blog");
                                                             window.location.href = "/landing/blog";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-blog" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-blog" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Blog"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -489,7 +489,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("landing-testimonials");
                                                             window.location.href = "/landing/testimonials";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-testimonials" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-testimonials" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Testimonials"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -521,7 +521,7 @@ const Sidebar = ()=>{
                                             handleNavClick("booking");
                                             window.location.href = "/booking";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "booking" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "booking" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faCalendarCheck"]
@@ -557,7 +557,7 @@ const Sidebar = ()=>{
                                             handleNavClick("user");
                                             window.location.href = "/user";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "user" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "user" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faUser"]
@@ -593,7 +593,7 @@ const Sidebar = ()=>{
                                             handleNavClick("setting");
                                             window.location.href = "/setting";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "setting" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "setting" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faGear"]
@@ -629,7 +629,7 @@ const Sidebar = ()=>{
                                             handleNavClick("logout");
                                             window.location.href = "/logout";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "logout" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "logout" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faRightFromBracket"],

@@ -201,7 +201,7 @@ const Sidebar = ()=>{
                                             handleNavClick("dashboard");
                                             window.location.href = "/dashboard";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "dashboard" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "dashboard" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                 className: `w-5 h-5 ${activeNav === "dashboard" ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-white"}`,
@@ -255,7 +255,7 @@ const Sidebar = ()=>{
                                                 setIsServicesOpen(!isServicesOpen);
                                                 if (!isServicesOpen) handleNavClick("services");
                                             },
-                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("services") ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("services") ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faSpa"]
@@ -328,7 +328,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("services-category");
                                                             window.location.href = "/services/category";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-category" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-category" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Category"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -348,7 +348,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("services-services");
                                                             window.location.href = "/services/services";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-services" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "services-services" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Services"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -380,7 +380,7 @@ const Sidebar = ()=>{
                                                 setIsLandingOpen(!isLandingOpen);
                                                 if (!isLandingOpen) handleNavClick("landing");
                                             },
-                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("landing") ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                            className: `flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${isParentActive("landing") ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faUser"]
@@ -453,7 +453,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("landing-blog");
                                                             window.location.href = "/landing/blog";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-blog" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-blog" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Blog"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -473,7 +473,7 @@ const Sidebar = ()=>{
                                                             handleNavClick("landing-testimonials");
                                                             window.location.href = "/landing/testimonials";
                                                         },
-                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-testimonials" ? "bg-[#5932EA] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
+                                                        className: `flex items-center w-full p-2 pl-11 rounded-lg ${activeNav === "landing-testimonials" ? "bg-[#008767] text-white" : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`,
                                                         children: "Testimonials"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
@@ -505,7 +505,7 @@ const Sidebar = ()=>{
                                             handleNavClick("booking");
                                             window.location.href = "/booking";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "booking" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "booking" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faCalendarCheck"]
@@ -541,7 +541,7 @@ const Sidebar = ()=>{
                                             handleNavClick("user");
                                             window.location.href = "/user";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "user" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "user" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faUser"]
@@ -577,7 +577,7 @@ const Sidebar = ()=>{
                                             handleNavClick("setting");
                                             window.location.href = "/setting";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "setting" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "setting" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faGear"]
@@ -613,7 +613,7 @@ const Sidebar = ()=>{
                                             handleNavClick("logout");
                                             window.location.href = "/logout";
                                         },
-                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "logout" ? "bg-[#5932EA] text-white" : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
+                                        className: `flex items-center p-2 rounded-lg group ${activeNav === "logout" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faRightFromBracket"],
@@ -707,63 +707,83 @@ var _s = __turbopack_context__.k.signature();
 function User() {
     _s();
     const itemsPerPage = 3;
-    const data = [
+    const initialData = [
         {
             name: 'Apple MacBook Pro 17"',
-            phone: '1111232456',
-            email: 'asdfasdga',
-            date: '2023-10-01'
+            Phone: '1234567890',
+            email: "High-end laptop",
+            date: "12.23.2001",
+            password: ""
         },
         {
-            name: 'Microsoft Surface Pro',
-            phone: '1345678909',
-            email: 'asdfasdga',
-            date: '2023-10-02'
+            name: 'Apple MacBook Pro 17"',
+            Phone: '1234567890',
+            email: "High-end laptop",
+            date: "12.23.2001",
+            password: ""
         },
         {
-            name: 'Microsoft Surface Pro',
-            phone: '657483902',
-            email: 'asdfasdga',
-            date: '2023-10-02'
+            name: 'Apple MacBook Pro 17"',
+            Phone: '1234567890',
+            email: "High-end laptop",
+            date: "12.23.2001",
+            password: ""
         },
         {
-            name: 'Magic Mouse 2',
-            phone: '5678920',
-            email: 'asdfasdga',
-            date: '2023-10-02'
+            name: 'Apple MacBook Pro 17"',
+            Phone: '1234567890',
+            email: "High-end laptop",
+            date: "12.23.2001",
+            password: ""
         },
         {
-            name: 'iPhone 13',
-            phone: '1029348576',
-            email: 'asdfasdga',
-            date: '2023-10-02'
+            name: 'Apple MacBook Pro 17"',
+            Phone: '1234567890',
+            email: "High-end laptop",
+            date: "12.23.2001",
+            password: ""
         },
         {
-            name: 'iPad Pro',
-            phone: '1092384756',
-            email: 'asdfasdga',
-            date: '2023-10-02'
+            name: 'Apple MacBook Pro 17"',
+            Phone: '1234567890',
+            email: "High-end laptop",
+            date: "12.23.2001",
+            password: ""
         },
         {
-            name: 'Apple Watch',
-            phone: '1029384576',
-            email: 'asdfasdga',
-            date: '2023-10-02'
+            name: 'Apple MacBook Pro 17"',
+            Phone: '1234567890',
+            email: "High-end laptop",
+            date: "12.23.2001",
+            password: ""
         },
         {
-            name: 'AirPods Pro',
-            phone: '102938475',
-            email: 'asdfasdga',
-            date: '2023-10-02'
-        },
-        {
-            name: 'Dell XPS 13',
-            phone: '0129384756',
-            email: 'asdfasdga',
-            date: '2023-10-02'
+            name: 'Apple MacBook Pro 17"',
+            Phone: '1234567890',
+            email: "High-end laptop",
+            date: "12.23.2001",
+            password: ""
         }
     ];
+    const [data, setData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialData);
     const [currentPage, setCurrentPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
+    const [showModal, setShowModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [editIndex, setEditIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [editForm, setEditForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        name: "",
+        Phone: "",
+        email: "",
+        date: "",
+        password: ""
+    });
+    const [addModal, setAddModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [newUser, setNewUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        name: "",
+        Phone: "",
+        email: "",
+        date: "",
+        password: ""
+    });
     const totalItems = data.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -771,6 +791,74 @@ function User() {
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
     const handlePrev = ()=>setCurrentPage((prev)=>Math.max(prev - 1, 1));
     const handleNext = ()=>setCurrentPage((prev)=>Math.min(prev + 1, totalPages));
+    const handleEditClick = (index)=>{
+        const item = data[index];
+        setEditIndex(index);
+        setEditForm({
+            ...item,
+            Phone: "",
+            password: "",
+            email: item.email || ""
+        });
+        setShowModal(true);
+    };
+    const handleEditChange = (e)=>{
+        setEditForm({
+            ...editForm,
+            [e.target.name]: e.target.value
+        });
+    };
+    const handleSave = ()=>{
+        if (editIndex !== null) {
+            const updated = [
+                ...data
+            ];
+            updated[editIndex] = {
+                ...updated[editIndex],
+                ...editForm
+            };
+            setData(updated);
+        }
+        setShowModal(false);
+    };
+    const handleImageUpload = (e)=>{
+        const files = e.target.files;
+        if (files && files[0]) {
+            const imageUrl = URL.createObjectURL(files[0]);
+            setEditForm((prev)=>({
+                    ...prev,
+                    image: imageUrl
+                }));
+        }
+    };
+    const handleAddUserChange = (e)=>{
+        setNewUser({
+            ...newUser,
+            [e.target.name]: e.target.value
+        });
+    };
+    const handleAddImageUpload = (e)=>{
+        const files = e.target.files;
+        if (files && files[0]) {
+            const imageUrl = URL.createObjectURL(files[0]);
+            setNewUser((prev)=>({
+                    ...prev,
+                    image: imageUrl
+                }));
+        }
+    };
+    const handleAddSave = ()=>{
+        setData((prev)=>[
+                ...prev,
+                {
+                    ...newUser,
+                    date: new Date().toLocaleDateString()
+                }
+            ]);
+        setAddModal(false);
+    };
+    const [showDeleteModal, setShowDeleteModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [deleteIndex, setDeleteIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "relative bg-cover bg-center min-h-screen",
         children: [
@@ -778,12 +866,12 @@ function User() {
                 className: "hidden md:block",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$sidebar$2f$page$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                    lineNumber: 40,
+                    lineNumber: 93,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                lineNumber: 39,
+                lineNumber: 92,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -796,7 +884,7 @@ function User() {
                             children: "User Management"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                            lineNumber: 45,
+                            lineNumber: 98,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -814,12 +902,12 @@ function User() {
                                                     className: "text-2xl"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                    lineNumber: 51,
-                                                    columnNumber: 17
+                                                    lineNumber: 104,
+                                                    columnNumber: 37
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                lineNumber: 50,
+                                                lineNumber: 103,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -829,7 +917,7 @@ function User() {
                                                         children: "Total Users"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                        lineNumber: 54,
+                                                        lineNumber: 107,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -837,53 +925,54 @@ function User() {
                                                         children: totalItems
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                        lineNumber: 55,
+                                                        lineNumber: 108,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                lineNumber: 53,
+                                                lineNumber: 106,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                        lineNumber: 49,
+                                        lineNumber: 102,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                    lineNumber: 48,
-                                    columnNumber: 17
+                                    lineNumber: 101,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    className: "w-full sm:w-auto bg-[#5932EA] text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-blue-700 transition",
+                                    onClick: ()=>setAddModal(true),
+                                    className: "w-full sm:w-auto bg-[#008767] text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-[#006d50] transition",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                             icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faPlus"]
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                            lineNumber: 63,
+                                            lineNumber: 117,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             children: "Add User"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                            lineNumber: 64,
+                                            lineNumber: 118,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                    lineNumber: 62,
+                                    lineNumber: 113,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                            lineNumber: 47,
+                            lineNumber: 100,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -897,7 +986,7 @@ function User() {
                                             children: "User List"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                            lineNumber: 70,
+                                            lineNumber: 124,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -905,10 +994,10 @@ function User() {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-green-700 font-medium whitespace-nowrap",
-                                                    children: "All Users"
+                                                    children: "Active User"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                    lineNumber: 72,
+                                                    lineNumber: 126,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -917,84 +1006,79 @@ function User() {
                                                     className: "px-2 py-1.5 border rounded-md text-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                    lineNumber: 73,
+                                                    lineNumber: 127,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                            lineNumber: 71,
+                                            lineNumber: 125,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                    lineNumber: 69,
+                                    lineNumber: 123,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "relative overflow-x-auto shadow-sm rounded-lg",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
-                                        className: "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400",
+                                        className: "w-full text-sm text-left text-gray-500 dark:text-gray-400",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
                                                 className: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            scope: "col",
                                                             className: "px-6 py-3",
-                                                            children: "Name"
+                                                            children: "User Name"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                            lineNumber: 85,
+                                                            lineNumber: 139,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            scope: "col",
                                                             className: "px-6 py-3",
                                                             children: "Phone Number"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                            lineNumber: 86,
+                                                            lineNumber: 140,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            scope: "col",
                                                             className: "px-6 py-3",
                                                             children: "Email"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                            lineNumber: 87,
+                                                            lineNumber: 141,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            scope: "col",
                                                             className: "px-6 py-3",
                                                             children: "Date"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                            lineNumber: 88,
+                                                            lineNumber: 142,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            scope: "col",
                                                             className: "px-6 py-3 text-right",
                                                             children: "Actions"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                            lineNumber: 89,
+                                                            lineNumber: 144,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                    lineNumber: 84,
+                                                    lineNumber: 138,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                lineNumber: 83,
+                                                lineNumber: 137,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1002,96 +1086,99 @@ function User() {
                                                         className: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition",
                                                         children: [
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                                scope: "row",
                                                                 className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
                                                                 children: item.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                lineNumber: 95,
-                                                                columnNumber: 23
+                                                                lineNumber: 150,
+                                                                columnNumber: 45
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                className: "px-6 py-4",
-                                                                children: item.phone
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                                className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
+                                                                children: item.Phone
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                lineNumber: 98,
+                                                                lineNumber: 152,
                                                                 columnNumber: 23
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                className: "px-6 py-4",
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                                className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
                                                                 children: item.email
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                lineNumber: 100,
+                                                                lineNumber: 153,
                                                                 columnNumber: 23
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                className: "px-6 py-4",
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                                className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
                                                                 children: item.date
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                lineNumber: 101,
+                                                                lineNumber: 154,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                                 className: "px-6 py-4 text-right space-x-2",
                                                                 children: [
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                        className: "text-blue-600 dark:text-blue-500 hover:text-blue-800",
+                                                                        className: "text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]",
+                                                                        onClick: ()=>handleEditClick(index + indexOfFirstItem),
                                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__["Pencil"], {
                                                                             size: 18
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                            lineNumber: 104,
-                                                                            columnNumber: 5
+                                                                            lineNumber: 161,
+                                                                            columnNumber: 27
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                        lineNumber: 103,
-                                                                        columnNumber: 3
+                                                                        lineNumber: 157,
+                                                                        columnNumber: 25
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                        onClick: ()=>alert(`Deleting ${item.name}`),
+                                                                        onClick: ()=>{
+                                                                            setDeleteIndex(index + indexOfFirstItem);
+                                                                            setShowDeleteModal(true);
+                                                                        },
                                                                         className: "text-red-600 dark:text-red-500 hover:text-red-800",
                                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
                                                                             size: 18
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                            lineNumber: 110,
-                                                                            columnNumber: 5
+                                                                            lineNumber: 170,
+                                                                            columnNumber: 3
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                        lineNumber: 106,
-                                                                        columnNumber: 3
+                                                                        lineNumber: 163,
+                                                                        columnNumber: 25
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                                lineNumber: 102,
+                                                                lineNumber: 156,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, index, true, {
                                                         fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                        lineNumber: 94,
+                                                        lineNumber: 149,
                                                         columnNumber: 21
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                lineNumber: 92,
+                                                lineNumber: 147,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                        lineNumber: 82,
+                                        lineNumber: 136,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                    lineNumber: 81,
+                                    lineNumber: 135,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1109,7 +1196,7 @@ function User() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                            lineNumber: 121,
+                                            lineNumber: 181,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1122,7 +1209,7 @@ function User() {
                                                     children: "Previous"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                    lineNumber: 125,
+                                                    lineNumber: 185,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1134,7 +1221,7 @@ function User() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                    lineNumber: 132,
+                                                    lineNumber: 192,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1144,46 +1231,462 @@ function User() {
                                                     children: "Next"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                                    lineNumber: 133,
+                                                    lineNumber: 193,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                            lineNumber: 124,
+                                            lineNumber: 184,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                                    lineNumber: 120,
+                                    lineNumber: 180,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                            lineNumber: 68,
+                            lineNumber: 122,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                    lineNumber: 44,
+                    lineNumber: 97,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-                lineNumber: 43,
+                lineNumber: 96,
                 columnNumber: 7
+            }, this),
+            addModal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex justify-between items-center mb-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                    className: "text-lg sm:text-xl font-semibold text-gray-800 dark:text-white",
+                                    children: "Add User"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 213,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>setAddModal(false),
+                                    className: "text-[#008767] hover:text-[#006d50] text-3xl font-bold",
+                                    children: "×"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 214,
+                                    columnNumber: 9
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 212,
+                            columnNumber: 7
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "space-y-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                            children: "Name of the user"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 223,
+                                            columnNumber: 11
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            name: "name",
+                                            type: "text",
+                                            value: newUser.name,
+                                            onChange: handleAddUserChange,
+                                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 224,
+                                            columnNumber: 11
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 222,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                            children: "Email"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 233,
+                                            columnNumber: 11
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            name: "name",
+                                            type: "text",
+                                            value: newUser.email,
+                                            onChange: handleAddUserChange,
+                                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 234,
+                                            columnNumber: 11
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 232,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                            children: "Phone Number"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 243,
+                                            columnNumber: 11
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            name: "name",
+                                            type: "text",
+                                            value: newUser.Phone,
+                                            onChange: handleAddUserChange,
+                                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 244,
+                                            columnNumber: 11
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 242,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                            children: "Password"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 253,
+                                            columnNumber: 11
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            name: "name",
+                                            type: "text",
+                                            value: newUser.password,
+                                            onChange: handleAddUserChange,
+                                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 254,
+                                            columnNumber: 11
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 252,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: handleAddSave,
+                                        className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
+                                        children: "Save"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                        lineNumber: 266,
+                                        columnNumber: 11
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 264,
+                                    columnNumber: 9
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 221,
+                            columnNumber: 7
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                    lineNumber: 211,
+                    columnNumber: 5
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                lineNumber: 210,
+                columnNumber: 3
+            }, this),
+            showDeleteModal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-sm dark:bg-gray-900",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                            className: "text-lg sm:text-xl font-semibold mb-4 text-gray-800 dark:text-white",
+                            children: "Are you sure you want to delete this User?"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 284,
+                            columnNumber: 7
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>setShowDeleteModal(false),
+                                    className: "px-4 py-2 rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 w-full sm:w-auto",
+                                    children: "Cancel"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 288,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>{
+                                        if (deleteIndex !== null) {
+                                            const updated = [
+                                                ...data
+                                            ];
+                                            updated.splice(deleteIndex, 1);
+                                            setData(updated);
+                                        }
+                                        setShowDeleteModal(false);
+                                        setDeleteIndex(null);
+                                    },
+                                    className: "px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 w-full sm:w-auto",
+                                    children: "Delete"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 294,
+                                    columnNumber: 9
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 287,
+                            columnNumber: 7
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                    lineNumber: 283,
+                    columnNumber: 5
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                lineNumber: 282,
+                columnNumber: 3
+            }, this),
+            showModal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex justify-between items-center mb-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                    className: "text-lg sm:text-xl font-semibold text-gray-800 dark:text-white",
+                                    children: "Edit User"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 319,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>setShowModal(false),
+                                    className: "text-[#008767] hover:text-[#006d50] text-3xl font-bold",
+                                    "aria-label": "Close Modal",
+                                    children: "×"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 320,
+                                    columnNumber: 9
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 318,
+                            columnNumber: 7
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "space-y-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                            children: "Name of the User"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 331,
+                                            columnNumber: 11
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            name: "name",
+                                            type: "text",
+                                            value: editForm.name,
+                                            onChange: handleEditChange,
+                                            placeholder: "Enter user's full name",
+                                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 332,
+                                            columnNumber: 11
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 330,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                            children: "Email"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 343,
+                                            columnNumber: 11
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            name: "email",
+                                            type: "text",
+                                            value: editForm.email,
+                                            onChange: handleEditChange,
+                                            placeholder: "Enter email address",
+                                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 344,
+                                            columnNumber: 11
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 342,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                            children: "Phone Number"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 355,
+                                            columnNumber: 11
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            name: "Phone",
+                                            type: "text",
+                                            value: editForm.Phone,
+                                            onChange: handleEditChange,
+                                            placeholder: "Enter phone number",
+                                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 356,
+                                            columnNumber: 11
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 354,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                            children: "Password"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 367,
+                                            columnNumber: 11
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            name: "password",
+                                            type: "password",
+                                            value: editForm.password,
+                                            onChange: handleEditChange,
+                                            placeholder: "Enter password",
+                                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 368,
+                                            columnNumber: 11
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 366,
+                                    columnNumber: 9
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: handleSave,
+                                        className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
+                                        children: "Save"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                        lineNumber: 379,
+                                        columnNumber: 11
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 378,
+                                    columnNumber: 9
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 329,
+                            columnNumber: 7
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                    lineNumber: 317,
+                    columnNumber: 5
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                lineNumber: 316,
+                columnNumber: 3
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/component/users/page.tsx",
-        lineNumber: 38,
+        lineNumber: 91,
         columnNumber: 5
     }, this);
 }
-_s(User, "6xAUoJ2motYJ38x4zeUWisA+X/4=");
+_s(User, "UXqQ4xw2S7qI+WpFLrNfGozOe+Q=");
 _c = User;
 var _c;
 __turbopack_context__.k.register(_c, "User");

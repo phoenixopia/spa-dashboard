@@ -1,37 +1,40 @@
 "use client";
 
 import Sidebar from "../sidebar/page";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLayerGroup, faPlus, faSquareRss } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
-import Image from 'next/image';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLayerGroup, faPlus, faSquareRss } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import Image from "next/image";
 import { Pencil, Trash2 } from "lucide-react";
-import Link from 'next/link';
 
 export default function Booking() {
   const itemsPerPage = 3;
-  const data = [
-    { name: 'Apple MacBook Pro 17"', service: 'High-end laptop', email:'adfadsfadfa', Phone:'1234567890', date: '2023-10-01', status:"Pending" },
-    { name: 'Apple MacBook Pro 17"', service: 'High-end laptop', email:'adfadsfadfa',Phone:'1234567890', date: '2023-10-01', status:"Approved" },
-
-    { name: 'Apple MacBook Pro 17"', service: 'High-end laptop',email:'adfadsfadfa', Phone:'1234567890', date: '2023-10-01' , status:"Rejected"},
-
-    { name: 'Apple MacBook Pro 17"', service: 'High-end laptop',email:'adfadsfadfa', Phone:'1234567890', date: '2023-10-01' , status:"Pending" },
-    { name: 'Apple MacBook Pro 17"', service: 'High-end laptop',email:'adfadsfadfa', Phone:'1234567890', date: '2023-10-01' , status:"Pending"},
-
-    { name: 'Apple MacBook Pro 17"', service: 'High-end laptop', email:'adfadsfadfa',Phone:'1234567890', date: '2023-10-01', status:"Approved" },
-
-    { name: 'Apple MacBook Pro 17"', service: 'High-end laptop', email:'adfadsfadfa',Phone:'1234567890', date: '2023-10-01', status:"Rejected" },
-
-    { name: 'Apple MacBook Pro 17"', service: 'High-end laptop', email:'adfadsfadfa',Phone:'1234567890', date: '2023-10-01', status:"Approved" },
-
-
+  const initialData = [
+    { name: 'Apple MacBook Pro 17"', service: "High-end laptop", number: "1234567890", email:"asdfghjkl", date:"1.2.2001", status:"Pending" },
+    { name: 'Apple MacBook Pro 17"', service: "High-end laptop", number: "1234567890", email:"asdfghjkl", date:"1.2.2001", status:"Completed" },
+    { name: 'Apple MacBook Pro 17"', service: "High-end laptop", number: "1234567890", email:"asdfghjkl", date:"1.2.2001", status:"Rejected" },
+    { name: 'Apple MacBook Pro 17"', service: "High-end laptop", number: "1234567890", email:"asdfghjkl", date:"1.2.2001", status:"Completed" },
+    { name: 'Apple MacBook Pro 17"', service: "High-end laptop", number: "1234567890", email:"asdfghjkl", date:"1.2.2001", status:"Completed" },
+    { name: 'Apple MacBook Pro 17"', service: "High-end laptop", number: "1234567890", email:"asdfghjkl", date:"1.2.2001", status:"Completed" },
+    { name: 'Apple MacBook Pro 17"', service: "High-end laptop", number: "1234567890", email:"asdfghjkl", date:"1.2.2001", status:"Completed" },
+    { name: 'Apple MacBook Pro 17"', service: "High-end laptop", number: "1234567890", email:"asdfghjkl", date:"1.2.2001", status:"Pending" },
   ];
 
+  const [data, setData] = useState(initialData);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editForm, setEditForm] = useState({ name: "", service: "", number: "", email: "", date: "", status: "" });
+  const [addModal, setAddModal] = useState(false);
+  const [newBooking, setNewBooking] = useState({ name: "", service: "", number: "", email: "", date: "" , status: ""});
 
   const totalItems = data.length;
+  const [items, setItems] = useState(data);
+  
   const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
+  const [selectedItem, setSelectedItem] = useState<typeof data[0] | null>(null);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -40,6 +43,67 @@ export default function Booking() {
   const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
+  const handleEditClick = (index: number) => {
+    const item = data[index];
+    setEditIndex(index);
+    setEditForm(item);
+    setShowModal(true);
+  };
+
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setEditForm({ ...editForm, [e.target.name]: e.target.value });
+  };
+
+  const handleSave = () => {
+    if (editIndex !== null) {
+      const updated = [...data];
+      updated[editIndex] = editForm;
+      setData(updated);
+    }
+    setShowModal(false);
+  };
+
+  const openModal = (item:any)=> {
+    setSelectedItem(item);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedItem(null);
+  };
+
+  const updateStatus = (newStatus: string) => {
+      const updatedItems = items.map((item: typeof data[0]) => {
+        if (item === selectedItem) return { ...item, status: newStatus };
+        return item;
+      });
+      setItems(updatedItems);
+      closeModal();
+    };
+
+
+  
+  const handleAddBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setNewBooking({ ...newBooking, [e.target.name]: e.target.value });
+  };
+
+  const handleAddImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files[0]) {
+      const imageUrl = URL.createObjectURL(files[0]);
+      setNewBooking(prev => ({ ...prev, image: imageUrl }));
+    }
+  };
+
+  const handleAddSave = () => {
+    setData(prev => [...prev, { ...newBooking, service: "Default Service", number: "0000000000", email: "default@example.com", date: new Date().toLocaleDateString(), status: "" }]);
+    setAddModal(false);
+  };
+  console.log(selectedItem,'fsf')
+ 
+// Removed redundant openModal declaration
+
   return (
     <div className="relative bg-cover bg-center min-h-screen">
       <div className="hidden md:block">
@@ -47,7 +111,8 @@ export default function Booking() {
       </div>
 
       <div className="px-4 sm:px-6 lg:px-8 py-6 space-y-20 md:ml-[260px]">
-        <div className="max-w-7xl w-full mx-auto">
+        
+      <div className="max-w-7xl w-full mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 mb-8">Booking Management</h2>
 
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
@@ -76,8 +141,11 @@ export default function Booking() {
               </div>
             </div>
             </div>
-
-            <button className="w-full sm:w-auto bg-[#5932EA] text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-blue-700 transition">
+            
+            <button
+              onClick={() => setAddModal(true)}
+              className="w-full sm:w-auto bg-[#008767] text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-[#006d50] transition"
+            >
               <FontAwesomeIcon icon={faPlus} />
               <span>Add Booking</span>
             </button>
@@ -97,49 +165,45 @@ export default function Booking() {
             </div>
 
             <div className="relative overflow-x-auto shadow-sm rounded-lg">
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">Customer Name</th>
-                    <th scope="col" className="px-6 py-3">Service</th>
-                    <th scope="col" className="px-6 py-3">Phone Number</th>
-                    <th scope="col" className="px-6 py-3">Email</th>
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th className="px-6 py-3">Customer Name</th>
+      <th className="px-6 py-3">Service</th>
+      <th className="px-6 py-3">Phone Number</th>
+      <th className="px-6 py-3 text-left">Email</th>
+      <th className="px-6 py-3 text-left">Date</th>
+      <th className="px-6 py-3 text-center">Status</th> 
+    </tr>
+  </thead>
+  <tbody>
+                  {currentItems.map((item, idx) => (
+                    <tr
+                      key={idx}
+                      onClick={() => openModal(item)} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</td>
+        <td className="px-6 py-4">{item.service}</td>
+        <td className="px-6 py-4">{item.number}</td>
+        <td className="px-6 py-4 text-left">{item.email}</td> 
+        <td className="px-6 py-4 text-left">{item.date}</td>
+        <td className="px-6 py-4 text-center">
+          <span className={`px-2 py-1 rounded-full text-xs font-medium ${ 
+            item.status === 'Completed' ? 'bg-green-100 text-green-800' : 
+            item.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
+            item.status === 'Rejected' ? 'bg-red-100 text-red-800' : 
+            'bg-gray-100 text-gray-800' 
+          }`}>
+            {item.status}
+          </span>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
-                    <th scope="col" className="px-6 py-3">Date</th>
-                    <th scope="col" className="px-6 py-3 text-right">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems.map((item, index) => (
-                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {item.name}
-                      </th>
-                      <td className="px-6 py-4">{item.service}</td>
 
-                      <td className="px-6 py-4">{item.Phone}</td>
-                      <td className="px-6 py-4">{item.email}</td>
-
-                      <td className="px-6 py-4">{item.date}</td>
-                      <td>
-        <button
-          className={`
-            px-4 py-2 my-3 text-white font-semibold 
-            ${item.status === 'Approved' ? 'bg-green-600 hover:bg-green-600' : ''}
-            ${item.status === 'Pending' ? 'bg-yellow-500 hover:bg-yellow-500' : ''}
-            ${item.status === 'Rejected' ? 'bg-red-600 hover:bg-red-600' : ''}
-          `}
-        >
-          {item.status}
-        </button>
-      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
             </div>
 
-            {/* Footer: Pagination + Showing */}
             <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-600 dark:text-gray-300">
               <p>
                 Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, totalItems)} of {totalItems} entries
@@ -165,6 +229,162 @@ export default function Booking() {
           </div>
         </div>
       </div>
+
+
+
+
+
+{/* Add Booking Modal */}
+{addModal && (
+  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Add Booking</h2>
+        <button
+          onClick={() => setAddModal(false)}
+          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
+          aria-label="Close Modal"
+        >
+          ×
+        </button>
+      </div>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Booking Name</label>
+          <input
+            name="name"
+            type="text"
+            value={newBooking.name}
+            onChange={handleAddBookingChange}
+            placeholder="Enter booking name"
+            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Service</label>
+          <input
+            name="service"
+            type="text"
+            value={newBooking.service}
+            onChange={handleAddBookingChange}
+            placeholder="Enter service details"
+            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Phone Number</label>
+          <input
+            name="number"
+            type="text"
+            value={newBooking.number}
+            onChange={handleAddBookingChange}
+            placeholder="Enter phone number"
+            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Email</label>
+          <input
+            name="email"
+            type="text"
+            value={newBooking.email}
+            onChange={handleAddBookingChange}
+            placeholder="Enter email address"
+            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Date</label>
+          <input
+            name="date"
+            type="date"
+            value={newBooking.date}
+            onChange={handleAddBookingChange}
+            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+          />
+        </div>
+
+        
+
+        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
+          <button
+            onClick={handleAddSave}
+            className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+  
+
+
+
+
+
+
+{showModal &&  (<div>
+
+
+  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
+      
+      {/* Close Button */}
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Booking Details</h2>
+        <button
+          onClick={()=>setShowModal(false)}
+          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
+        >
+          ×
+        </button>
+      </div>
+
+      {/* Customer Info */}
+      <p className="mb-5 text-sm text-center text-gray-600 dark:text-gray-300">
+        Update status for <strong>{selectedItem?.name? selectedItem?.name :"-"}</strong>
+      </p>
+
+      {/* Date & Time Fields */}
+      <div className="flex flex-col sm:flex-r+ow gap-4 mb-6">
+        <div className="flex-1 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg text-sm text-gray-800 dark:text-white shadow-sm">
+          <strong>Date:</strong> {selectedItem?.date}
+        </div>
+        {/* <div className="flex-1 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg text-sm text-gray-800 dark:text-white shadow-sm">
+          <strong>Time:</strong> {selectedItem.time}
+        </div> */}
+      </div>
+
+      {/* Status Dropdown Field */}
+      <div className="mb-4 items-center">
+        <label htmlFor="status" className="block mb-2 text-sm font-medium text-[#008767] dark:text-gray-300">Change Status</label>
+        <div className="relative">
+          <select
+            id="status"
+            value={selectedItem?.status}
+            onChange={(e) => updateStatus(e.target.value)}
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767] pr-10"
+          >
+            <option value="Completed">Completed</option>
+            <option value="Pending">Pending</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>)}
+
+
+
     </div>
   );
 }

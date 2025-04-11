@@ -146,13 +146,13 @@ const Sidebar = () => {
                   }}
                   className={`flex items-center p-2 rounded-lg group ${
                     activeNav === "dashboard"
-                      ? "bg-[#5932EA] text-white"
-                      : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
+                      ? "bg-[#008767] text-white"
+                      : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
                   <svg 
                     className={`w-5 h-5 ${
-                      activeNav === "dashboard" ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-white"
+                      activeNav === "dashboard" ? "text-white" : "text-gray-900 dark:text-gray-400 group-hover:text-white"
                     }`} 
                     fill="currentColor" 
                     viewBox="0 0 22 21"
@@ -174,8 +174,8 @@ const Sidebar = () => {
                   }}
                   className={`flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${
                     isParentActive("services")
-                      ? "bg-[#5932EA] text-white"
-                      : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
+                      ? "bg-[#008767] text-white"
+                      : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
                  <FontAwesomeIcon icon={faSpa} />
@@ -203,7 +203,7 @@ const Sidebar = () => {
                         }}
                         className={`flex items-center w-full p-2 pl-11 rounded-lg ${
                           activeNav === "services-category"
-                            ? "bg-[#5932EA] text-white"
+                            ? "bg-[#008767] text-white"
                             : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         }`}
                       >
@@ -220,7 +220,7 @@ const Sidebar = () => {
                         }}
                         className={`flex items-center w-full p-2 pl-11 rounded-lg ${
                           activeNav === "services-services"
-                            ? "bg-[#5932EA] text-white"
+                            ? "bg-[#008767] text-white"
                             : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         }`}
                       >
@@ -241,8 +241,8 @@ const Sidebar = () => {
                   }}
                   className={`flex items-center w-full p-2 text-base transition duration-75 rounded-lg group ${
                     isParentActive("landing")
-                      ? "bg-[#5932EA] text-white"
-                      : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
+                      ? "bg-[#008767] text-white"
+                      : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
                   <FontAwesomeIcon icon={faUser} />
@@ -270,7 +270,7 @@ const Sidebar = () => {
                         }}
                         className={`flex items-center w-full p-2 pl-11 rounded-lg ${
                           activeNav === "landing-blog"
-                            ? "bg-[#5932EA] text-white"
+                            ? "bg-[#008767] text-white"
                             : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         }`}
                       >
@@ -287,7 +287,7 @@ const Sidebar = () => {
                         }}
                         className={`flex items-center w-full p-2 pl-11 rounded-lg ${
                           activeNav === "landing-testimonials"
-                            ? "bg-[#5932EA] text-white"
+                            ? "bg-[#008767] text-white"
                             : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         }`}
                       >
@@ -309,8 +309,8 @@ const Sidebar = () => {
                   }}
                   className={`flex items-center p-2 rounded-lg group ${
                     activeNav === "booking"
-                      ? "bg-[#5932EA] text-white"
-                      : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
+                      ? "bg-[#008767] text-white"
+                      : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
                   <FontAwesomeIcon icon={faCalendarCheck} /> 
@@ -327,8 +327,8 @@ const Sidebar = () => {
                   }}
                   className={`flex items-center p-2 rounded-lg group ${
                     activeNav === "user"
-                      ? "bg-[#5932EA] text-white"
-                      : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
+                      ? "bg-[#008767] text-white"
+                      : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
                   <FontAwesomeIcon icon={faUser} />
@@ -346,8 +346,8 @@ const Sidebar = () => {
                   }}
                   className={`flex items-center p-2 rounded-lg group ${
                     activeNav === "setting"
-                      ? "bg-[#5932EA] text-white"
-                      : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
+                      ? "bg-[#008767] text-white"
+                      : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
                   <FontAwesomeIcon icon={faGear} />
@@ -368,8 +368,8 @@ const Sidebar = () => {
                   }}
                   className={`flex items-center p-2 rounded-lg group ${
                     activeNav === "logout"
-                      ? "bg-[#5932EA] text-white"
-                      : "text-gray-900 hover:bg-[#5932EA] hover:text-white dark:text-white dark:hover:bg-gray-700"
+                      ? "bg-[#008767] text-white"
+                      : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
                   }`}
                 >
                   <FontAwesomeIcon icon={faRightFromBracket} style={{ transform: 'scaleX(-1)' }} />
