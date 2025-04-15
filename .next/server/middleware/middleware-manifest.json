@@ -3,58 +3,30 @@
   "middleware": {
     "/": {
       "files": [
-        "server/edge/chunks/_a1b8b59d._.js",
-        "server/edge/chunks/[root of the server]__10ae24bd._.js",
-        "server/edge/chunks/edge-wrapper_321a5c3e.js"
+        "server/edge/chunks/_94a4b977._.js",
+        "server/edge/chunks/[root of the server]__860be4f0._.js",
+        "server/edge/chunks/edge-wrapper_1985d09c.js"
       ],
       "name": "middleware",
       "page": "/",
       "matchers": [
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/dashboard{(\\\\.json)}?",
-          "originalSource": "/dashboard"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/((?!api|trpc|_next|_vercel|.*\\..*).*){(\\\\.json)}?",
+          "originalSource": "/((?!api|trpc|_next|_vercel|.*\\..*).*)"
         },
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/services{(\\\\.json)}?",
-          "originalSource": "/services"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/category{(\\\\.json)}?",
-          "originalSource": "/category"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/landing{(\\\\.json)}?",
-          "originalSource": "/landing"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/blog{(\\\\.json)}?",
-          "originalSource": "/blog"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/testimonials{(\\\\.json)}?",
-          "originalSource": "/testimonials"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/booking{(\\\\.json)}?",
-          "originalSource": "/booking"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/usersetting{(\\\\.json)}?",
-          "originalSource": "/usersetting"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/logout{(\\\\.json)}?",
-          "originalSource": "/logout"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/([\\w-]+)?/reset-password/(.+){(\\\\.json)}?",
+          "originalSource": "/([\\w-]+)?/reset-password/(.+)"
         }
       ],
       "wasm": [],
       "assets": [],
       "env": {
         "__NEXT_BUILD_ID": "development",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "9hWcvswU4qTgP8TTBYPbKdkwmGdr2/uvvySQ/YifIdY=",
-        "__NEXT_PREVIEW_MODE_ID": "480bec44809235c8ea6ef493f5b23515",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "949e75ce1cb570d13be86356f24b5477937ab97dc4f4fbb556b1d277805a0120",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "436013621a4f8bb007d28780ce02b5ac58c5135329050ccbcf6d7c74cd36d7b1"
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "57/Ob+n4Yq54kOl7tK+N7buvs+1bb2kJeS4H72nBhK4=",
+        "__NEXT_PREVIEW_MODE_ID": "d64fa38eea718c69063d5418299224d6",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "2a81cde66220e29ab22aae7fd42dc65ea250b6561cd90b2e6bc6af1da38f4047",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "e1466f0ddb168a84bdb54fa96f03c1631630813e5f2c6908aa307ee5335ab079"
       }
     }
   },

@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../sidebar/page";
 import { Bell, Trash2, Menu } from "lucide-react";
-const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
+const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
 interface Notification {
   id: number;
@@ -22,8 +22,8 @@ export default function NotificationPage() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get(`${BURL}/notifications`);
-        setNotifications(response.data);
+        const response = await axios.get(`${BURL}/notification`);
+        setNotifications(response.data.data);
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }
@@ -32,8 +32,17 @@ export default function NotificationPage() {
     fetchNotifications();
   }, []);
 
-  const handleDelete = (id: number) => {
-    setNotifications((prev) => prev.filter((note) => note.id !== id));
+  const handleDelete = async (id: number) => {
+    try {
+      await axios.post(`${BURL}/notification/edit/${id}`, {
+        status: "archived",
+      });
+
+      // Remove from UI
+      setNotifications((prev) => prev.filter((note) => note.id !== id));
+    } catch (error) {
+      console.error("Error archiving notification:", error);
+    }
   };
 
   return (

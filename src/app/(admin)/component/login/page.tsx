@@ -15,13 +15,13 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
 
   // Check if email is saved in localStorage on component mount
-  useEffect(() => {
-    const savedEmail = localStorage.getItem("email");
-    if (savedEmail) {
-      setEmail(savedEmail);
-      setRememberMe(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedEmail = localStorage.getItem("email");
+  //   if (savedEmail) {
+  //     setEmail(savedEmail);
+  //     setRememberMe(true);
+  //   }
+  // }, []);
 
   const validatePassword = (password: string) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})/;
@@ -41,10 +41,11 @@ export default function LoginPage() {
       const response = await axios.post(
         `${BURL}/auth/signin`,
         { email, password },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       console.log("Login successful:", response.status === 200);
       router.push("/dashboard");
+      console.log(response,'responsed')
 
       if (response.status === 200) {
         if (rememberMe) {
@@ -54,7 +55,7 @@ export default function LoginPage() {
           // Clear email from localStorage if Remember Me is unchecked
           localStorage.removeItem("email");
         }
-        router.push("/dashboard");
+        // router.push("/dashboard");
       }
     } catch (err: any) {
       if (err.response && err.response.status === 404) {

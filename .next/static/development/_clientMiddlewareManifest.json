@@ -1,38 +1,10 @@
 [
   {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/dashboard(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/dashboard"
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/((?!api|trpc|_next|_vercel|.*\\..*).*))(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/((?!api|trpc|_next|_vercel|.*\\..*).*)"
   },
   {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/services(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/services"
-  },
-  {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/category(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/category"
-  },
-  {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/landing(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/landing"
-  },
-  {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/blog(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/blog"
-  },
-  {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/testimonials(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/testimonials"
-  },
-  {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/booking(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/booking"
-  },
-  {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/usersetting(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/usersetting"
-  },
-  {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/logout(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/logout"
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/([\\w-]+))?\\/reset-password(?:\\/(.+))(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/([\\w-]+)?/reset-password/(.+)"
   }
 ]
