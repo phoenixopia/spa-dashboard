@@ -4,7 +4,7 @@ import axios from "axios";
 interface EditForm {
   name: string;
   categoryId: string;
-  price: string;
+  price: number;
 }
 
 interface EditserviceModalProps {
@@ -51,15 +51,12 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
   if (!showModal) return null;
 
   const handleSave = async () => {
-    const token = getCookie("authToken");
-
-    if (!token) {
-      setMessage("You must be logged in to update the service.");
-      setMessageType("error");
-      return;
-    }
-
+    
     try {
+      const token = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('token='))
+      ?.split('=')[1] || '';
       const response = await axios.put(
         `${BURL}/service/edit/${serviceId}`,
         {
@@ -71,6 +68,7 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          withCredentials: true,
         }
       );
       setMessage("Service updated successfully!");
@@ -147,7 +145,7 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
             </label>
             <input
               name="price"
-              type="text"
+              type="number"
               value={editForm.price}
               onChange={handleEditChange}
               placeholder="Enter price"

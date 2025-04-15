@@ -4,6 +4,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { faCalendarCheck, faGear, faRightFromBracket, faSpa, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -357,26 +359,39 @@ const Sidebar = () => {
 
 
 
-
               <li>
-                <a 
-                  href="/logout"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("logout");
-                    window.location.href = "/logout";
-                  }}
-                  className={`flex items-center p-2 rounded-lg group ${
-                    activeNav === "logout"
-                      ? "bg-[#008767] text-white"
-                      : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
-                  }`}
-                >
-                  <FontAwesomeIcon icon={faRightFromBracket} style={{ transform: 'scaleX(-1)' }} />
+  <a
+    href="/logout"
+    onClick={async (e) => {
+      e.preventDefault();
 
-                  <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
-                </a>
-              </li>
+      try {
+        await axios.post(
+          `${BURL}/auth/logout`,
+          {},
+          {
+            withCredentials: true, // send cookies with request
+          }
+        );
+      } catch (err) {
+        console.error("Logout failed", err);
+      }
+
+      handleNavClick("logout");
+      window.location.href = "/";
+    }}
+    className={`flex items-center p-2 rounded-lg group ${
+      activeNav === "logout"
+        ? "bg-[#008767] text-white"
+        : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"
+    }`}
+  >
+    <FontAwesomeIcon icon={faRightFromBracket} style={{ transform: "scaleX(-1)" }} />
+    <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
+  </a>
+</li>
+
+
 
 
               

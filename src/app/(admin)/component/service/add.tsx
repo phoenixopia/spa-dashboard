@@ -15,7 +15,7 @@ interface AddserviceModalProps {
   newservice: {
     name: string;
     categoryId: string;
-    price: string;
+    price: number;
   };
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
@@ -32,11 +32,16 @@ const AddserviceModal: React.FC<AddserviceModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       axios
-        .get(`${BURL}/category`)
-        .then(res => setCategories(res.data.data)) // <-- Make sure to access `data.data`
+        .get(`${BURL}/category`, {
+        })
+        .then(res => {
+          setCategories(res.data.data);
+          console.log('Fetched Categories:', res.data.data); // ✅ Move this inside the .then block
+        })
         .catch(err => console.error('Error fetching categories:', err));
     }
   }, [isOpen]);
+  
 
   if (!isOpen) return null;
 

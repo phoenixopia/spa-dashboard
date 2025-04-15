@@ -17,17 +17,35 @@ const DeleteserviceModal: React.FC<DeleteserviceModalProps> = ({
   serviceId,
   onDeleted,
 }) => {
+ 
+  
   const handleDelete = async () => {
     if (!serviceId) return;
-
+  
+    const token = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('token='))
+    ?.split('=')[1] || '';
+  
+    if (!token) {
+      console.error("No token found in cookies.");
+      return;
+    }
+  
     try {
-      await axios.delete(`${BURL}/service/delete/${serviceId}`);
+      await axios.delete(`${BURL}/service/delete/${serviceId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
       onDeleted(); // Refresh or refetch data
       onClose();
     } catch (error) {
       console.error("Error deleting service:", error);
     }
   };
+  
 
   if (!isOpen) return null;
 

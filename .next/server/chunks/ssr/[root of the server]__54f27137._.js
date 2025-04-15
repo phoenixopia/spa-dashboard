@@ -626,38 +626,40 @@ const Sidebar = ()=>{
                                         href: "/logout",
                                         onClick: (e)=>{
                                             e.preventDefault();
+                                            // Clear token cookie if accessible
+                                            document.cookie = "authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
                                             handleNavClick("logout");
-                                            window.location.href = "/logout";
+                                            window.location.href = "/login"; // or use navigate('/login') if using react-router
                                         },
                                         className: `flex items-center p-2 rounded-lg group ${activeNav === "logout" ? "bg-[#008767] text-white" : "text-gray-900 hover:bg-[#006d50] hover:text-white dark:text-white dark:hover:bg-gray-700"}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
                                                 icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faRightFromBracket"],
                                                 style: {
-                                                    transform: 'scaleX(-1)'
+                                                    transform: "scaleX(-1)"
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
-                                                lineNumber: 375,
-                                                columnNumber: 19
+                                                lineNumber: 378,
+                                                columnNumber: 5
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "flex-1 ms-3 whitespace-nowrap",
                                                 children: "Logout"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
-                                                lineNumber: 377,
-                                                columnNumber: 19
+                                                lineNumber: 379,
+                                                columnNumber: 5
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
-                                        lineNumber: 362,
-                                        columnNumber: 17
+                                        lineNumber: 361,
+                                        columnNumber: 3
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
-                                    lineNumber: 361,
+                                    lineNumber: 360,
                                     columnNumber: 15
                                 }, this)
                             ]

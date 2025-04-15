@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
@@ -13,15 +15,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-
-  // Check if email is saved in localStorage on component mount
-  // useEffect(() => {
-  //   const savedEmail = localStorage.getItem("email");
-  //   if (savedEmail) {
-  //     setEmail(savedEmail);
-  //     setRememberMe(true);
-  //   }
-  // }, []);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validatePassword = (password: string) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})/;
@@ -31,31 +26,33 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     if (!validatePassword(password)) {
       setError("Password must be at least 8 characters, include one capital letter and one special character.");
+      setLoading(false);
       return;
     }
 
     try {
-      const response = await axios.post(
-        `${BURL}/auth/signin`,
-        { email, password },
-        { withCredentials: true },
-      );
-      console.log("Login successful:", response.status === 200);
-      router.push("/dashboard");
-      console.log(response,'responsed')
+      const response = await axios.post(`${BURL}/auth/signin`, { email, password });
 
       if (response.status === 200) {
+        const token = response.data.data.token;
+
+        Cookies.set("token", token, {
+          expires: 1,
+          secure: true,
+          sameSite: "Strict",
+        });
+
         if (rememberMe) {
-          // Store email in localStorage if Remember Me is checked
           localStorage.setItem("email", email);
         } else {
-          // Clear email from localStorage if Remember Me is unchecked
           localStorage.removeItem("email");
         }
-        // router.push("/dashboard");
+
+        router.push("/dashboard");
       }
     } catch (err: any) {
       if (err.response && err.response.status === 404) {
@@ -63,6 +60,8 @@ export default function LoginPage() {
       } else {
         setError("Something went wrong. Please try again.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -114,16 +113,24 @@ export default function LoginPage() {
                 placeholder="you@example.com"
               />
             </div>
-            <div>
+
+            <div className="relative">
               <label className="block text-sm font-medium text-white">Password</label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="mt-1 w-full rounded-md bg-white border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-[#289C9A]"
+                className="mt-1 w-full rounded-md bg-white border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-[#289C9A] pr-10"
                 placeholder="••••••••"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-9 right-3 cursor-pointer text-gray-600"
+                >
+                {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+              </button>
             </div>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-sm text-white gap-2 sm:gap-0">
@@ -143,9 +150,36 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full rounded-md bg-[#289C9A] px-4 py-2 text-white hover:bg-[#207372] transition"
+              className="w-full flex justify-center items-center gap-2 rounded-md bg-[#289C9A] px-4 py-2 text-white hover:bg-[#207372] transition disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={loading}
             >
-              Sign In
+              {loading ? (
+                <>
+                  <svg
+                    className="h-5 w-5 animate-spin text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                    />
+                  </svg>
+                  <span>Logging in...</span>
+                </>
+              ) : (
+                "Sign In"
+              )}
             </button>
           </form>
         </div>

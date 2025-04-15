@@ -28,7 +28,7 @@ export default function Service() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [editForm, setEditForm] = useState({ name: "", categoryId:"", price: "" });
+  const [editForm, setEditForm] = useState({ name: "", categoryId:"", price: 0.0 });
   const totalItems = data ? data.length : 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -53,7 +53,7 @@ export default function Service() {
     if (typeof item === "object" && item !== null) {
       if (typeof item === "object" && item !== null) {
         setEditForm({
-          ...item, name: "", categoryId: "", price: ""
+          ...item, name: "", categoryId: "", price: 0.0
         });
       }
     }
@@ -70,7 +70,7 @@ export default function Service() {
 const [newservice, setNewservice] = useState({
   name: '',
   categoryId:'',
-  price: '',
+  price: 0.0,
   
 });
 
@@ -81,14 +81,29 @@ const handleAddserviceChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSele
 
 const handleAddSave = async () => {
   try {
-    const response = await axios.post(`${BURL}/service/create`, newservice);
+    const token = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('token='))
+      ?.split('=')[1] || ''; // Extract token from cookies
+    const response = await axios.post(
+      `${BURL}/service/create`,
+      newservice,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
     console.log('service added:', response?.data?.service);
     setAddModal(false);
-    fetchData(); // ⬅️ Refresh the list
+    fetchData(); // refresh list
   } catch (error) {
     console.error('Error adding service:', error);
   }
 };
+
+
 
 
   const [showDeleteModal, setShowDeleteModal] = useState(false); // ✅ Keep this
@@ -128,7 +143,7 @@ useEffect(() => {
     setEditForm({
       name: item.name || "",
       categoryId: item.categoryId || "",
-      price: item.price || "",
+      price: item.price || 0.0,
       
     });
   }
@@ -148,9 +163,6 @@ useEffect(() => {
   }, []);
 
 
-console.log("edit Form:", editForm);
-
-
 
   return (
     <div className="relative bg-cover bg-center min-h-screen">
@@ -164,18 +176,18 @@ console.log("edit Form:", editForm);
         <div className="max-w-7xl w-full mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 mb-8">Service Management</h2>
 
-          <>
+            <>
 
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div className="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border-gray-200 rounded-3xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
               <div className="flex items-center space-x-4">
-                <div className="bg-green-100 text-green-600 p-3 rounded-full">
-                                    <FontAwesomeIcon icon={faServer}  className="text-2xl" />
-                </div>
-                <div>
-                  <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total services</h5>
-                  <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
-                </div>
+              <div className="bg-green-100 text-green-600 p-3 rounded-full">
+                        <FontAwesomeIcon icon={faServer}  className="text-2xl" />
+              </div>
+              <div>
+                <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total services</h5>
+                <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
+              </div>
               </div>
             </div>
 
@@ -186,17 +198,17 @@ console.log("edit Form:", editForm);
               <FontAwesomeIcon icon={faPlus} />
               <span>Add service</span>
             </button>
-          </div>
-          <AddserviceModal
-  isOpen={addModal}
-  onClose={() => setAddModal(false)}
-  onSave={handleAddSave}
-  newservice={newservice}
-  onChange={handleAddserviceChange}
-/>
+            </div>
+            <AddserviceModal
+        isOpen={addModal}
+        onClose={() => setAddModal(false)}
+        onSave={handleAddSave}
+        newservice={newservice}
+        onChange={handleAddserviceChange}
+      />
 
 
-</>
+      </>
 
 
           <div className="bg-white shadow-md rounded-2xl p-4 sm:p-6 dark:bg-gray-900">
@@ -245,7 +257,7 @@ console.log("edit Form:", editForm);
     setEditForm({
       name: item.name || "",
       categoryId: item.categoryId || "",
-      price: item.price || "",
+      price: item.price || 0.0,
       
     });
     setserviceId(item.id); // Or whatever your service ID key is
@@ -321,3 +333,5 @@ console.log("edit Form:", editForm);
     </div>
   );
 }
+
+
