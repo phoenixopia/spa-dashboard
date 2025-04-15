@@ -2,85 +2,154 @@
 
 import Sidebar from "../sidebar/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLayerGroup, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { faLayerGroup, faPlus, faServer } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Pencil, Trash2 } from "lucide-react";
-import Category from "../category/page";
+import axios from "axios";
+import DeleteserviceModal from './delete'; // Adjust path if needed
+
+import { Console } from "console";
+import AddserviceModal from './add'; // import the modal component
+import EditserviceModal from "./edit"; // import the modal component
+
+
+const BURL = process.env.NEXT_PUBLIC_APP_URL;
+
+
 
 export default function Service() {
   const itemsPerPage = 3;
-  const initialData = [
-    { name: 'Apple MacBook Pro 17"', category: "High-end laptop", price: "/Images/hi.jpeg" },
-    { name: 'Apple MacBook Pro 17"', category: "High-end laptop", price: "/Images/hi.jpeg" },
-    { name: 'Apple MacBook Pro 17"', category: "High-end laptop", price: "/Images/hi.jpeg" },
-    { name: 'Apple MacBook Pro 17"', category: "High-end laptop", price: "/Images/hi.jpeg" },
-    { name: 'Apple MacBook Pro 17"', category: "High-end laptop", price: "/Images/hi.jpeg" },
-    { name: 'Apple MacBook Pro 17"', category: "High-end laptop", price: "/Images/hi.jpeg" },
-    { name: 'Apple MacBook Pro 17"', category: "High-end laptop", price: "/Images/hi.jpeg" },
-    { name: 'Apple MacBook Pro 17"', category: "High-end laptop", price: "/Images/hi.jpeg" },
-  ];
+  
+  const [categoryMap, setCategoryMap] = useState<{ [key: string]: string }>({});
 
-  const [data, setData] = useState(initialData);
+  
+  const [data, setData] = useState<any[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [editForm, setEditForm] = useState({ name: "", category: "", price: "" });
-  const [addModal, setAddModal] = useState(false);
-  const [newService, setNewService] = useState({ name: "", category: "", price: "" });
-
-  const totalItems = data.length;
+  const [editForm, setEditForm] = useState({ name: "", categoryId:"", price: "" });
+  const totalItems = data ? data.length : 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  // console.log("data:", data);
+  // console.log("type of data:", typeof data);
+  // console.log("isArray:", Array.isArray(data));
+  const currentItems = [];
+  for (let i = indexOfFirstItem; i < indexOfLastItem && data && i < data.length; i++) {
+    currentItems.push(data[i]);
+  }
+  
 
-  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
+  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+
   const handleEditClick = (index: number) => {
-    const item = data[index];
+    const item = data ? data[index] : null;
     setEditIndex(index);
-    setEditForm(item);
+    if (typeof item === "object" && item !== null) {
+      if (typeof item === "object" && item !== null) {
+        setEditForm({
+          ...item, name: "", categoryId: "", price: ""
+        });
+      }
+    }
     setShowModal(true);
   };
 
- 
-
-  const handleSave = () => {
-    if (editIndex !== null) {
-      const updated = [...data];
-      updated[editIndex] = editForm;
-      setData(updated);
-    }
-    setShowModal(false);
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
  
 
-  const handleAddServiceChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setNewService({ ...newService, [e.target.name]: e.target.value });
-  };
+  const [addModal, setAddModal] = useState(false);
+const [newservice, setNewservice] = useState({
+  name: '',
+  categoryId:'',
+  price: '',
+  
+});
 
-  const handleEditChange = (e: { target: { name: any; value: any; }; }) => {
-    const { name, value } = e.target;
-    setEditForm((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+const handleAddserviceChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+  const { name, value } = e.target;
+  setNewservice(prev => ({ ...prev, [name]: value }));
+};
 
-
-  const uniqueCategories = [...new Set(initialData.map(item => item.category))];
-
-  const handleAddSave = () => {
-    setData(prev => [...prev, newService]);
+const handleAddSave = async () => {
+  try {
+    const response = await axios.post(`${BURL}/service/create`, newservice);
+    console.log('service added:', response?.data?.service);
     setAddModal(false);
-  };
+    fetchData(); // ⬅️ Refresh the list
+  } catch (error) {
+    console.error('Error adding service:', error);
+  }
+};
 
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // ✅ Keep this
+  const [deleteItemId, setDeleteItemId] = useState<string | null>(null); // ✅ Keep this
+  const [serviceId, setserviceId] = useState("");
+
+  
+
+
+const fetchData = async () => {
+  try {
+    const res = await axios.get(`${BURL}/service`);
+    console.log("API raw response:", res.data);
+
+    // Confirm the actual response structure and access correctly:
+    if (Array.isArray(res.data.data)) {
+      setData(res.data.data); // this is correct if the API returns { data: [...] }
+    } else if (Array.isArray(res.data)) {
+      setData(res.data); // if API returns an array directly
+    } else {
+      console.error("Unexpected data structure:", res.data);
+    }
+  } catch (error) {
+    console.error("Error fetching services:", error);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+
+
+
+useEffect(() => {
+  if (editIndex !== null && data && data[editIndex]) {
+    const item = data[editIndex];
+    setEditForm({
+      name: item.name || "",
+      categoryId: item.categoryId || "",
+      price: item.price || "",
+      
+    });
+  }
+}, [editIndex, data]);
+
+
+useEffect(() => {
+  axios.get(`${BURL}/category`)
+      .then((res) => {
+        const map: { [key: string]: string } = {};
+        res.data.data.forEach((cat: { id: string | number; name: string }) => {
+          map[cat.id] = cat.name;
+        });
+        setCategoryMap(map);
+      })
+      .catch((err) => console.error("Failed to load categories", err));
+  }, []);
+
+
+console.log("edit Form:", editForm);
+
 
 
   return (
@@ -89,18 +158,22 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
         <Sidebar />
       </div>
 
+
+
       <div className="px-4 sm:px-6 lg:px-8 py-6 space-y-20 md:ml-[260px]">
         <div className="max-w-7xl w-full mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 mb-8">Service Management</h2>
+
+          <>
 
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div className="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border-gray-200 rounded-3xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
               <div className="flex items-center space-x-4">
                 <div className="bg-green-100 text-green-600 p-3 rounded-full">
-                  <FontAwesomeIcon icon={faLayerGroup} className="text-2xl" />
+                                    <FontAwesomeIcon icon={faServer}  className="text-2xl" />
                 </div>
                 <div>
-                  <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total Services</h5>
+                  <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total services</h5>
                   <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
                 </div>
               </div>
@@ -111,15 +184,26 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
               className="w-full sm:w-auto bg-[#008767] text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-[#006d50] transition"
             >
               <FontAwesomeIcon icon={faPlus} />
-              <span>Add Service</span>
+              <span>Add service</span>
             </button>
           </div>
+          <AddserviceModal
+  isOpen={addModal}
+  onClose={() => setAddModal(false)}
+  onSave={handleAddSave}
+  newservice={newservice}
+  onChange={handleAddserviceChange}
+/>
+
+
+</>
+
 
           <div className="bg-white shadow-md rounded-2xl p-4 sm:p-6 dark:bg-gray-900">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Service List</h2>
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">service List</h2>
               <div className="flex items-center gap-3 w-full sm:w-auto">
-                <p className="text-green-700 font-medium whitespace-nowrap">Active Service</p>
+                <p className="text-green-700 font-medium whitespace-nowrap">Active service</p>
                 <input
                   type="text"
                   placeholder="Search..."
@@ -129,44 +213,78 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
             </div>
 
             <div className="relative overflow-x-auto shadow-sm rounded-lg">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th className="px-6 py-3">Service Name</th>
-                    <th className="px-6 py-3">Category</th>
-                    <th className="px-6 py-3">Price</th>
-                    <th className="px-6 py-3 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems.map((item, index) => (
-                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</th>
-                      <td className="px-6 py-4">{item.category}</td>
-
-                      <td className="px-6 py-4">{item.price}</td>
-                      <td className="px-6 py-4 text-right space-x-2">
-                        <button
-className="text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]"
-onClick={() => handleEditClick(index + indexOfFirstItem)}
-                        >
-                          <Pencil size={18} />
-                        </button>
-                        <button
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th className="px-6 py-3">service Name</th>
+      <th className="px-6 py-3">Category</th>
+      <th className="px-6 py-3">Price</th>
+      <th className="px-6 py-3 text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {currentItems.map((item, index) => (
+      <tr
+        key={index}
+        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+      >
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {item.name}
+        </td>
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        {categoryMap[item.categoryId] || "Loading..."}
+        </td>
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {item.price}
+        </td>
+        
+        <td className="px-6 py-4 text-right space-x-2">
+        <button
+  className="text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]"
   onClick={() => {
-    setDeleteIndex(index + indexOfFirstItem);
-    setShowDeleteModal(true);
+    setEditForm({
+      name: item.name || "",
+      categoryId: item.categoryId || "",
+      price: item.price || "",
+      
+    });
+    setserviceId(item.id); // Or whatever your service ID key is
+    setShowModal(true);
   }}
-  className="text-red-600 dark:text-red-500 hover:text-red-800"
 >
-  <Trash2 size={18} />
+  <Pencil size={18} />
 </button>
 
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+      <EditserviceModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        editForm={editForm}
+        handleEditChange={handleEditChange}
+        serviceId={item.id}
+        BURL={BURL || ""}
+      />
+          <button
+            onClick={() => {
+              setDeleteItemId(item.id); 
+              setShowDeleteModal(true);
+            }}
+            className="text-red-600 dark:text-red-500 hover:text-red-800"
+          >
+            <Trash2 size={18} />
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+ <DeleteserviceModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        serviceId={deleteItemId}
+        onDeleted={fetchData}
+      />
+
             </div>
 
             <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-600 dark:text-gray-300">
@@ -195,178 +313,7 @@ onClick={() => handleEditClick(index + indexOfFirstItem)}
         </div>
       </div>
 
-     {/* Add Service Modal */}
-{addModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Add Service</h2>
-        <button
-          onClick={() => setAddModal(false)}
-          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
-        >
-          ×
-        </button>
-      </div>
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Service Name</label>
-          <input
-            name="name"
-            type="text"
-            value={newService.name}
-            onChange={handleAddServiceChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
 
-        <div>
-      <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
-        Select Category
-      </label>
-      <select
-        name="category"
-        value={editForm.category}
-        onChange={handleEditChange}
-        className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-      >
-        <option value="">Select Category</option>
-        {uniqueCategories.map((cat, index) => (
-          <option key={index} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
-    </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Service Price</label>
-          <input
-            name="price"
-            type="text"
-            value={newService.price}
-            onChange={handleAddServiceChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-          
-          <button
-            onClick={handleAddSave}
-            className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-      )}
-
-  
-{/* Delete Modal */}
-{showDeleteModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-sm dark:bg-gray-900">
-      <h2 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800 dark:text-white">
-        Are you sure you want to delete this Service?
-      </h2>
-      <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-        <button
-          onClick={() => setShowDeleteModal(false)}
-          className="px-4 py-2 rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 w-full sm:w-auto"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => {
-            if (deleteIndex !== null) {
-              const updated = [...data];
-              updated.splice(deleteIndex, 1);
-              setData(updated);
-            }
-            setShowDeleteModal(false);
-            setDeleteIndex(null);
-          }}
-          className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 w-full sm:w-auto"
-        >
-          Delete
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
-
-     {/* Edit Service Modal */}
-{showModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Edit Service</h2>
-        <button
-          onClick={() => setShowModal(false)}
-          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
-        >
-          ×
-        </button>
-      </div>
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Service Name</label>
-          <input
-            name="name"
-            type="text"
-            value={editForm.name}
-            onChange={handleEditChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div>
-      <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
-        Select Category
-      </label>
-      <select
-        name="category"
-        value={editForm.category}
-        onChange={handleEditChange}
-        className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-      >
-        <option value="">Select Category</option>
-        {uniqueCategories.map((cat, index) => (
-          <option key={index} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
-    </div>
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Service Price</label>
-          <input
-            name="price"
-            type="text"
-            value={editForm.price}
-            onChange={handleEditChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        
-        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-          
-          <button
-            onClick={handleSave}
-            className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-      )}
 
 
 

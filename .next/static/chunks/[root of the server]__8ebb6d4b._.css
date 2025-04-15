@@ -830,6 +830,10 @@
     width: calc(var(--spacing) * 96);
   }
 
+  .w-\[90\%\] {
+    width: 90%;
+  }
+
   .w-full {
     width: 100%;
   }
@@ -995,6 +999,10 @@
 
   .justify-end {
     justify-content: flex-end;
+  }
+
+  .justify-items-start {
+    justify-items: start;
   }
 
   .gap-2 {
@@ -1227,6 +1235,10 @@
 
   .bg-black {
     background-color: var(--color-black);
+  }
+
+  .bg-black\/40 {
+    background-color: color-mix(in oklab, var(--color-black) 40%, transparent);
   }
 
   .bg-black\/60 {
@@ -2107,12 +2119,6 @@
   @media (hover: hover) {
     .hover\:text-\[\#006d50\]:hover {
       color: #006d50;
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:text-blue-800:hover {
-      color: var(--color-blue-800);
     }
   }
 

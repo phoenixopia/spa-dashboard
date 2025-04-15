@@ -1,28 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Sidebar from "../sidebar/page";
 import { Bell, Trash2, Menu } from "lucide-react";
+const BURL = process.env.NEXT_PUBLIC_APP_URL;
+
+
+interface Notification {
+  id: number;
+  title: string;
+  message: string;
+  time: string;
+  read: boolean;
+}
 
 export default function NotificationPage() {
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "New Booking Confirmed",
-      message: "Your client Sarah booked a Swedish Massage at 3:00 PM.",
-      time: "Just now",
-      read: false,
-    },
-    {
-      id: 2,
-      title: "Previous Booking",
-      message: "Emma completed her Facial Treatment at 5:00 PM.",
-      time: "1 hour ago",
-      read: true,
-    },
-  ]);
-
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get(`${BURL}/notifications`);
+        setNotifications(response.data);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
 
   const handleDelete = (id: number) => {
     setNotifications((prev) => prev.filter((note) => note.id !== id));

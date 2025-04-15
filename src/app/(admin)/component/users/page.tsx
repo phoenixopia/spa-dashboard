@@ -3,45 +3,61 @@
 import Sidebar from "../sidebar/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLayerGroup, faPlus, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Pencil, Trash2 } from "lucide-react";
+import axios from "axios";
+import DeleteUserModal from './delete'; // Adjust path if needed
+
+import { Console } from "console";
+import AddUserModal from './add'; // import the modal component
+import EditUserModal from "./edit"; // import the modal component
+
+
+const BURL = process.env.NEXT_PUBLIC_APP_URL;
+
+
+
 
 export default function User() {
   const itemsPerPage = 3;
-  const initialData = [
-    { name: 'Apple MacBook Pro 17"', Phone:'1234567890',email: "High-end laptop", date: "12.23.2001",password:"" },
-    { name: 'Apple MacBook Pro 17"', Phone:'1234567890',email: "High-end laptop", date: "12.23.2001", password:"" },
-    { name: 'Apple MacBook Pro 17"', Phone:'1234567890',email: "High-end laptop", date: "12.23.2001", password:"" },
-    { name: 'Apple MacBook Pro 17"', Phone:'1234567890',email: "High-end laptop", date: "12.23.2001", password:"" },
-    { name: 'Apple MacBook Pro 17"', Phone:'1234567890',email: "High-end laptop", date: "12.23.2001", password:"" },
-    { name: 'Apple MacBook Pro 17"', Phone:'1234567890',email: "High-end laptop", date: "12.23.2001", password:"" },
-    { name: 'Apple MacBook Pro 17"', Phone:'1234567890',email: "High-end laptop", date: "12.23.2001", password:"" },
-    { name: 'Apple MacBook Pro 17"', Phone:'1234567890',email: "High-end laptop", date: "12.23.2001", password:"" },
-  ];
-
-  const [data, setData] = useState(initialData);
+  
+  
+  
+  const [data, setData] = useState<any[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [editForm, setEditForm] = useState({ name: "", Phone: "", email: "", date: "", password: "" });
-  const [addModal, setAddModal] = useState(false);
-  const [newUser, setNewUser] = useState({ name: "", Phone: "", email: "", date: "", password: "" });
-
-  const totalItems = data.length;
+  const [editForm, setEditForm] = useState({ firstName: "", lastName:"", phoneNumber: "", email: "", updatedAt: "", password: "" });
+  const totalItems = data ? data.length : 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  // console.log("data:", data);
+  // console.log("type of data:", typeof data);
+  // console.log("isArray:", Array.isArray(data));
+  const currentItems = [];
+  for (let i = indexOfFirstItem; i < indexOfLastItem && data && i < data.length; i++) {
+    currentItems.push(data[i]);
+  }
+  
 
-  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
+  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+
   const handleEditClick = (index: number) => {
-    const item = data[index];
+    const item = data ? data[index] : null;
     setEditIndex(index);
-    setEditForm({ ...item, Phone: "", password: "", email: item.email || "" });
+    if (typeof item === "object" && item !== null) {
+      if (typeof item === "object" && item !== null) {
+        setEditForm({
+          ...item, phoneNumber: "", password: "", email: item.email || "",
+          firstName: "", lastName:""
+        });
+      }
+    }
     setShowModal(true);
   };
 
@@ -49,42 +65,81 @@ export default function User() {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
-    if (editIndex !== null) {
-      const updated = [...data];
-      updated[editIndex] = { ...updated[editIndex], ...editForm };
-      setData(updated);
-    }
-    setShowModal(false);
-  };
+ 
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files[0]) {
-      const imageUrl = URL.createObjectURL(files[0]);
-      setEditForm(prev => ({ ...prev, image: imageUrl }));
-    }
-  };
+  const [addModal, setAddModal] = useState(false);
+const [newUser, setNewUser] = useState({
+  firstName: '',
+  lastName:'',
+  email: '',
+  phoneNumber: '',
+  password: '',
+});
 
-  const handleAddUserChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setNewUser({ ...newUser, [e.target.name]: e.target.value });
-  };
+const handleAddUserChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const { name, value } = e.target;
+  setNewUser(prev => ({ ...prev, [name]: value }));
+};
 
-  const handleAddImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files[0]) {
-      const imageUrl = URL.createObjectURL(files[0]);
-      setNewUser(prev => ({ ...prev, image: imageUrl }));
-    }
-  };
-
-  const handleAddSave = () => {
-    setData(prev => [...prev, { ...newUser, date: new Date().toLocaleDateString() }]);
+const handleAddSave = async () => {
+  try {
+    const response = await axios.post(`${BURL}/user/create`, newUser);
+    console.log('User added:', response?.data?.user);
     setAddModal(false);
-  };
+    fetchData(); // ⬅️ Refresh the list
+  } catch (error) {
+    console.error('Error adding user:', error);
+  }
+};
 
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // ✅ Keep this
+  const [deleteItemId, setDeleteItemId] = useState<string | null>(null); // ✅ Keep this
+  const [userId, setUserId] = useState("");
+
+  
+
+
+const fetchData = async () => {
+  try {
+    const res = await axios.get(`${BURL}/user`);
+    console.log("API raw response:", res.data);
+
+    // Confirm the actual response structure and access correctly:
+    if (Array.isArray(res.data.data)) {
+      setData(res.data.data); // this is correct if the API returns { data: [...] }
+    } else if (Array.isArray(res.data)) {
+      setData(res.data); // if API returns an array directly
+    } else {
+      console.error("Unexpected data structure:", res.data);
+    }
+  } catch (error) {
+    console.error("Error fetching users:", error);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+
+
+
+useEffect(() => {
+  if (editIndex !== null && data && data[editIndex]) {
+    const item = data[editIndex];
+    setEditForm({
+      phoneNumber: item.phoneNumber || "",
+      password: item.password || "",
+      email: item.email || "",
+      firstName: item.firstName || "",
+      lastName: item.lastName || "",
+      updatedAt: item.updatedAt || ""
+    });
+  }
+}, [editIndex, data]);
+
+console.log("edit Form:", editForm);
+
 
 
   return (
@@ -93,9 +148,13 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
         <Sidebar />
       </div>
 
+
+
       <div className="px-4 sm:px-6 lg:px-8 py-6 space-y-20 md:ml-[260px]">
         <div className="max-w-7xl w-full mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 mb-8">User Management</h2>
+
+          <>
 
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div className="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border-gray-200 rounded-3xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -118,6 +177,17 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
               <span>Add User</span>
             </button>
           </div>
+          <AddUserModal
+  isOpen={addModal}
+  onClose={() => setAddModal(false)}
+  onSave={handleAddSave}
+  newUser={newUser}
+  onChange={handleAddUserChange}
+/>
+
+
+</>
+
 
           <div className="bg-white shadow-md rounded-2xl p-4 sm:p-6 dark:bg-gray-900">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
@@ -133,48 +203,84 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
             </div>
 
             <div className="relative overflow-x-auto shadow-sm rounded-lg">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th className="px-6 py-3">User Name</th>
-                    <th className="px-6 py-3">Phone Number</th>
-                    <th className="px-6 py-3">Email</th>
-                    <th className="px-6 py-3">Date</th>
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th className="px-6 py-3">User Name</th>
+      <th className="px-6 py-3">Phone Number</th>
+      <th className="px-6 py-3">Email</th>
+      <th className="px-6 py-3">Date</th>
+      <th className="px-6 py-3 text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {currentItems.map((item, index) => (
+      <tr
+        key={index}
+        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+      >
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {item.firstName}
+        </td>
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {item.phoneNumber}
+        </td>
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {item.email}
+        </td>
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+  {new Date(item.updatedAt).toLocaleDateString()}
+</td>
 
-                    <th className="px-6 py-3 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems.map((item, index) => (
-                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                                            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</th>
-
-                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.Phone}</th>
-                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.email}</th>
-                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.date}</th>
-
-                      <td className="px-6 py-4 text-right space-x-2">
-                        <button
-className="text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]"
-onClick={() => handleEditClick(index + indexOfFirstItem)}
-                        >
-                          <Pencil size={18} />
-                        </button>
-                        <button
+        <td className="px-6 py-4 text-right space-x-2">
+        <button
+  className="text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]"
   onClick={() => {
-    setDeleteIndex(index + indexOfFirstItem);
-    setShowDeleteModal(true);
+    setEditForm({
+      firstName: item.firstName || "",
+      lastName: item.lastName || "",
+      email: item.email || "",
+      phoneNumber: item.phoneNumber || "",
+      updatedAt: item.updatedAt || "",
+      password: "", // Leave password empty or handle securely
+    });
+    setUserId(item.id); // Or whatever your user ID key is
+    setShowModal(true);
   }}
-  className="text-red-600 dark:text-red-500 hover:text-red-800"
 >
-  <Trash2 size={18} />
+  <Pencil size={18} />
 </button>
 
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+      <EditUserModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        editForm={editForm}
+        handleEditChange={handleEditChange}
+        userId={item.id}
+        BURL={BURL || ""}
+      />
+          <button
+            onClick={() => {
+              setDeleteItemId(item.id); 
+              setShowDeleteModal(true);
+            }}
+            className="text-red-600 dark:text-red-500 hover:text-red-800"
+          >
+            <Trash2 size={18} />
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+ <DeleteUserModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        userId={deleteItemId}
+        onDeleted={fetchData}
+      />
+
             </div>
 
             <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-600 dark:text-gray-300">
@@ -205,188 +311,6 @@ onClick={() => handleEditClick(index + indexOfFirstItem)}
 
 
 
-     {/* Add User Modal */}
-{addModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Add User</h2>
-        <button
-          onClick={() => setAddModal(false)}
-          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
-        >
-          ×
-        </button>
-      </div>
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Name of the user</label>
-          <input
-            name="name"
-            type="text"
-            value={newUser.name}
-            onChange={handleAddUserChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Email</label>
-          <input
-            name="name"
-            type="text"
-            value={newUser.email}
-            onChange={handleAddUserChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Phone Number</label>
-          <input
-            name="name"
-            type="text"
-            value={newUser.Phone}
-            onChange={handleAddUserChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Password</label>
-          <input
-            name="name"
-            type="text"
-            value={newUser.password}
-            onChange={handleAddUserChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        
-        
-        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-          
-          <button
-            onClick={handleAddSave}
-            className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-      )}
-
-  
-{/* Delete Modal */}
-{showDeleteModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-sm dark:bg-gray-900">
-      <h2 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800 dark:text-white">
-        Are you sure you want to delete this User?
-      </h2>
-      <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-        <button
-          onClick={() => setShowDeleteModal(false)}
-          className="px-4 py-2 rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 w-full sm:w-auto"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => {
-            if (deleteIndex !== null) {
-              const updated = [...data];
-              updated.splice(deleteIndex, 1);
-              setData(updated);
-            }
-            setShowDeleteModal(false);
-            setDeleteIndex(null);
-          }}
-          className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 w-full sm:w-auto"
-        >
-          Delete
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
-{/* Edit User Modal */}
-{showModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Edit User</h2>
-        <button
-          onClick={() => setShowModal(false)}
-          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
-          aria-label="Close Modal"
-        >
-          ×
-        </button>
-      </div>
-
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Name of the User</label>
-          <input
-            name="name"
-            type="text"
-            value={editForm.name}
-            onChange={handleEditChange}
-            placeholder="Enter user's full name"
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Email</label>
-          <input
-            name="email"
-            type="text"
-            value={editForm.email}
-            onChange={handleEditChange}
-            placeholder="Enter email address"
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Phone Number</label>
-          <input
-            name="Phone"
-            type="text"
-            value={editForm.Phone}
-            onChange={handleEditChange}
-            placeholder="Enter phone number"
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Password</label>
-          <input
-            name="password"
-            type="password"
-            value={editForm.password}
-            onChange={handleEditChange}
-            placeholder="Enter password"
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
-          />
-        </div>
-
-        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-          <button
-            onClick={handleSave}
-            className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
 
 
 
