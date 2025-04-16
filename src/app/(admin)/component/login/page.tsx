@@ -13,10 +13,10 @@ export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const validatePassword = (password: string) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})/;
@@ -25,11 +25,14 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setMessage(null);
     setLoading(true);
 
     if (!validatePassword(password)) {
-      setError("Password must be at least 8 characters, include one capital letter and one special character.");
+      setMessage({
+        type: "error",
+        text: "Password must be at least 8 characters, include one capital letter and one special character.",
+      });
       setLoading(false);
       return;
     }
@@ -52,13 +55,27 @@ export default function LoginPage() {
           localStorage.removeItem("email");
         }
 
-        router.push("/dashboard");
+        setMessage({
+          type: "success",
+          text: response.data.message || "Login successful!",
+        });
+
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1000);
       }
     } catch (err: any) {
-      if (err.response && err.response.status === 404) {
-        setError("Login unsuccessful. Please check your credentials.");
+      if (err.response) {
+        const backendMessage = err.response.data?.message || "Login failed.";
+        setMessage({
+          type: "error",
+          text: backendMessage,
+        });
       } else {
-        setError("Something went wrong. Please try again.");
+        setMessage({
+          type: "error",
+          text: "Something went wrong. Please try again.",
+        });
       }
     } finally {
       setLoading(false);
@@ -95,9 +112,15 @@ export default function LoginPage() {
         <div className="w-full max-w-sm sm:max-w-md md:max-w-lg rounded-2xl bg-[#1E3B5C] p-6 sm:p-8 shadow-2xl">
           <h2 className="mb-6 text-center text-2xl font-semibold text-white">Login</h2>
 
-          {error && (
-            <div className="mb-4 rounded-md bg-red-100 px-4 py-2 text-sm text-red-700">
-              {error}
+          {message && (
+            <div
+              className={`mb-4 rounded-md px-4 py-2 text-sm ${
+                message.type === "success"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {message.text}
             </div>
           )}
 
@@ -128,7 +151,7 @@ export default function LoginPage() {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute top-9 right-3 cursor-pointer text-gray-600"
-                >
+              >
                 {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
               </button>
             </div>

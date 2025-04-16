@@ -15,7 +15,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
-"use client"; // Add this line at the top to mark the file as a client component
+"use client";
 ;
 ;
 ;
@@ -23,29 +23,37 @@ const BURL = ("TURBOPACK compile-time value", "https://spa-backend-dev.vercel.ap
 function ForgotPasswordPage() {
     _s();
     const [email, setEmail] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    const [successMessage, setSuccessMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [messageType, setMessageType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false); // Added loading state
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        setError("");
-        setSuccessMessage("");
+        setMessage("");
+        setMessageType("");
         if (!email) {
-            setError("Please enter your email address.");
+            setMessage("Please enter your email address.");
+            setMessageType("error");
             return;
         }
         try {
+            setLoading(true); // Start loading
             const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/auth/forgot`, {
                 email
             });
             if (response.status === 200) {
-                setSuccessMessage("A password reset link has been sent to your email.");
+                setMessage(response.data?.message || "A password reset link has been sent to your email.");
+                setMessageType("success");
             }
         } catch (err) {
+            const backendMessage = err?.response?.data?.message;
             if (err.response && err.response.status === 404) {
-                setError("Email not found. Please check and try again.");
+                setMessage(backendMessage || "Email not found. Please check and try again.");
             } else {
-                setError("Something went wrong. Please try again later.");
+                setMessage(backendMessage || "Something went wrong. Please try again later.");
             }
+            setMessageType("error");
+        } finally{
+            setLoading(false); // Stop loading
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -58,14 +66,14 @@ function ForgotPasswordPage() {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                lineNumber: 40,
+                lineNumber: 51,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "absolute inset-0 bg-black/60"
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                lineNumber: 48,
+                lineNumber: 57,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -81,17 +89,17 @@ function ForgotPasswordPage() {
                         priority: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                        lineNumber: 53,
+                        lineNumber: 62,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                    lineNumber: 52,
+                    lineNumber: 61,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                lineNumber: 51,
+                lineNumber: 60,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -104,7 +112,7 @@ function ForgotPasswordPage() {
                             children: "Forgot Password"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                            lineNumber: 67,
+                            lineNumber: 76,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -112,23 +120,15 @@ function ForgotPasswordPage() {
                             children: "Enter your email to receive a password reset link."
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                            lineNumber: 70,
+                            lineNumber: 79,
                             columnNumber: 11
                         }, this),
-                        error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "mb-4 rounded-md bg-red-100 px-4 py-2 text-sm text-red-700",
-                            children: error
+                        message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: `mb-4 rounded-md px-4 py-2 text-sm ${messageType === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`,
+                            children: message
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                            lineNumber: 76,
-                            columnNumber: 13
-                        }, this),
-                        successMessage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "mb-4 rounded-md bg-green-100 px-4 py-2 text-sm text-green-700",
-                            children: successMessage
-                        }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                            lineNumber: 81,
+                            lineNumber: 85,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -142,39 +142,76 @@ function ForgotPasswordPage() {
                                             children: "Email"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                                            lineNumber: 88,
+                                            lineNumber: 98,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             type: "email",
                                             value: email,
+                                            disabled: loading,
                                             onChange: (e)=>setEmail(e.target.value),
-                                            className: "mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#289C9A]",
+                                            className: "mt-1 w-full rounded-md border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#289C9A] disabled:opacity-70",
                                             placeholder: "you@example.com"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                                            lineNumber: 89,
+                                            lineNumber: 99,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                                    lineNumber: 87,
+                                    lineNumber: 97,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
-                                    className: "w-full rounded-md bg-[#289C9A] px-4 py-2 text-white hover:bg-[#207372] transition",
-                                    children: "Reset Password"
-                                }, void 0, false, {
+                                    disabled: loading,
+                                    className: "w-full flex justify-center items-center gap-2 rounded-md bg-[#289C9A] px-4 py-2 text-white hover:bg-[#207372] transition disabled:opacity-70",
+                                    children: [
+                                        loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "h-5 w-5 animate-spin text-white",
+                                            xmlns: "http://www.w3.org/2000/svg",
+                                            fill: "none",
+                                            viewBox: "0 0 24 24",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                    className: "opacity-25",
+                                                    cx: "12",
+                                                    cy: "12",
+                                                    r: "10",
+                                                    stroke: "currentColor",
+                                                    strokeWidth: "4"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
+                                                    lineNumber: 120,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                    className: "opacity-75",
+                                                    fill: "currentColor",
+                                                    d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
+                                                    lineNumber: 128,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
+                                            lineNumber: 114,
+                                            columnNumber: 17
+                                        }, this),
+                                        loading ? "Sending..." : "Reset Password"
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                                    lineNumber: 97,
+                                    lineNumber: 108,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                            lineNumber: 86,
+                            lineNumber: 96,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -185,33 +222,33 @@ function ForgotPasswordPage() {
                                 children: "Back to login"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                                lineNumber: 107,
+                                lineNumber: 141,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                            lineNumber: 106,
+                            lineNumber: 140,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                    lineNumber: 66,
+                    lineNumber: 75,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-                lineNumber: 65,
+                lineNumber: 74,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/component/forgetpassword/page.tsx",
-        lineNumber: 38,
+        lineNumber: 49,
         columnNumber: 5
     }, this);
 }
-_s(ForgotPasswordPage, "fJ2SLm01rzQ9+GauJf04uaSkO6k=");
+_s(ForgotPasswordPage, "L+xf5OIxm6dr0Ow1pP9ck9G9Y+w=");
 _c = ForgotPasswordPage;
 var _c;
 __turbopack_context__.k.register(_c, "ForgotPasswordPage");

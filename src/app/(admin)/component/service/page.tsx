@@ -2,7 +2,7 @@
 
 import Sidebar from "../sidebar/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLayerGroup, faPlus, faServer } from "@fortawesome/free-solid-svg-icons";
+import { faLayerGroup, faPlus, faServer, faSpa } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Pencil, Trash2 } from "lucide-react";
@@ -182,7 +182,7 @@ useEffect(() => {
             <div className="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border-gray-200 rounded-3xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
               <div className="flex items-center space-x-4">
               <div className="bg-green-100 text-green-600 p-3 rounded-full">
-                        <FontAwesomeIcon icon={faServer}  className="text-2xl" />
+                                         <FontAwesomeIcon icon={faSpa} className="text-2xl" />
               </div>
               <div>
                 <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total services</h5>

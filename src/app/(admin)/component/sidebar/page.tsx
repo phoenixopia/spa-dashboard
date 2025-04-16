@@ -370,9 +370,17 @@ const Sidebar = () => {
           `${BURL}/auth/logout`,
           {},
           {
-            withCredentials: true, // send cookies with request
+            withCredentials: true,
           }
         );
+
+        // Manually delete accessible cookies
+        document.cookie.split(";").forEach((c) => {
+          document.cookie = c
+            .replace(/^ +/, "")
+            .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+        });
+
       } catch (err) {
         console.error("Logout failed", err);
       }
@@ -390,7 +398,6 @@ const Sidebar = () => {
     <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
   </a>
 </li>
-
 
 
 
