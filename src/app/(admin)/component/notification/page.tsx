@@ -34,15 +34,33 @@ export default function NotificationPage() {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.post(`${BURL}/notification/edit/${id}`, {
-        status: "archived",
-      });
-
+      const token = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('token='))
+        ?.split('=')[1];
+    
+      if (!token) {
+        console.error('No auth token found. Redirecting or showing message...');
+        return;
+      }
+    
+      await axios.put(
+        `${BURL}/notification/edit/${id}`,
+        { status: "Archived" },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+    
       // Remove from UI
       setNotifications((prev) => prev.filter((note) => note.id !== id));
     } catch (error) {
       console.error("Error archiving notification:", error);
     }
+    
   };
 
   return (

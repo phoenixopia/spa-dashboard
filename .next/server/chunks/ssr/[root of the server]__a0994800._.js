@@ -192,9 +192,6 @@ function LoginPage() {
             if (response.status === 200) {
                 const token = response.data.data.token;
                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$js$2d$cookie$2f$dist$2f$js$2e$cookie$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].set("token", token, {
-                    expires: 1,
-                    secure: true,
-                    sameSite: "Strict"
                 });
                 if (rememberMe) {
                     localStorage.setItem("email", email);

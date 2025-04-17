@@ -44,9 +44,9 @@ export default function LoginPage() {
         const token = response.data.data.token;
 
         Cookies.set("token", token, {
-          expires: 1,
-          secure: true,
-          sameSite: "Strict",
+          // expires: 1,
+          // secure: true,
+          // sameSite: "Strict",
         });
 
         if (rememberMe) {

@@ -214,14 +214,14 @@ console.log(currentItems,'gfhgfhgfg')
 
           <div className="bg-white shadow-md rounded-2xl p-4 sm:p-6 dark:bg-gray-900">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">blog List</h2>
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Blog List</h2>
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <p className="text-green-700 font-medium whitespace-nowrap">Active blog</p>
-                <input
+                {/* <input
                   type="text"
                   placeholder="Search..."
                   className="px-2 py-1.5 border rounded-md text-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-                />
+                /> */}
               </div>
             </div>
 

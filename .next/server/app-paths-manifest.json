@@ -6,7 +6,9 @@
   "/dashboard/page": "app/dashboard/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/notification/page": "app/notification/page.js",
+  "/page": "app/page.js",
   "/services/category/page": "app/services/category/page.js",
   "/services/services/page": "app/services/services/page.js",
-  "/setting/page": "app/setting/page.js"
+  "/setting/page": "app/setting/page.js",
+  "/user/page": "app/user/page.js"
 }
