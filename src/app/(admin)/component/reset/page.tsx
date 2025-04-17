@@ -42,14 +42,14 @@ export default function ResetPasswordPage() {
     }
 
     try {
-      const cookieToken = Cookies.get("token"); // Optional, if needed for authentication
+      const cookieToken = Cookies.get("token"); // Optional
 
       const response = await axios.post(
         `${BURL}/auth/reset`,
         {
           oldPassword,
           newPassword,
-          token: resetToken, // Sending token from URL
+          token: resetToken,
         },
         {
           headers: {
@@ -63,6 +63,8 @@ export default function ResetPasswordPage() {
         setOldPassword("");
         setNewPassword("");
         setConfirmPassword("");
+
+          router.push("/"); // Redirect to homepage after short delay
       }
     } catch (err: any) {
       if (err.response && err.response.status === 400) {
@@ -84,8 +86,11 @@ export default function ResetPasswordPage() {
       {/* Black Overlay */}
       <div className="absolute inset-0 bg-black/60" />
 
-      {/* Logo */}
-      <div className="absolute top-4 left-4 z-20">
+      {/* Logo (Clickable) */}
+      <div
+        className="absolute top-4 left-4 z-20 cursor-pointer"
+        onClick={() => router.push("/")}
+      >
         <div className="w-28 sm:w-36 md:w-40">
           <Image
             src="/Images/logo.png"

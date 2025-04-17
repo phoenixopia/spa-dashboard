@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
+interface Booking {
+  id: string;
+  status: "Approved" | "Pending" | "Rejected";
+  customerName?: string;
+  dateTime?: string; // Use string to match API response
+  time?: string;
+}
+
 interface EditBookingModalProps {
   showModal: boolean;
-  selectedItem: { _id: string; customerName: string; serviceId: string; price: number } | null;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  handleAddBookingChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
+  serviceId: any;
+  BURL: string;
+  editForm: any;
   closeModal: () => void;
-  setShowModal: (value: boolean) => void;
-  refreshData?: () => void; // optional callback to refresh table/list
+  selectedItem: Booking | null;
+  refreshData?: () => void;
 }
 
 const EditBookingModal: React.FC<EditBookingModalProps> = ({
@@ -18,23 +30,19 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
   setShowModal,
   refreshData,
 }) => {
-  const [editForm, setEditForm] = useState({
-    name: selectedItem?.customerName || "",
-    serviceId: selectedItem?.serviceId || "",
-    price: selectedItem?.price || "",
-  });
+  const [status, setStatus] = useState<"Approved" | "Pending" | "Rejected">(
+    selectedItem?.status || "Pending"
+  );
+  const [message, setMessage] = useState<string>("");
+  const [messageType, setMessageType] = useState<string>("");
 
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("");
+  useEffect(() => {
+    if (selectedItem) {
+      setStatus(selectedItem.status);
+    }
+  }, [selectedItem]);
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
-    setEditForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleUpdate = async () => {
+  const handleUpdateTime = async () => {
     try {
       const token =
         document.cookie
@@ -42,22 +50,16 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
           .find((row) => row.startsWith("token="))
           ?.split("=")[1] || "";
 
-      const response = await axios.put(
-        `${BURL}/booking/edit/${selectedItem?._id}`,
+      await axios.put(
+        `${BURL}/booking/edit/${selectedItem?.id}`,
+        { status },
         {
-          name: editForm.name,
-          serviceId: editForm.serviceId,
-          price: editForm.price,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         }
       );
 
-      setMessage("Booking updated successfully!");
+      setMessage("Booking status updateTimed successfully!");
       setMessageType("success");
 
       setTimeout(() => {
@@ -67,13 +69,16 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
         if (refreshData) refreshData();
       }, 1500);
     } catch (error) {
-      console.error("Failed to update booking:", error);
-      setMessage("Error updating booking. Please try again.");
+      console.error("Error updating booking status:", error);
+      setMessage("Failed to updateTime status. Please try again.");
       setMessageType("error");
     }
   };
 
   if (!showModal || !selectedItem) return null;
+
+  // Safely parse the dateTime string
+  const bookingdateTime = selectedItem.dateTime ? new Date(selectedItem.dateTime) : null;
 
   return (
     <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
@@ -81,7 +86,7 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">
-            Edit Booking
+            Booking Details
           </h2>
           <button
             onClick={closeModal}
@@ -91,55 +96,47 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
           </button>
         </div>
 
-        {/* Inputs */}
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-[#008767] dark:text-gray-300">
-              Customer Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={editForm.name}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-            />
-          </div>
+        {/* Customer Info */}
+        <p className="mb-5 text-sm text-center text-gray-600 dark:text-gray-300">
+          UpdateTime status for <strong>{selectedItem.customerName || "Customer"}</strong>
+        </p>
 
-          <div>
-            <label className="block text-sm font-medium text-[#008767] dark:text-gray-300">
-              Service ID
-            </label>
-            <input
-              type="text"
-              name="serviceId"
-              value={editForm.serviceId}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-            />
-          </div>
+        {/* dateTime & Time */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          <div className="flex-1 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg text-sm text-gray-800 dark:text-white shadow-sm">
+            <strong>Date:</strong> {selectedItem.dateTime ? new Date(selectedItem.dateTime).toLocaleDateString() : "N/A"}
 
-          <div>
-            <label className="block text-sm font-medium text-[#008767] dark:text-gray-300">
-              Price
-            </label>
-            <input
-              type="number"
-              name="price"
-              value={editForm.price}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-            />
           </div>
+          <div className="flex-1 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg text-sm text-gray-800 dark:text-white shadow-sm">
+            <strong>Time:</strong> {bookingdateTime ? bookingdateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "N/A"}
+          </div>
+        </div>
+
+        {/* Status Field */}
+        <div className="mb-4">
+          <label
+            htmlFor="status"
+            className="block mb-2 text-sm font-medium text-[#008767] dark:text-gray-300"
+          >
+            Change Status
+          </label>
+          <select
+            id="status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value as "Approved" | "Pending" | "Rejected")}
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767] pr-10"
+          >
+            <option value="Approved">Approved</option>
+            <option value="Pending">Pending</option>
+            <option value="Rejected">Rejected</option>
+          </select>
         </div>
 
         {/* Message */}
         {message && (
           <p
-            className={`mt-4 text-sm text-center ${
-              messageType === "success"
-                ? "text-green-600"
-                : "text-red-600"
+            className={`mt-2 text-sm text-center ${
+              messageType === "success" ? "text-green-600" : "text-red-600"
             }`}
           >
             {message}
@@ -149,7 +146,7 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
         {/* Save Button */}
         <div className="mt-6 flex justify-end">
           <button
-            onClick={handleUpdate}
+            onClick={handleUpdateTime}
             className="bg-[#008767] text-white px-4 py-2 rounded-lg hover:bg-[#006d50] transition"
           >
             Save Changes

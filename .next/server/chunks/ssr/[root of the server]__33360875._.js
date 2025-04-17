@@ -159,7 +159,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 ;
 ;
 ;
-const BURL = ("TURBOPACK compile-time value", "https://spa-backend-dev.vercel.app/api");
+const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 const Sidebar = ()=>{
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["usePathname"])();
     const [isSidebarOpen, setIsSidebarOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -737,6 +737,10 @@ const Sidebar = ()=>{
                                                 await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/auth/logout`, {}, {
                                                     withCredentials: true
                                                 });
+                                                // Manually delete accessible cookies
+                                                document.cookie.split(";").forEach((c)=>{
+                                                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                                                });
                                             } catch (err) {
                                                 console.error("Logout failed", err);
                                             }
@@ -752,7 +756,7 @@ const Sidebar = ()=>{
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
-                                                lineNumber: 389,
+                                                lineNumber: 397,
                                                 columnNumber: 5
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -760,7 +764,7 @@ const Sidebar = ()=>{
                                                 children: "Logout"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
-                                                lineNumber: 390,
+                                                lineNumber: 398,
                                                 columnNumber: 5
                                             }, this)
                                         ]
@@ -813,7 +817,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
 ;
 ;
-const BURL = ("TURBOPACK compile-time value", "https://spa-backend-dev.vercel.app/api");
+const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 const DeleteserviceModal = ({ isOpen, onClose, serviceId, onDeleted })=>{
     const handleDelete = async ()=>{
         if (!serviceId) return;
@@ -912,7 +916,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 ;
 ;
 ;
-const BURL = ("TURBOPACK compile-time value", "https://spa-backend-dev.vercel.app/api");
+const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 const AddserviceModal = ({ isOpen, onClose, onSave, newservice, onChange })=>{
     const [categories, setCategories] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
@@ -1370,7 +1374,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$c
 ;
 ;
 ;
-const BURL = ("TURBOPACK compile-time value", "https://spa-backend-dev.vercel.app/api");
+const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 function Service() {
     const itemsPerPage = 3;
     const [categoryMap, setCategoryMap] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({});

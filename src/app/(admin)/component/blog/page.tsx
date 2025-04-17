@@ -2,89 +2,167 @@
 
 import Sidebar from "../sidebar/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLayerGroup, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { faLayerGroup, faPlus, faServer, faSpa, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Pencil, Trash2 } from "lucide-react";
+import axios from "axios";
+import DeleteblogModal from './delete'; // Adjust path if needed
 
-export default function Blog() {
+import { Console } from "console";
+import AddblogModal from './add'; // import the modal component
+import EditblogModal from "./edit"; // import the modal component
+import { Content } from "next/font/google";
+
+
+const BURL = process.env.NEXT_PUBLIC_APP_URL;
+
+
+
+export default function blog() {
   const itemsPerPage = 3;
-  const initialData = [
-    { name: 'Apple MacBook Pro 17"', description: "High-end laptop", image: "/Images/hi.jpeg" },
-    { name: "Microsoft Surface Pro", description: "2-in-1 device", image: "/Images/hi.jpeg" },
-    { name: "Magic Mouse 2", description: "Wireless mouse", image: "/Images/hi.jpeg" },
-    { name: "iPhone 13", description: "Smartphone", image: "/Images/hi.jpeg" },
-    { name: "iPad Pro", description: "Tablet", image: "/Images/hi.jpeg" },
-    { name: "Apple Watch", description: "Smartwatch", image: "/Images/hi.jpeg" },
-    { name: "AirPods Pro", description: "Wireless earbuds", image: "/Images/hi.jpeg" },
-    { name: "Dell XPS 13", description: "Ultrabook", image: "/Images/hi.jpeg" },
-  ];
+  
+  const [blogMap, setblogMap] = useState<{ [key: string]: string }>({});
 
-  const [data, setData] = useState(initialData);
+  
+  const [data, setData] = useState<any[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [editForm, setEditForm] = useState({ name: "", description: "", image: "" });
-  const [addModal, setAddModal] = useState(false);
-  const [newBlog, setNewBlog] = useState({ name: "", description: "", image: "" });
-
-  const totalItems = data.length;
+  const [editForm, setEditForm] = useState({ title: "", imageURL: "", content: "", updatedAt: new Date()});
+  const totalItems = data ? data.length : 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  // console.log("data:", data);
+  // console.log("type of data:", typeof data);
+  // console.log("isArray:", Array.isArray(data));
+  const currentItems = [];
+  for (let i = indexOfFirstItem; i < indexOfLastItem && data && i < data.length; i++) {
+    currentItems.push(data[i]);
+  }
+  
 
-  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
+  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+
   const handleEditClick = (index: number) => {
-    const item = data[index];
+    const item = data ? data[index] : null;
     setEditIndex(index);
-    setEditForm(item);
+    if (typeof item === "object" && item !== null) {
+      if (typeof item === "object" && item !== null) {
+        setEditForm({
+          ...item, title: "", imageURL: "", content: "", updatedAt: new Date(),
+        });
+      }
+    }
     setShowModal(true);
   };
 
-  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
-    if (editIndex !== null) {
-      const updated = [...data];
-      updated[editIndex] = editForm;
-      setData(updated);
-    }
-    setShowModal(false);
-  };
+ 
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files[0]) {
-      const imageUrl = URL.createObjectURL(files[0]);
-      setEditForm(prev => ({ ...prev, image: imageUrl }));
-    }
-  };
+  const [addModal, setAddModal] = useState(false);
+const [newblog, setNewblog] = useState({
+  title: "", imageURL: "", content: "", updatedAt: new Date()
+  
+});
 
-  const handleAddBlogChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setNewBlog({ ...newBlog, [e.target.name]: e.target.value });
-  };
+const handleAddblogChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
+  const { name, value } = e.target;
+  setNewblog(prev => ({ ...prev, [name]: value }));
+};
 
-  const handleAddImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files[0]) {
-      const imageUrl = URL.createObjectURL(files[0]);
-      setNewBlog(prev => ({ ...prev, image: imageUrl }));
-    }
-  };
-
-  const handleAddSave = () => {
-    setData(prev => [...prev, newBlog]);
+const handleAddSave = async () => {
+  try {
+    const token = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('token='))
+      ?.split('=')[1] || ''; // Extract token from cookies
+      console.log(token)
+    const response = await axios.post(
+      `${BURL}/blog/create`,
+      newblog,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+    console.log('blog added:', response?.data?.blog);
     setAddModal(false);
-  };
+    fetchData(); // refresh list
+  } catch (error) {
+    console.error('Error adding blog:', error);
+  }
+};
 
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
+
+
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // ✅ Keep this
+  const [deleteItemId, setDeleteItemId] = useState<string | null>(null); // ✅ Keep this
+  const [blogId, setblogId] = useState("");
+
+  
+
+
+const fetchData = async () => {
+  try {
+    const res = await axios.get(`${BURL}/blog`);
+    console.log("API blog response:", res.data);
+
+    // Confirm the actual response structure and access correctly:
+    if (Array.isArray(res.data.data)) {
+      setData(res.data.data); // this is correct if the API returns { data: [...] }
+    } else if (Array.isArray(res.data)) {
+      setData(res.data); // if API returns an array directly
+    } else {
+      console.error("Unexpected data structure:", res.data);
+    }
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+
+
+
+useEffect(() => {
+  if (editIndex !== null && data && data[editIndex]) {
+    const item = data[editIndex];
+    setEditForm({
+      title: item.title, 
+      content: item.content,
+       updatedAt: item.updatedAt,
+      imageURL: item.imageURL || "",
+      
+    });
+  }
+}, [editIndex, data]);
+
+
+useEffect(() => {
+  axios.get(`${BURL}/blog`)
+      .then((res) => {
+        const map: { [key: string]: string } = {};
+        res.data.data.forEach((cat: { id: string | number; title: string }) => {
+          map[cat.id] = cat.title;
+        });
+        setblogMap(map);
+      })
+      .catch((err) => console.error("Failed to load categories", err));
+  }, []);
+
 
 
   return (
@@ -93,20 +171,24 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
         <Sidebar />
       </div>
 
+
+
       <div className="px-4 sm:px-6 lg:px-8 py-6 space-y-20 md:ml-[260px]">
         <div className="max-w-7xl w-full mx-auto">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-8">Blog Management</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-8">blog Management</h2>
 
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+            <>
+
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div className="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border-gray-200 rounded-3xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
               <div className="flex items-center space-x-4">
-                <div className="bg-green-100 text-green-600 p-3 rounded-full">
-                  <FontAwesomeIcon icon={faLayerGroup} className="text-2xl" />
-                </div>
-                <div>
-                  <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total Blogs</h5>
-                  <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
-                </div>
+              <div className="bg-green-100 text-green-600 p-3 rounded-full">
+                                                           <FontAwesomeIcon icon={faUser} className="text-2xl" />
+              </div>
+              <div>
+                <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total blogs</h5>
+                <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
+              </div>
               </div>
             </div>
 
@@ -117,13 +199,24 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
               <FontAwesomeIcon icon={faPlus} />
               <span>Add Blog</span>
             </button>
-          </div>
+            </div>
+            <AddblogModal
+        isOpen={addModal}
+        onClose={() => setAddModal(false)}
+        onSave={handleAddSave}
+        newblog={newblog}
+        onChange={handleAddblogChange}
+      />
+
+
+      </>
+
 
           <div className="bg-white shadow-md rounded-2xl p-4 sm:p-6 dark:bg-gray-900">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Blog List</h2>
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">blog List</h2>
               <div className="flex items-center gap-3 w-full sm:w-auto">
-                <p className="text-green-700 font-medium whitespace-nowrap">Active Blog</p>
+                <p className="text-green-700 font-medium whitespace-nowrap">Active blog</p>
                 <input
                   type="text"
                   placeholder="Search..."
@@ -133,45 +226,95 @@ const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
             </div>
 
             <div className="relative overflow-x-auto shadow-sm rounded-lg">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th className="px-6 py-3">Blog Title</th>
-                    <th className="px-6 py-3">Picture</th>
-                    <th className="px-6 py-3">Description</th>
-                    <th className="px-6 py-3 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems.map((item, index) => (
-                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</th>
-                      <td className="px-6 py-4">
-                        <Image src={item.image} alt={item.name} width={48} height={48} className="w-12 h-12 rounded object-cover" />
-                      </td>
-                      <td className="px-6 py-4">{item.description}</td>
-                      <td className="px-6 py-4 text-right space-x-2">
-                        <button
-className="text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]"
-onClick={() => handleEditClick(index + indexOfFirstItem)}
-                        >
-                          <Pencil size={18} />
-                        </button>
-                        <button
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th className="px-6 py-3">Blog Title</th>
+      <th className="px-6 py-3">Content</th>
+
+      <th className="px-6 py-3">Date</th>
+      <th className="px-6 py-3">Picture</th>
+      <th className="px-6 py-3 text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {currentItems.map((item, index) => (
+      <tr
+        key={index}
+        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+      >
+      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+  {item.title}
+</td>
+<td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {item.content}
+        </td>
+        
+
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {item.updatedAt ? new Date(item.updatedAt).toLocaleDateString() : "N/A"}
+        </td>
+        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+  <img 
+    src={item.imageURL} 
+    alt="Item" 
+    className="w-12 h-12 object-cover rounded-full"
+  />
+</td>
+        
+        <td className="px-6 py-4 text-right space-x-2">
+        <button
+  className="text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]"
   onClick={() => {
-    setDeleteIndex(index + indexOfFirstItem);
-    setShowDeleteModal(true);
+    setEditForm({
+      title: item.title,
+      content: item.content, 
+      updatedAt: item.updatedAt,
+      
+      imageURL: item.imageURL || "",
+      
+    });
+    setblogId(item.id); // Or whatever your blog ID key is
+    setShowModal(true);
   }}
-  className="text-red-600 dark:text-red-500 hover:text-red-800"
 >
-  <Trash2 size={18} />
+  <Pencil size={18} />
 </button>
 
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+      <EditblogModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        editForm={editForm}
+        handleEditChange={handleEditChange}
+        blogId={item.id}
+        BURL={BURL || ""}
+        refresh={fetchData}
+
+      />
+      <button
+            onClick={() => {
+              setDeleteItemId(item.id); 
+              setShowDeleteModal(true);
+            }}
+            className="text-red-600 dark:text-red-500 hover:text-red-800"
+          >
+            <Trash2 size={18} />
+          </button>
+          
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+ <DeleteblogModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        blogId={deleteItemId}
+        onDeleted={fetchData}
+
+      />
+
             </div>
 
             <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-600 dark:text-gray-300">
@@ -200,165 +343,7 @@ onClick={() => handleEditClick(index + indexOfFirstItem)}
         </div>
       </div>
 
-     {/* Add Blog Modal */}
-{addModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Add Blog</h2>
-        <button
-          onClick={() => setAddModal(false)}
-          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
-        >
-          ×
-        </button>
-      </div>
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Blog Name</label>
-          <input
-            name="name"
-            type="text"
-            value={newBlog.name}
-            onChange={handleAddBlogChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Description</label>
-          <textarea
-            name="description"
-            value={newBlog.description}
-            onChange={handleAddBlogChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Upload Image</label>
-          <input
-  name="image"
-  type="file"
-  accept="image/*"
-  onChange={handleAddImageUpload}
-  className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 
-             file:bg-[#008767] file:text-white file:font-semibold 
-             hover:file:bg-[#006d50]
-             border border-gray-300 dark:border-gray-600 px-3 py-2 
-             rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-/>
 
-        </div>
-        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-          
-          <button
-            onClick={handleAddSave}
-            className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-      )}
-
-  
-{/* Delete Modal */}
-{showDeleteModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-sm dark:bg-gray-900">
-      <h2 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800 dark:text-white">
-        Are you sure you want to delete this Blog?
-      </h2>
-      <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-        <button
-          onClick={() => setShowDeleteModal(false)}
-          className="px-4 py-2 rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 w-full sm:w-auto"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => {
-            if (deleteIndex !== null) {
-              const updated = [...data];
-              updated.splice(deleteIndex, 1);
-              setData(updated);
-            }
-            setShowDeleteModal(false);
-            setDeleteIndex(null);
-          }}
-          className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 w-full sm:w-auto"
-        >
-          Delete
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
-
-     {/* Edit Blog Modal */}
-{showModal && (
-  <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Edit Blog</h2>
-        <button
-          onClick={() => setShowModal(false)}
-          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
-        >
-          ×
-        </button>
-      </div>
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Blog Name</label>
-          <input
-            name="name"
-            type="text"
-            value={editForm.name}
-            onChange={handleEditChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Description</label>
-          <textarea
-            name="description"
-            value={editForm.description}
-            onChange={handleEditChange}
-            className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Upload Image</label>
-          <input
-            name="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 
-                       file:bg-[#008767] file:text-white file:font-semibold 
-                       hover:file:bg-[#006d50] border border-gray-300 dark:border-gray-600 
-                       px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-          />
-        </div>
-        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-          
-          <button
-            onClick={handleSave}
-            className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-      )}
 
 
 
@@ -366,3 +351,5 @@ onClick={() => handleEditClick(index + indexOfFirstItem)}
     </div>
   );
 }
+
+

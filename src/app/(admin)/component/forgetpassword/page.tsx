@@ -24,13 +24,18 @@ export default function ForgotPasswordPage() {
 
     try {
       setLoading(true); // Start loading
-      const response = await axios.post(`${BURL}/auth/forgot`, { email });
-
+      const response = await axios.post(
+        `${BURL}/auth/forgot`,
+        { email },
+        // { withCredentials: true }
+      );
+    
       if (response.status === 200) {
         setMessage(response.data?.message || "A password reset link has been sent to your email.");
         setMessageType("success");
       }
     } catch (err: any) {
+      console.log(err);
       const backendMessage = err?.response?.data?.message;
 
       if (err.response && err.response.status === 404) {
@@ -138,7 +143,7 @@ export default function ForgotPasswordPage() {
 
           {/* Back to Login Link */}
           <div className="mt-6 text-center text-sm">
-            <a href="/login" className="text-[#289C9A] hover:underline">
+            <a href="/" className="text-[#289C9A] hover:underline">
               Back to login
             </a>
           </div>

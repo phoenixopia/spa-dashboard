@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { faCalendarCheck, faGear, faRightFromBracket, faSpa, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import Cookies from "js-cookie";
 const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
 const Sidebar = () => {
@@ -375,13 +376,14 @@ const Sidebar = () => {
         );
 
         // Manually delete accessible cookies
-        document.cookie.split(";").forEach((c) => {
-          document.cookie = c
-            .replace(/^ +/, "")
-            .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-        });
+        // document.cookie.split(";").forEach((c) => {
+        //   document.cookie = c
+        //     .replace(/^ +/, "")
+        //     .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+        // });
 
-      } catch (err) {
+        Cookies.set("token", "", { expires: -1 });
+        }catch (err) {
         console.error("Logout failed", err);
       }
 

@@ -25,7 +25,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-const BURL = ("TURBOPACK compile-time value", "https://spa-backend-dev.vercel.app/api");
+const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 const Sidebar = ()=>{
     _s();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"])();
@@ -618,6 +618,10 @@ const Sidebar = ()=>{
                                                 await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/auth/logout`, {}, {
                                                     withCredentials: true
                                                 });
+                                                // Manually delete accessible cookies
+                                                document.cookie.split(";").forEach((c)=>{
+                                                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                                                });
                                             } catch (err) {
                                                 console.error("Logout failed", err);
                                             }
@@ -633,7 +637,7 @@ const Sidebar = ()=>{
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
-                                                lineNumber: 389,
+                                                lineNumber: 397,
                                                 columnNumber: 5
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -641,7 +645,7 @@ const Sidebar = ()=>{
                                                 children: "Logout"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/sidebar/page.tsx",
-                                                lineNumber: 390,
+                                                lineNumber: 398,
                                                 columnNumber: 5
                                             }, this)
                                         ]

@@ -5,36 +5,65 @@ import { SetStateAction, useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faCalendarAlt, faCogs, faLayerGroup, faPlus, faSeedling, faSpa, faUsers, faCalendarCheck, faSquareRss, faBell } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import axios from "axios";
 import { time } from "console";
+import EditbookingModal from "../booking/edit"; // import the modal component
+
+// Removed incorrect import of 'data' from "react-router-dom"
+const BURL = process.env.NEXT_PUBLIC_APP_URL;
+
 
 export default function Dashboard() {
   const itemsPerPage = 3;
-  const data = [
-    { customerName: 'John Doe', service: 'Apple MacBook Pro 17"', phoneNumber: '+1 234 567 890', email: 'johndoe@example.com', date: '2025-04-08', status: 'Completed', time: '10:00 AM' },
-    { customerName: 'Jane Smith', service: 'Microsoft Surface Pro', phoneNumber: '+1 987 654 321', email: 'janesmith@example.com', date: '2025-04-09', status: 'Pending', time: '10:00 AM' },
-    { customerName: 'Michael Johnson', service: 'Magic Mouse 2', phoneNumber: '+1 555 123 456', email: 'michaeljohnson@example.com', date: '2025-04-10', status: 'Rejected', time: '10:00 AM' },
-    { customerName: 'Emily Davis', service: 'iPhone 13', phoneNumber: '+1 321 654 987', email: 'emilydavis@example.com', date: '2025-04-11', status: 'Completed', time: '10:00 AM' },
-    { customerName: 'James Brown', service: 'iPad Pro', phoneNumber: '+1 654 987 123', email: 'jamesbrown@example.com', date: '2025-04-12', status: 'Rejected' , time: '10:00 AM'},
-    { customerName: 'Olivia Wilson', service: 'Apple Watch', phoneNumber: '+1 987 321 654', email: 'oliviawilson@example.com', date: '2025-04-13', status: 'Pending' , time: '10:00 AM'},
-    { customerName: 'Liam Moore', service: 'AirPods Pro', phoneNumber: '+1 123 456 789', email: 'liammoore@example.com', date: '2025-04-14', status: 'Completed' , time: '10:00 AM'},
-    { customerName: 'Sophia Taylor', service: 'Dell XPS 13', phoneNumber: '+1 765 432 109', email: 'sophiataylor@example.com', date: '2025-04-15', status: 'Pending', time: '10:00 AM' },
-    { customerName: 'Liam Moore', service: 'AirPods Pro', phoneNumber: '+1 123 456 789', email: 'liammoore@example.com', date: '2025-04-14', status: 'Completed' , time: '10:00 AM'},
-    { customerName: 'Sophia Taylor', service: 'Dell XPS 13', phoneNumber: '+1 765 432 109', email: 'sophiataylor@example.com', date: '2025-04-15', status: 'Pending', time: '10:00 AM' }
-  ];
-
+  
   const [currentPage, setCurrentPage] = useState(1);
-  const [items, setItems] = useState(data);
-  const [selectedItem, setSelectedItem] = useState<typeof data[0] | null>(null);
+  const [items, setItems] = useState<BookingItem[]>([]);
+  type BookingItem = {
+    id: string; // Add the missing 'id' property
+    customerName: string;
+    service: string;
+    phoneNumber: string;
+    email: string;
+    date: string;
+    time: string;
+    status: "Approved" | "Pending" | "Rejected";
+  };
+  
+  const [selectedItem, setSelectedItem] = useState<BookingItem | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [editForm, setEditForm] = useState({
+    name: "",
+    serviceId: "",
+    price: "",
+    status: "",
+    customerName: "",
+    date: "",
+    time: "",
+    phoneNumber: "",
+    email: "",
+  });
+
+  const [newBooking, setNewBooking] = useState({
+    name: "",
+    serviceId: "",
+    price: "",
+    status: "",
+    customerName: "",
+    date: "",
+    time: "",
+    phoneNumber: "",
+    email: "",
+  });
 
   const itemsPerPageCount = itemsPerPage;
   const totalPages = Math.ceil(items.length / itemsPerPageCount);
   const currentItems = items.slice((currentPage - 1) * itemsPerPageCount, currentPage * itemsPerPageCount);
+  const [serviceMap, setServiceMap] = useState<{ [key: string]: string }>({});
 
   const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
-  const openModal = (item: typeof data[0]) => {
+  const openModal = (item: BookingItem) => {
     setSelectedItem(item);
     setShowModal(true);
   };
@@ -45,15 +74,79 @@ export default function Dashboard() {
   };
 
   const updateStatus = (newStatus: string) => {
-      const updatedItems = items.map((item: typeof data[0]) => {
-        if (item === selectedItem) return { ...item, status: newStatus };
+      const updatedItems = items.map((item: BookingItem) => {
+        if (item === selectedItem) return { ...item, status: newStatus as "Approved" | "Pending" | "Rejected" };
         return item;
       });
       setItems(updatedItems);
       closeModal();
     };
 
+  // Fetch all the data from the server
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(`${BURL}/booking`);
+      console.log("API response:", res.data);
+
+      if (Array.isArray(res.data.data)) {
+        setItems(res.data.data); // Assuming the response has a data array
+      } else {
+        console.error("Unexpected data structure:", res.data);
+      }
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+    }
+  };
+
+  const handleRowClick = (item: any) => {
+    setSelectedItem(item); // Set the selected item
+    setEditForm({
+      name: item.name,
+      serviceId: item.serviceId,
+      price: item.price,
+      status: item.status,
+      customerName: item.customerName,
+      date: item.date,
+      time: item.time,
+      phoneNumber: item.phoneNumber,
+      email: item.email,
+    });
+    setShowModal(true); // Open the edit modal
+  };
+
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setEditForm({ ...editForm, [e.target.name]: e.target.value });
+  };
+  
+  const handleAddBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+    const { name, value } = e.target;
+    setNewBooking((prev) => ({ ...prev, [name]: value }));
+    fetchData(); // Refresh the list after adding
+  };
+
   const totalServices = 10;
+
+  // Fetch service data once and map the service names to their IDs
+  const fetchServices = async () => {
+    try {
+      const res = await axios.get(`${BURL}/service`);
+      const map: { [key: string]: string } = {};
+      res.data.data.forEach((service: { id: string | number; name: string }) => {
+        map[service.id] = service.name;
+      });
+      setServiceMap(map); // Set the service map
+    } catch (error) {
+      console.error("Failed to load services", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(); // Fetch bookings data
+    fetchServices(); // Fetch services data
+  }, []); // Runs once when the component mounts
+
+  // Get current page items based on pagination
+
 
   return (
     <div className="relative bg-cover bg-center min-h-screen" style={{ backgroundImage: 'url("/Image/banner-bg.jpg")' }}>
@@ -100,42 +193,55 @@ export default function Dashboard() {
             </div>
 
             <div className="relative overflow-x-auto shadow-sm rounded-lg">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs uppercase bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
-                  <tr>
-                    <th className="px-6 py-3">Customer</th>
-                    <th className="px-6 py-3">Service</th>
-                    <th className="px-6 py-3">Phone</th>
-                    <th className="px-6 py-3">Email</th>
-                    <th className="px-6 py-3">Date</th>
-                    <th className="px-6 py-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems.map((item, idx) => (
-                    <tr
-                      key={idx}
-                      onClick={() => openModal(item)}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
-                    >
-                      <td className="px-6 py-4">{item.customerName}</td>
-                      <td className="px-6 py-4">{item.service}</td>
-                      <td className="px-6 py-4">{item.phoneNumber}</td>
-                      <td className="px-6 py-4">{item.email}</td>
-                      <td className="px-6 py-4">{item.date}</td>
-                      <td className="px-6 py-4">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          item.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                          item.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-red-100 text-red-800'
-                        }`}>
-                          {item.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th className="px-6 py-3 text-left">Customer Name</th>
+      <th className="px-6 py-3 text-left">Service</th>
+      <th className="px-6 py-3 text-left">Phone Number</th>
+      <th className="px-6 py-3 text-left">Email</th>
+      <th className="px-6 py-3 text-right">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {currentItems.map((item: any) => (
+      <tr
+        key={item.id}
+        onClick={() => handleRowClick(item)} // Pass clicked row item
+        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      >
+        <td className="px-6 py-3 text-left">{`${item.firstName} ${item.lastName}`}</td>
+        <td className="px-6 py-3 text-left">{serviceMap[item.serviceId] || "Loading..."}</td>
+        <td className="px-6 py-3 text-left">{item.phoneNumber}</td>
+        <td className="px-6 py-3 text-left">{item.email || "null"}</td>
+        <td className="px-6 py-3 text-right">
+          <span
+            className={`px-2 py-1 rounded-lg text-xs font-semibold ${item.status === "Approved"
+              ? "bg-green-100 text-green-800"
+              : item.status === "Pending"
+                ? "bg-yellow-100 text-yellow-800"
+                : "bg-red-100 text-red-800"}`}
+          >
+            {item.status}
+          </span>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+{selectedItem && (
+              <EditbookingModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                editForm={editForm}
+                handleAddBookingChange={handleAddBookingChange}
+                serviceId={selectedItem.service} // Adjusted the service mapping here
+                BURL={BURL || ""} 
+                closeModal={() => setShowModal(false)}
+                selectedItem={selectedItem} // Pass the selectedItem here
+                refreshData={fetchData}
+              />
+            )}
             </div>
 
             <div className="flex justify-between items-center mt-4">
@@ -190,7 +296,7 @@ export default function Dashboard() {
             onChange={(e) => updateStatus(e.target.value)}
             className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767] pr-10"
           >
-            <option value="Completed">Completed</option>
+            <option value="Approved">Approved</option>
             <option value="Pending">Pending</option>
             <option value="Rejected">Rejected</option>
           </select>
@@ -219,3 +325,7 @@ function StatCard({ icon, title, value }: { icon: any; title: string; value: str
     </div>
   );
 }
+function setEditForm(arg0: { name: any; serviceId: any; price: any; status: any; customerName: any; date: any; time: any; phoneNumber: any; email: any; }) {
+  throw new Error("Function not implemented.");
+}
+
