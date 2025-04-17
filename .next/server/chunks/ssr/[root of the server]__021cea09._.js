@@ -1082,6 +1082,60 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$c
 const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 function Dashboard() {
     const itemsPerPage = 3;
+    const [todaybooking, settodaybookingCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const fetchtodaybooking = async ()=>{
+        try {
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/booking/today`);
+            const todaybooking = res?.data?.pagination?.total || 0; // Get the total number of services or default to 0
+            settodaybookingCount(todaybooking); // Update the state with the booking count
+        } catch (error) {
+            console.error("Failed to load today's booking", error);
+        }
+    };
+    console.log("\n\n toaday booking", todaybooking);
+    const [testimonialcount, settestimonialCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const fetchtestimonial = async ()=>{
+        try {
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/testimonial`);
+            console.log("testimonial data", res);
+            const testimonialcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+            settestimonialCount(testimonialcount); // Update the state with the booking count
+        } catch (error) {
+            console.error("Failed to load testimonial", error);
+        }
+    };
+    const [blogcount, setblogCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const fetchblog = async ()=>{
+        try {
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/blog`);
+            const blogcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+            setblogCount(blogcount); // Update the state with the booking count
+        } catch (error) {
+            console.error("Failed to load user", error);
+        }
+    };
+    const [usercount, setuserCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const fetchuser = async ()=>{
+        try {
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/user`);
+            const usercount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+            setuserCount(usercount); // Update the state with the booking count
+        } catch (error) {
+            console.error("Failed to load user", error);
+        }
+    };
+    // Fetch all the data from the server
+    const [servicecount, setServiceCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0); // Initialize service count state
+    const [bookingcount, setBookingCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const fetchBookings = async ()=>{
+        try {
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/booking`);
+            const bookingcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+            setBookingCount(bookingcount); // Update the state with the booking count
+        } catch (error) {
+            console.error("Failed to load services", error);
+        }
+    };
     const [currentPage, setCurrentPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(1);
     const [items, setItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [selectedItem, setSelectedItem] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
@@ -1137,7 +1191,6 @@ function Dashboard() {
     const fetchData = async ()=>{
         try {
             const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/booking`);
-            console.log("API response:", res.data);
             if (Array.isArray(res.data.data)) {
                 setItems(res.data.data); // Assuming the response has a data array
             } else {
@@ -1181,6 +1234,9 @@ function Dashboard() {
     const fetchServices = async ()=>{
         try {
             const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/service`);
+            const servicecount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+            setServiceCount(servicecount) // Get the total number of services or default to 0
+            ;
             const map = {};
             res.data.data.forEach((service)=>{
                 map[service.id] = service.name;
@@ -1189,10 +1245,15 @@ function Dashboard() {
         } catch (error) {
             console.error("Failed to load services", error);
         }
-    };
+    }; // Close the fetchServices function
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        fetchtodaybooking();
+        fetchtestimonial();
+        fetchuser();
+        fetchblog();
         fetchData(); // Fetch bookings data
         fetchServices(); // Fetch services data
+        fetchBookings(); // Fetch booking count
     }, []); // Runs once when the component mounts
     // Get current page items based on pagination
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1205,12 +1266,12 @@ function Dashboard() {
                 className: "hidden md:block",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$sidebar$2f$page$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                    lineNumber: 154,
+                    lineNumber: 246,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                lineNumber: 153,
+                lineNumber: 245,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1229,13 +1290,13 @@ function Dashboard() {
                                             children: "👋,"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 160,
+                                            lineNumber: 252,
                                             columnNumber: 31
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 160,
+                                    lineNumber: 252,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1246,18 +1307,18 @@ function Dashboard() {
                                         className: "text-2xl cursor-pointer"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 162,
+                                        lineNumber: 254,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 161,
+                                    lineNumber: 253,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 159,
+                            lineNumber: 251,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1268,39 +1329,39 @@ function Dashboard() {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(StatCard, {
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faSpa"],
                                         title: "Total Services",
-                                        value: totalServices
+                                        value: servicecount
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 168,
+                                        lineNumber: 260,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(StatCard, {
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faUsers"],
                                         title: "Total Users",
-                                        value: "10"
+                                        value: usercount
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 169,
+                                        lineNumber: 261,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(StatCard, {
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faCalendarCheck"],
                                         title: "Total Books",
-                                        value: "100"
+                                        value: bookingcount
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 170,
+                                        lineNumber: 262,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                lineNumber: 167,
+                                lineNumber: 259,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 166,
+                            lineNumber: 258,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1311,39 +1372,39 @@ function Dashboard() {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(StatCard, {
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faSquareRss"],
                                         title: "Total Blogs",
-                                        value: totalServices
+                                        value: blogcount
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 176,
+                                        lineNumber: 268,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(StatCard, {
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faUsers"],
                                         title: "Total Testimonials",
-                                        value: "10"
+                                        value: testimonialcount
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 177,
+                                        lineNumber: 269,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(StatCard, {
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faCalendarCheck"],
                                         title: "Today Booked",
-                                        value: "100"
+                                        value: todaybooking
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 178,
+                                        lineNumber: 270,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                lineNumber: 175,
+                                lineNumber: 267,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 174,
+                            lineNumber: 266,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1357,7 +1418,7 @@ function Dashboard() {
                                             children: "Booking List"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 184,
+                                            lineNumber: 276,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1368,7 +1429,7 @@ function Dashboard() {
                                                     children: "Latest booked"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                    lineNumber: 186,
+                                                    lineNumber: 278,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1377,19 +1438,19 @@ function Dashboard() {
                                                     className: "px-2 py-1.5 border rounded-md text-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                    lineNumber: 187,
+                                                    lineNumber: 279,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 185,
+                                            lineNumber: 277,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 183,
+                                    lineNumber: 275,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1407,7 +1468,7 @@ function Dashboard() {
                                                                 children: "Customer Name"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                lineNumber: 199,
+                                                                lineNumber: 291,
                                                                 columnNumber: 7
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1415,7 +1476,7 @@ function Dashboard() {
                                                                 children: "Service"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                lineNumber: 200,
+                                                                lineNumber: 292,
                                                                 columnNumber: 7
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1423,7 +1484,7 @@ function Dashboard() {
                                                                 children: "Phone Number"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                lineNumber: 201,
+                                                                lineNumber: 293,
                                                                 columnNumber: 7
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1431,7 +1492,7 @@ function Dashboard() {
                                                                 children: "Email"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                lineNumber: 202,
+                                                                lineNumber: 294,
                                                                 columnNumber: 7
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1439,18 +1500,18 @@ function Dashboard() {
                                                                 children: "Status"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                lineNumber: 203,
+                                                                lineNumber: 295,
                                                                 columnNumber: 7
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                        lineNumber: 198,
+                                                        lineNumber: 290,
                                                         columnNumber: 5
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                    lineNumber: 197,
+                                                    lineNumber: 289,
                                                     columnNumber: 3
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1463,7 +1524,7 @@ function Dashboard() {
                                                                     children: `${item.firstName} ${item.lastName}`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                    lineNumber: 213,
+                                                                    lineNumber: 305,
                                                                     columnNumber: 9
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1471,7 +1532,7 @@ function Dashboard() {
                                                                     children: serviceMap[item.serviceId] || "Loading..."
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                    lineNumber: 214,
+                                                                    lineNumber: 306,
                                                                     columnNumber: 9
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1479,7 +1540,7 @@ function Dashboard() {
                                                                     children: item.phoneNumber
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                    lineNumber: 215,
+                                                                    lineNumber: 307,
                                                                     columnNumber: 9
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1487,7 +1548,7 @@ function Dashboard() {
                                                                     children: item.email || "null"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                    lineNumber: 216,
+                                                                    lineNumber: 308,
                                                                     columnNumber: 9
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1497,29 +1558,29 @@ function Dashboard() {
                                                                         children: item.status
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                        lineNumber: 218,
+                                                                        lineNumber: 310,
                                                                         columnNumber: 11
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                                    lineNumber: 217,
+                                                                    lineNumber: 309,
                                                                     columnNumber: 9
                                                                 }, this)
                                                             ]
                                                         }, item.id, true, {
                                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                            lineNumber: 208,
+                                                            lineNumber: 300,
                                                             columnNumber: 7
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                    lineNumber: 206,
+                                                    lineNumber: 298,
                                                     columnNumber: 3
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 196,
+                                            lineNumber: 288,
                                             columnNumber: 13
                                         }, this),
                                         selectedItem && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$booking$2f$edit$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1534,13 +1595,13 @@ function Dashboard() {
                                             refreshData: fetchData
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 233,
+                                            lineNumber: 325,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 195,
+                                    lineNumber: 287,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1553,7 +1614,7 @@ function Dashboard() {
                                             children: "Previous"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 248,
+                                            lineNumber: 340,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1566,7 +1627,7 @@ function Dashboard() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 249,
+                                            lineNumber: 341,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1576,30 +1637,30 @@ function Dashboard() {
                                             children: "Next"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 250,
+                                            lineNumber: 342,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 247,
+                                    lineNumber: 339,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 182,
+                            lineNumber: 274,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                    lineNumber: 158,
+                    lineNumber: 250,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                lineNumber: 157,
+                lineNumber: 249,
                 columnNumber: 7
             }, this),
             showModal && selectedItem && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1615,7 +1676,7 @@ function Dashboard() {
                                     children: "Booking Details"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 265,
+                                    lineNumber: 357,
                                     columnNumber: 9
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1624,13 +1685,13 @@ function Dashboard() {
                                     children: "×"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 266,
+                                    lineNumber: 358,
                                     columnNumber: 9
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 264,
+                            lineNumber: 356,
                             columnNumber: 7
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1641,13 +1702,13 @@ function Dashboard() {
                                     children: selectedItem.customerName
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 276,
+                                    lineNumber: 368,
                                     columnNumber: 27
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 275,
+                            lineNumber: 367,
                             columnNumber: 7
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1660,7 +1721,7 @@ function Dashboard() {
                                             children: "Date:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 282,
+                                            lineNumber: 374,
                                             columnNumber: 11
                                         }, this),
                                         " ",
@@ -1668,7 +1729,7 @@ function Dashboard() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 281,
+                                    lineNumber: 373,
                                     columnNumber: 9
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1678,7 +1739,7 @@ function Dashboard() {
                                             children: "Time:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                            lineNumber: 285,
+                                            lineNumber: 377,
                                             columnNumber: 11
                                         }, this),
                                         " ",
@@ -1686,13 +1747,13 @@ function Dashboard() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 284,
+                                    lineNumber: 376,
                                     columnNumber: 9
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 280,
+                            lineNumber: 372,
                             columnNumber: 7
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1704,7 +1765,7 @@ function Dashboard() {
                                     children: "Change Status"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 291,
+                                    lineNumber: 383,
                                     columnNumber: 9
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1720,7 +1781,7 @@ function Dashboard() {
                                                 children: "Approved"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                lineNumber: 299,
+                                                lineNumber: 391,
                                                 columnNumber: 13
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1728,7 +1789,7 @@ function Dashboard() {
                                                 children: "Pending"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                lineNumber: 300,
+                                                lineNumber: 392,
                                                 columnNumber: 13
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1736,41 +1797,41 @@ function Dashboard() {
                                                 children: "Rejected"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                                lineNumber: 301,
+                                                lineNumber: 393,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                        lineNumber: 293,
+                                        lineNumber: 385,
                                         columnNumber: 11
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                                    lineNumber: 292,
+                                    lineNumber: 384,
                                     columnNumber: 9
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                            lineNumber: 290,
+                            lineNumber: 382,
                             columnNumber: 7
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                    lineNumber: 261,
+                    lineNumber: 353,
                     columnNumber: 5
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                lineNumber: 260,
+                lineNumber: 352,
                 columnNumber: 3
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-        lineNumber: 152,
+        lineNumber: 244,
         columnNumber: 5
     }, this);
 }
@@ -1785,12 +1846,12 @@ function StatCard({ icon, title, value }) {
                     className: "text-2xl"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                    lineNumber: 319,
+                    lineNumber: 411,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                lineNumber: 318,
+                lineNumber: 410,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1800,7 +1861,7 @@ function StatCard({ icon, title, value }) {
                         children: title
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                        lineNumber: 322,
+                        lineNumber: 414,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1808,24 +1869,21 @@ function StatCard({ icon, title, value }) {
                         children: value
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                        lineNumber: 323,
+                        lineNumber: 415,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-                lineNumber: 321,
+                lineNumber: 413,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/component/dashboard/page.tsx",
-        lineNumber: 317,
+        lineNumber: 409,
         columnNumber: 5
     }, this);
-}
-function setEditForm(arg0) {
-    throw new Error("Function not implemented.");
 }
 }}),
 

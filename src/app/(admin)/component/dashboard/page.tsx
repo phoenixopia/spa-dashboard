@@ -9,12 +9,98 @@ import axios from "axios";
 import { time } from "console";
 import EditbookingModal from "../booking/edit"; // import the modal component
 
+
 // Removed incorrect import of 'data' from "react-router-dom"
 const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
 
 export default function Dashboard() {
   const itemsPerPage = 3;
+
+  const [todaybooking, settodaybookingCount] = useState(0);
+
+
+  const fetchtodaybooking = async () => {
+    try {
+      const res = await axios.get(`${BURL}/booking/today`);
+      
+        const todaybooking = res?.data?.pagination?.total || 0; // Get the total number of services or default to 0
+        settodaybookingCount(todaybooking); // Update the state with the booking count
+    } catch (error) {
+      console.error("Failed to load today's booking", error);
+    }
+  };
+
+  console.log("\n\n toaday booking", todaybooking)
+
+
+  const [testimonialcount, settestimonialCount] = useState(0);
+
+
+  const fetchtestimonial = async () => {
+    try {
+      const res = await axios.get(`${BURL}/testimonial`);
+      console.log("testimonial data", res);
+      const testimonialcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+      settestimonialCount(testimonialcount); // Update the state with the booking count
+    } catch (error) {
+      console.error("Failed to load testimonial", error);
+    }
+  };
+
+
+  const [blogcount, setblogCount] = useState(0);
+
+
+  const fetchblog = async () => {
+    try {
+      const res = await axios.get(`${BURL}/blog`);
+      const blogcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+      setblogCount(blogcount); // Update the state with the booking count
+    } catch (error) {
+      console.error("Failed to load user", error);
+    }
+  };
+
+
+
+  const [usercount, setuserCount] = useState(0);
+
+
+  const fetchuser = async () => {
+    try {
+      const res = await axios.get(`${BURL}/user`);
+      const usercount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+      setuserCount(usercount); // Update the state with the booking count
+    } catch (error) {
+      console.error("Failed to load user", error);
+    }
+  };
+
+
+
+
+
+
+ // Fetch all the data from the server
+const [servicecount, setServiceCount] = useState(0); // Initialize service count state
+const [bookingcount, setBookingCount] = useState(0);
+
+
+const fetchBookings = async () => {
+  try {
+    const res = await axios.get(`${BURL}/booking`);
+    const bookingcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+    setBookingCount(bookingcount); // Update the state with the booking count
+  } catch (error) {
+    console.error("Failed to load services", error);
+  }
+};
+
+
+
+
+
   
   const [currentPage, setCurrentPage] = useState(1);
   const [items, setItems] = useState<BookingItem[]>([]);
@@ -86,7 +172,6 @@ export default function Dashboard() {
   const fetchData = async () => {
     try {
       const res = await axios.get(`${BURL}/booking`);
-      console.log("API response:", res.data);
 
       if (Array.isArray(res.data.data)) {
         setItems(res.data.data); // Assuming the response has a data array
@@ -130,6 +215,8 @@ export default function Dashboard() {
   const fetchServices = async () => {
     try {
       const res = await axios.get(`${BURL}/service`);
+      const servicecount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+      setServiceCount(servicecount) // Get the total number of services or default to 0
       const map: { [key: string]: string } = {};
       res.data.data.forEach((service: { id: string | number; name: string }) => {
         map[service.id] = service.name;
@@ -138,11 +225,16 @@ export default function Dashboard() {
     } catch (error) {
       console.error("Failed to load services", error);
     }
-  };
+  }; // Close the fetchServices function
 
   useEffect(() => {
-    fetchData(); // Fetch bookings data
-    fetchServices(); // Fetch services data
+    fetchtodaybooking()
+    fetchtestimonial()
+    fetchuser()
+    fetchblog()
+      fetchData(); // Fetch bookings data
+      fetchServices(); // Fetch services data
+      fetchBookings(); // Fetch booking count
   }, []); // Runs once when the component mounts
 
   // Get current page items based on pagination
@@ -165,17 +257,17 @@ export default function Dashboard() {
 
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm p-2 mb-8">
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              <StatCard icon={faSpa} title="Total Services" value={totalServices} />
-              <StatCard icon={faUsers} title="Total Users" value="10" />
-              <StatCard icon={faCalendarCheck} title="Total Books" value="100" />
+              <StatCard icon={faSpa} title="Total Services" value={servicecount} />
+              <StatCard icon={faUsers} title="Total Users" value={usercount} />
+              <StatCard icon={faCalendarCheck} title="Total Books" value={bookingcount} />
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm p-2 mb-8">
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              <StatCard icon={faSquareRss} title="Total Blogs" value={totalServices} />
-              <StatCard icon={faUsers} title="Total Testimonials" value="10" />
-              <StatCard icon={faCalendarCheck} title="Today Booked" value="100" />
+              <StatCard icon={faSquareRss} title="Total Blogs" value={blogcount} />
+              <StatCard icon={faUsers} title="Total Testimonials" value={testimonialcount} />
+              <StatCard icon={faCalendarCheck} title="Today Booked" value={todaybooking} />
             </div>
           </div>
 
@@ -325,7 +417,3 @@ function StatCard({ icon, title, value }: { icon: any; title: string; value: str
     </div>
   );
 }
-function setEditForm(arg0: { name: any; serviceId: any; price: any; status: any; customerName: any; date: any; time: any; phoneNumber: any; email: any; }) {
-  throw new Error("Function not implemented.");
-}
-

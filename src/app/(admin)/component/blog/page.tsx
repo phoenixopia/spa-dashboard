@@ -163,7 +163,7 @@ useEffect(() => {
       .catch((err) => console.error("Failed to load categories", err));
   }, []);
 
-
+console.log(currentItems,'gfhgfhgfg')
 
   return (
     <div className="relative bg-cover bg-center min-h-screen">
@@ -255,9 +255,11 @@ useEffect(() => {
           {item.updatedAt ? new Date(item.updatedAt).toLocaleDateString() : "N/A"}
         </td>
         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-  <img 
+  <Image 
     src={item.imageURL} 
     alt="Item" 
+    height={400}
+    width={400}
     className="w-12 h-12 object-cover rounded-full"
   />
 </td>

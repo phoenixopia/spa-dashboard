@@ -9,7 +9,7 @@
     "static/chunks/node_modules_next_fbf13dfa._.js",
     "static/chunks/node_modules_@fortawesome_free-solid-svg-icons_index_mjs_6d4e8d45._.js",
     "static/chunks/node_modules_axios_lib_99999129._.js",
-    "static/chunks/node_modules_69fd3a8b._.js"
+    "static/chunks/node_modules_a87c5c18._.js"
   ],
   "source": "dynamic"
 });

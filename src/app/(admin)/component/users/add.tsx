@@ -12,6 +12,7 @@ interface AddUserModalProps {
     email: string;
     updatedAt?: string;
     password: string;
+    message: string;
   };
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

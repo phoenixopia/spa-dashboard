@@ -22,33 +22,28 @@ export default function UserSettings() {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const token = getTokenFromCookie();
-        console.log('Token:', token);
-
-        if (!token) {
-          console.error('No token found in cookies');
-          return;
-        }
+        if (!token) return;
 
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/user/single`,
+          `${process.env.NEXT_PUBLIC_APP_URL}/user/single`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            withCredentials: true, // Important if cookies are used
+            headers: { Authorization: `Bearer ${token}` },
+            withCredentials: true,
           }
         );
 
         const data = response.data.data;
         setName(data.firstName);
         setEmail(data.email);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
+      } catch (error: any) {
+        const msg = error?.response?.data?.message || 'Failed to fetch user data.';
+        setMessage({ type: 'error', text: msg });
       }
     };
 
@@ -67,53 +62,60 @@ export default function UserSettings() {
   const handleChange = async () => {
     const token = getTokenFromCookie();
     if (!token) {
-      console.error('No token found in cookies');
+      setMessage({ type: 'error', text: 'No token found. Please log in again.' });
       return;
     }
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
+    const headers = { Authorization: `Bearer ${token}` };
 
     try {
-      if (editField === 'password') {
-        if (newPassword === confirmPassword && newPassword.length >= 6) {
-          const response = await axios.put(
-            `${process.env.NEXT_PUBLIC_APP_URL}/user/edit`,
-            { oldPassword, newPassword },
-            { headers, withCredentials: true }
-          );
+      let response;
 
-          alert(response.status === 200 ? 'Password updated!' : 'Password update failed!');
-        } else {
-          alert('Password confirmation does not match or is too short');
+      if (editField === 'password') {
+        if (newPassword !== confirmPassword || newPassword.length < 6) {
+          setMessage({ type: 'error', text: 'Passwords do not match or are too short.' });
+          return;
         }
+
+        response = await axios.put(
+          `${process.env.NEXT_PUBLIC_APP_URL}/user/edit`,
+          { oldPassword, newPassword },
+          { headers, withCredentials: true }
+        );
       } else if (tempValue.trim()) {
-        const response = await axios.put(
+        response = await axios.put(
           `${process.env.NEXT_PUBLIC_APP_URL}/user/edit`,
           { [editField as 'firstName' | 'email']: tempValue },
           { headers, withCredentials: true }
         );
 
-        if (response.status === 200) {
-          if (editField === 'firstName') setName(tempValue);
-          if (editField === 'email') setEmail(tempValue);
-          alert(`${editField} updated!`);
-        } else {
-          alert(`Failed to update ${editField}`);
-        }
+        if (editField === 'firstName') setName(tempValue);
+        if (editField === 'email') setEmail(tempValue);
       }
-    } catch (error) {
-      alert(`Error updating ${editField}`);
-      console.error(error);
-    }
 
-    closeModal();
+      const msg = response?.data?.message || 'Update successful.';
+      setMessage({ type: 'success', text: msg });
+      closeModal();
+    } catch (error: any) {
+      const msg = error?.response?.data?.message || 'Something went wrong.';
+      setMessage({ type: 'error', text: msg });
+    }
   };
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 md:ml-[260px]">
       <h2 className="text-2xl font-bold text-gray-800 mb-10">User Settings</h2>
+
+      {/* Backend Message */}
+      {message && (
+        <div
+          className={`mb-6 px-4 py-3 rounded-md text-sm font-medium ${
+            message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}
+        >
+          {message.text}
+        </div>
+      )}
 
       <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
         {/* Name */}
@@ -128,7 +130,7 @@ export default function UserSettings() {
               setModalOpen(true);
               setTempValue(firstName);
             }}
-            className="bg-green-500 text-white px-4 py-1.5 rounded-lg hover:bg-green-600 transition whitespace-nowrap"
+            className="bg-green-500 text-white px-4 py-1.5 rounded-lg hover:bg-green-600 transition"
           >
             Change
           </button>
@@ -146,7 +148,7 @@ export default function UserSettings() {
               setModalOpen(true);
               setTempValue(email);
             }}
-            className="bg-green-500 text-white px-4 py-1.5 rounded-lg hover:bg-green-600 transition whitespace-nowrap"
+            className="bg-green-500 text-white px-4 py-1.5 rounded-lg hover:bg-green-600 transition"
           >
             Change
           </button>
@@ -163,7 +165,7 @@ export default function UserSettings() {
               setEditField('password');
               setModalOpen(true);
             }}
-            className="bg-green-500 text-white px-4 py-1.5 rounded-lg hover:bg-green-600 transition whitespace-nowrap"
+            className="bg-green-500 text-white px-4 py-1.5 rounded-lg hover:bg-green-600 transition"
           >
             Change
           </button>

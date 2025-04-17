@@ -102,11 +102,23 @@ const AddblogModal: React.FC<AddblogModalProps> = ({
               className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             />
           </div>
+          
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Image</label>
+            <input
+              name="imageURL"
+              type="text"
+              placeholder='insert the url after uploading the image in google drive'
+              value={newblog.imageURL}
+              onChange={onChange}
+              className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+            />
+          </div>
 
 
 
           {/* Image Upload */}
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Image</label>
             <input
               name="imageURL"
@@ -115,7 +127,7 @@ const AddblogModal: React.FC<AddblogModalProps> = ({
               onChange={onImageChange}
               className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
             />
-          </div>
+          </div> */}
 
           {/* message */}
           <div>

@@ -253,11 +253,13 @@ useEffect(() => {
           {item.message}
         </td>
         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-  <img 
-    src={item.imageURL} 
-    alt="Item" 
-    className="w-12 h-12 object-cover rounded-full"
-  />
+  <Image 
+      src={item.imageURL} 
+      alt="Item" 
+      height={400}
+      width={400}
+      className="w-12 h-12 object-cover rounded-full"
+    />
 </td>
         
         <td className="px-6 py-4 text-right space-x-2">
