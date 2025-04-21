@@ -38,6 +38,7 @@ function UserSettings() {
     const [newPassword, setNewPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const [confirmPassword, setConfirmPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false); // ← Loading state
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "UserSettings.useEffect": ()=>{
             const fetchUserData = {
@@ -73,6 +74,8 @@ function UserSettings() {
         setOldPassword('');
         setNewPassword('');
         setConfirmPassword('');
+        setMessage(null);
+        setLoading(false);
     };
     const handleChange = async ()=>{
         const token = getTokenFromCookie();
@@ -86,6 +89,7 @@ function UserSettings() {
         const headers = {
             Authorization: `Bearer ${token}`
         };
+        setLoading(true);
         try {
             let response;
             if (editField === 'password') {
@@ -94,6 +98,7 @@ function UserSettings() {
                         type: 'error',
                         text: 'Passwords do not match or are too short.'
                     });
+                    setLoading(false);
                     return;
                 }
                 response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].put(`${("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api")}/user/edit`, {
@@ -118,13 +123,14 @@ function UserSettings() {
                 type: 'success',
                 text: msg
             });
-            closeModal();
+            setTimeout(()=>closeModal(), 1200);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong.';
             setMessage({
                 type: 'error',
                 text: msg
             });
+            setLoading(false);
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -135,16 +141,8 @@ function UserSettings() {
                 children: "User Settings"
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                lineNumber: 107,
+                lineNumber: 113,
                 columnNumber: 7
-            }, this),
-            message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: `mb-6 px-4 py-3 rounded-md text-sm font-medium ${message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`,
-                children: message.text
-            }, void 0, false, {
-                fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                lineNumber: 111,
-                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "space-y-6 bg-white p-6 rounded-lg shadow-sm",
@@ -159,7 +157,7 @@ function UserSettings() {
                                         children: "Name"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 119,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -167,13 +165,13 @@ function UserSettings() {
                                         children: firstName
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                        lineNumber: 125,
+                                        lineNumber: 120,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                lineNumber: 123,
+                                lineNumber: 118,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -186,13 +184,13 @@ function UserSettings() {
                                 children: "Change"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                lineNumber: 127,
+                                lineNumber: 122,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                        lineNumber: 122,
+                        lineNumber: 117,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -205,7 +203,7 @@ function UserSettings() {
                                         children: "Email"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 137,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -213,13 +211,13 @@ function UserSettings() {
                                         children: email
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 138,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                lineNumber: 141,
+                                lineNumber: 136,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -232,13 +230,13 @@ function UserSettings() {
                                 children: "Change"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                lineNumber: 145,
+                                lineNumber: 140,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                        lineNumber: 140,
+                        lineNumber: 135,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -251,7 +249,7 @@ function UserSettings() {
                                         children: "Password"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                        lineNumber: 160,
+                                        lineNumber: 155,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -259,13 +257,13 @@ function UserSettings() {
                                         children: password
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                        lineNumber: 161,
+                                        lineNumber: 156,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                lineNumber: 159,
+                                lineNumber: 154,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -277,19 +275,19 @@ function UserSettings() {
                                 children: "Change"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                lineNumber: 163,
+                                lineNumber: 158,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                        lineNumber: 158,
+                        lineNumber: 153,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                lineNumber: 120,
+                lineNumber: 115,
                 columnNumber: 7
             }, this),
             modalOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -297,6 +295,14 @@ function UserSettings() {
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "bg-white w-full max-w-md rounded-xl shadow-lg p-6 space-y-6 relative",
                     children: [
+                        message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: `mb-6 px-4 py-3 rounded-md text-sm font-medium ${message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`,
+                            children: message.text
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
+                            lineNumber: 175,
+                            columnNumber: 15
+                        }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                             className: "text-xl font-semibold text-gray-800",
                             children: [
@@ -305,7 +311,7 @@ function UserSettings() {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                            lineNumber: 179,
+                            lineNumber: 184,
                             columnNumber: 13
                         }, this),
                         editField === 'password' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -319,7 +325,7 @@ function UserSettings() {
                                     onChange: (e)=>setOldPassword(e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                    lineNumber: 185,
+                                    lineNumber: 190,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -330,7 +336,7 @@ function UserSettings() {
                                     onChange: (e)=>setNewPassword(e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                    lineNumber: 192,
+                                    lineNumber: 197,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -341,13 +347,13 @@ function UserSettings() {
                                     onChange: (e)=>setConfirmPassword(e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                    lineNumber: 199,
+                                    lineNumber: 204,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                            lineNumber: 184,
+                            lineNumber: 189,
                             columnNumber: 15
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                             type: editField === 'email' ? 'email' : 'text',
@@ -356,7 +362,7 @@ function UserSettings() {
                             onChange: (e)=>setTempValue(e.target.value)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                            lineNumber: 208,
+                            lineNumber: 213,
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -365,46 +371,57 @@ function UserSettings() {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: closeModal,
                                     className: "px-4 py-2 text-gray-600 hover:underline",
+                                    disabled: loading,
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                    lineNumber: 217,
+                                    lineNumber: 222,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: handleChange,
-                                    className: "px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition",
-                                    children: "Save"
-                                }, void 0, false, {
+                                    className: "px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center",
+                                    disabled: loading,
+                                    children: [
+                                        loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
+                                            lineNumber: 235,
+                                            columnNumber: 19
+                                        }, this) : null,
+                                        loading ? 'Saving...' : 'Save'
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                                    lineNumber: 223,
+                                    lineNumber: 229,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                            lineNumber: 216,
+                            lineNumber: 221,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                    lineNumber: 178,
+                    lineNumber: 173,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-                lineNumber: 177,
+                lineNumber: 172,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/component/setting/page.tsx",
-        lineNumber: 106,
+        lineNumber: 112,
         columnNumber: 5
     }, this);
 }
-_s(UserSettings, "yDphY6ui5BBhbtLQ2zoBFjquECg=");
+_s(UserSettings, "myBwsGyTU/lVAW0CuNqqcwb5izs=");
 _c = UserSettings;
 var _c;
 __turbopack_context__.k.register(_c, "UserSettings");

@@ -275,6 +275,8 @@ useEffect(() => {
         handleEditChange={handleEditChange}
         serviceId={item.id}
         BURL={BURL || ""}
+        onEdited={fetchData}
+
       />
           <button
             onClick={() => {

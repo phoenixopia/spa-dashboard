@@ -23,6 +23,7 @@ export default function UserSettings() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [loading, setLoading] = useState(false); // ← Loading state
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -57,6 +58,8 @@ export default function UserSettings() {
     setOldPassword('');
     setNewPassword('');
     setConfirmPassword('');
+    setMessage(null);
+    setLoading(false);
   };
 
   const handleChange = async () => {
@@ -67,6 +70,7 @@ export default function UserSettings() {
     }
 
     const headers = { Authorization: `Bearer ${token}` };
+    setLoading(true);
 
     try {
       let response;
@@ -74,6 +78,7 @@ export default function UserSettings() {
       if (editField === 'password') {
         if (newPassword !== confirmPassword || newPassword.length < 6) {
           setMessage({ type: 'error', text: 'Passwords do not match or are too short.' });
+          setLoading(false);
           return;
         }
 
@@ -95,27 +100,17 @@ export default function UserSettings() {
 
       const msg = response?.data?.message || 'Update successful.';
       setMessage({ type: 'success', text: msg });
-      closeModal();
+      setTimeout(() => closeModal(), 1200);
     } catch (error: any) {
       const msg = error?.response?.data?.message || 'Something went wrong.';
       setMessage({ type: 'error', text: msg });
+      setLoading(false);
     }
   };
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 md:ml-[260px]">
       <h2 className="text-2xl font-bold text-gray-800 mb-10">User Settings</h2>
-
-      {/* Backend Message */}
-      {message && (
-        <div
-          className={`mb-6 px-4 py-3 rounded-md text-sm font-medium ${
-            message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-          }`}
-        >
-          {message.text}
-        </div>
-      )}
 
       <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
         {/* Name */}
@@ -176,6 +171,16 @@ export default function UserSettings() {
       {modalOpen && (
         <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center">
           <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-6 space-y-6 relative">
+            {message && (
+              <div
+                className={`mb-6 px-4 py-3 rounded-md text-sm font-medium ${
+                  message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                }`}
+              >
+                {message.text}
+              </div>
+            )}
+
             <h3 className="text-xl font-semibold text-gray-800">
               Change {editField ? editField.charAt(0).toUpperCase() + editField.slice(1) : ''}
             </h3>
@@ -217,14 +222,19 @@ export default function UserSettings() {
               <button
                 onClick={closeModal}
                 className="px-4 py-2 text-gray-600 hover:underline"
+                disabled={loading}
               >
                 Cancel
               </button>
               <button
                 onClick={handleChange}
-                className="px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+                className="px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center"
+                disabled={loading}
               >
-                Save
+                {loading ? (
+                  <span className="animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+                ) : null}
+                {loading ? 'Saving...' : 'Save'}
               </button>
             </div>
           </div>

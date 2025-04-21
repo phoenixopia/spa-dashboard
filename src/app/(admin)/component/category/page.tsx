@@ -28,7 +28,7 @@ export default function Category() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [editForm, setEditForm] = useState({ name: "", imageURL: "", description: "" });
+  const [editForm, setEditForm] = useState({ name: "", imageURL: "", description: "", imageFile: null });
   const totalItems = data ? data.length : 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -144,7 +144,7 @@ useEffect(() => {
       name: item.name || "",
       imageURL: item.imageURL || "",
       description: item.description || "",
-      
+      imageFile: null,
     });
   }
 }, [editIndex, data]);
@@ -205,6 +205,8 @@ useEffect(() => {
         onSave={handleAddSave}
         newcategory={newcategory}
         onChange={handleAddcategoryChange}
+        onAdd={fetchData}
+
       />
 
 
@@ -267,7 +269,7 @@ useEffect(() => {
       name: item.name || "",
       description: item.description || "",
       imageURL: item.imageURL || "",
-      
+      imageFile: null,
     });
     setcategoryId(item.id); // Or whatever your category ID key is
     setShowModal(true);
@@ -280,10 +282,12 @@ useEffect(() => {
       <EditcategoryModal
         showModal={showModal}
         setShowModal={setShowModal}
-        editForm={editForm}
+        editForm={{ ...editForm, imageFile: editForm.imageFile }}
         handleEditChange={handleEditChange}
         categoryId={item.id}
         BURL={BURL || ""}
+        onEdited={fetchData}
+
       />
           
         </td>

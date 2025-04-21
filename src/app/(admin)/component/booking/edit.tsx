@@ -35,6 +35,7 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
   );
   const [message, setMessage] = useState<string>("");
   const [messageType, setMessageType] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedItem) {
@@ -43,6 +44,7 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
   }, [selectedItem]);
 
   const handleUpdateTime = async () => {
+    setLoading(true);
     try {
       const token =
         document.cookie
@@ -59,25 +61,26 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
         }
       );
 
-      setMessage("Booking status updateTimed successfully!");
+      setMessage("Booking status updated successfully!");
       setMessageType("success");
 
       setTimeout(() => {
         setShowModal(false);
         setMessage("");
         setMessageType("");
+        setLoading(false);
         if (refreshData) refreshData();
       }, 1500);
     } catch (error) {
       console.error("Error updating booking status:", error);
-      setMessage("Failed to updateTime status. Please try again.");
+      setMessage("Failed to update status. Please try again.");
       setMessageType("error");
+      setLoading(false);
     }
   };
 
   if (!showModal || !selectedItem) return null;
 
-  // Safely parse the dateTime string
   const bookingdateTime = selectedItem.dateTime ? new Date(selectedItem.dateTime) : null;
 
   return (
@@ -98,17 +101,25 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
 
         {/* Customer Info */}
         <p className="mb-5 text-sm text-center text-gray-600 dark:text-gray-300">
-          UpdateTime status for <strong>{selectedItem.customerName || "Customer"}</strong>
+          Update status for <strong>{selectedItem.customerName || "Customer"}</strong>
         </p>
 
         {/* dateTime & Time */}
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex-1 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg text-sm text-gray-800 dark:text-white shadow-sm">
-            <strong>Date:</strong> {selectedItem.dateTime ? new Date(selectedItem.dateTime).toLocaleDateString() : "N/A"}
-
+            <strong>Date:</strong>{" "}
+            {selectedItem.dateTime
+              ? new Date(selectedItem.dateTime).toLocaleDateString()
+              : "N/A"}
           </div>
           <div className="flex-1 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg text-sm text-gray-800 dark:text-white shadow-sm">
-            <strong>Time:</strong> {bookingdateTime ? bookingdateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "N/A"}
+            <strong>Time:</strong>{" "}
+            {bookingdateTime
+              ? bookingdateTime.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : "N/A"}
           </div>
         </div>
 
@@ -147,9 +158,36 @@ const EditBookingModal: React.FC<EditBookingModalProps> = ({
         <div className="mt-6 flex justify-end">
           <button
             onClick={handleUpdateTime}
-            className="bg-[#008767] text-white px-4 py-2 rounded-lg hover:bg-[#006d50] transition"
+            disabled={loading}
+            className="bg-[#008767] text-white px-4 py-2 rounded-lg hover:bg-[#006d50] transition flex items-center justify-center gap-2 min-w-[120px]"
           >
-            Save Changes
+            {loading ? (
+              <>
+              <svg
+                className="h-5 w-5 animate-spin text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                />
+              </svg>
+                                <span>Saving...</span>
+</>
+            ) : (
+              "Save Changes"
+            )}
           </button>
         </div>
       </div>

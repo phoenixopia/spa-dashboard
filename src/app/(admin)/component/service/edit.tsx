@@ -11,9 +11,13 @@ interface EditserviceModalProps {
   showModal: boolean;
   setShowModal: (value: boolean) => void;
   editForm: EditForm;
-  handleEditChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  handleEditChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   serviceId: string;
   BURL: string;
+  onSaveSuccess?: () => void; // New prop to refresh data after save
+  onEdited: () => void; // New prop to refresh data after save
 }
 
 function getCookie(name: string): string | null {
@@ -30,10 +34,13 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
   handleEditChange,
   serviceId,
   BURL,
+  onSaveSuccess, // Receive the prop
+  onEdited
 }) => {
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [message, setMessage] = useState<string>("");
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
+  const [isSaving, setIsSaving] = useState<boolean>(false);
 
   useEffect(() => {
     if (showModal) {
@@ -51,12 +58,14 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
   if (!showModal) return null;
 
   const handleSave = async () => {
-    
+    setIsSaving(true);
     try {
-      const token = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('token='))
-      ?.split('=')[1] || '';
+      const token =
+        document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("token="))
+          ?.split("=")[1] || "";
+
       const response = await axios.put(
         `${BURL}/service/edit/${serviceId}`,
         {
@@ -71,17 +80,23 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
           withCredentials: true,
         }
       );
+
       setMessage("Service updated successfully!");
       setMessageType("success");
+
+      // After saving, call onSaveSuccess to refresh data in the parent
       setTimeout(() => {
         setShowModal(false);
         setMessage("");
         setMessageType("");
+        onSaveSuccess?.(); // Trigger data refresh
       }, 1500);
     } catch (error) {
       console.error("Failed to update service:", error);
       setMessage("Error updating service. Please try again.");
       setMessageType("error");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -155,9 +170,7 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
 
           {message && (
             <p
-              className={`text-sm ${
-                messageType === "error" ? "text-red-600" : "text-green-600"
-              }`}
+              className={`text-sm ${messageType === "error" ? "text-red-600" : "text-green-600"}`}
             >
               {message}
             </p>
@@ -166,9 +179,40 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
           <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
             <button
               onClick={handleSave}
-              className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
+              disabled={isSaving}
+              className={`px-4 py-2 rounded-lg w-full sm:w-auto flex items-center justify-center ${
+                isSaving
+                  ? "bg-[#006d50] cursor-not-allowed"
+                  : "bg-[#008767] hover:bg-[#006d50]"
+              } text-white`}
             >
-              Save
+              {isSaving ? (
+                <>
+                  <svg
+                    className="animate-spin h-5 w-5 mr-1 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
+                    ></path>
+                  </svg>
+                  <span> Saving...</span>
+                </>
+              ) : (
+                "Save"
+              )}
             </button>
           </div>
         </div>

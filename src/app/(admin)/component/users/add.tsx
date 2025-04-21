@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 interface AddUserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: () => void;
+  onSave: () => Promise<void>; // Make sure this is async
   newUser: {
     firstName: string;
     lastName: string;
@@ -24,7 +24,21 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   newUser,
   onChange
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSave = async () => {
+    setIsLoading(true);
+    try {
+      await onSave(); // Ensure onSave sets newUser.message
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   if (!isOpen) return null;
+
+  // Message classification (simple logic: if it includes 'success' -> green, else red)
+  const isSuccessMessage = newUser.message.toLowerCase().includes('success');
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4 sm:px-6">
@@ -38,6 +52,20 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
             ×
           </button>
         </div>
+
+        {/* ✅ Message Box */}
+        {newUser.message && (
+          <div
+            className={`mb-4 px-4 py-2 rounded-md text-sm font-medium ${
+              isSuccessMessage
+                ? 'bg-green-100 text-green-800 border border-green-300'
+                : 'bg-red-100 text-red-800 border border-red-300'
+            }`}
+          >
+            {newUser.message}
+          </div>
+        )}
+
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">First Name</label>
@@ -92,10 +120,35 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
 
           <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
             <button
-              onClick={onSave}
-              className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
+              onClick={handleSave}
+              className={`px-4 py-2 rounded-lg text-white w-full sm:w-auto flex items-center justify-center ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`}
+              disabled={isLoading}
             >
-              Save
+              {isLoading ? (
+                <>
+                   <svg
+                    className="h-5 w-5 animate-spin text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                    />
+                  </svg>
+                  Saving...
+                </>
+              ) : 'Save'}
             </button>
           </div>
         </div>

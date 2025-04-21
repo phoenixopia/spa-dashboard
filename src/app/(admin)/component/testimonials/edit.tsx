@@ -3,7 +3,6 @@ import axios from "axios";
 
 interface EditForm {
   firstName: string;
-  imageURL: string;
   lastName: string;
   message: string;
 }
@@ -29,34 +28,56 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
   BURL,
   refresh,
 }) => {
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>("");
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
+  const [isLoading, setIsLoading] = useState<boolean>(false); // New state for loading
 
+  // If the modal is not open, return null to prevent rendering
   if (!showModal) return null;
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImageFile(e.target.files[0]);
+    }
+  };
 
   const handleSave = async () => {
     try {
+      setIsLoading(true); // Set loading to true when save starts
       const token =
         document.cookie
           .split("; ")
           .find((row) => row.startsWith("token="))
           ?.split("=")[1] || "";
 
-      await axios.put(
-        `${BURL}/testimonial/edit/${testimonialId}`,
-        {
-          firstName: editForm.firstName,
-          lastName: editForm.lastName,
-          imageURL: editForm.imageURL,
-          message: editForm.message,
+      // Log token for debugging
+      console.log("Token:", token);
+
+      const formData = new FormData();
+      formData.append("firstName", editForm.firstName);
+      formData.append("lastName", editForm.lastName);
+      formData.append("message", editForm.message);
+      if (imageFile) {
+        formData.append("image", imageFile);
+      }
+
+      // Log FormData for debugging
+      console.log("Form Data:");
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
+
+      const response = await axios.put(`${BURL}/testimonial/edit/${testimonialId}`, formData, {
+      
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
+        withCredentials: true,
+      });
+
+      console.log("Response: edit testi", response); // Log the response for debugging
 
       setMessage("Testimonial updated successfully.");
       setMessageType("success");
@@ -65,13 +86,16 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
         setShowModal(false);
         setMessage("");
         setMessageType("");
-        refresh(); // ✅ Refresh after saving
+        refresh();
       }, 1500);
     } catch (error: any) {
+      console.error("Error during request:", error); // Log any request error
       const backendMessage =
         error.response?.data?.message || "Error updating testimonial.";
       setMessage(backendMessage);
       setMessageType("error");
+    } finally {
+      setIsLoading(false); // Reset loading when the operation is complete
     }
   };
 
@@ -107,7 +131,7 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
               value={editForm.firstName}
               onChange={handleEditChange}
               placeholder="Enter first name"
-              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+              className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             />
           </div>
 
@@ -122,23 +146,24 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
               value={editForm.lastName}
               onChange={handleEditChange}
               placeholder="Enter last name"
-              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+              className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             />
           </div>
 
-          {/* Image URL */}
+          {/* Image Upload */}
           <div>
             <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
-              Image URL
+              Upload Image
             </label>
             <input
-              name="imageURL"
-              type="text"
-              value={editForm.imageURL}
-              onChange={handleEditChange}
-              placeholder="Enter image URL"
-              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
             />
+            {imageFile && (
+              <p className="text-xs text-gray-500 mt-1">Selected: {imageFile.name}</p>
+            )}
           </div>
 
           {/* Message */}
@@ -151,7 +176,7 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
               value={editForm.message}
               onChange={handleEditChange}
               placeholder="Enter testimonial message"
-              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+              className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             />
           </div>
 
@@ -170,9 +195,36 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
           <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
             <button
               onClick={handleSave}
+              disabled={isLoading} // Disable button when loading
               className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
             >
-              Save
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <svg
+                    className="h-5 w-5 animate-spin text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                    />
+                  </svg>
+                  <span className="ml-2">Saving...</span>
+                </div>
+              ) : (
+                "Save"
+              )}
             </button>
           </div>
         </div>

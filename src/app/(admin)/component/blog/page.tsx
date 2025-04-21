@@ -27,6 +27,7 @@ export default function blog() {
   
   const [data, setData] = useState<any[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [blogcount, setBlogcount] = useState(0); // Add blogcount state
   const [showModal, setShowModal] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [editForm, setEditForm] = useState({ title: "", imageURL: "", content: "", updatedAt: new Date()});
@@ -116,7 +117,8 @@ const handleAddSave = async () => {
 const fetchData = async () => {
   try {
     const res = await axios.get(`${BURL}/blog`);
-    console.log("API blog response:", res.data);
+    const blogcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+    setBlogcount(blogcount); // Update blogcount state
 
     // Confirm the actual response structure and access correctly:
     if (Array.isArray(res.data.data)) {
@@ -187,7 +189,7 @@ console.log(currentItems,'gfhgfhgfg')
               </div>
               <div>
                 <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total blogs</h5>
-                <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
+                <p className="text-4xl font-bold text-gray-900 dark:text-white">{blogcount}</p>
               </div>
               </div>
             </div>
@@ -268,20 +270,13 @@ console.log(currentItems,'gfhgfhgfg')
         <button
   className="text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]"
   onClick={() => {
-    setEditForm({
-      title: item.title,
-      content: item.content, 
-      updatedAt: item.updatedAt,
-      
-      imageURL: item.imageURL || "",
-      
-    });
-    setblogId(item.id); // Or whatever your blog ID key is
+    setEditIndex(index + (currentPage - 1) * itemsPerPage); // Calculate actual index
     setShowModal(true);
   }}
 >
-  <Pencil size={18} />
+  <Pencil className="w-5 h-5" />
 </button>
+
 
 
       <EditblogModal
@@ -344,12 +339,6 @@ console.log(currentItems,'gfhgfhgfg')
           </div>
         </div>
       </div>
-
-
-
-
-
-
     </div>
   );
 }

@@ -11,7 +11,7 @@ interface Category {
 interface AddserviceModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: () => void;
+  onSave: () => Promise<void>; // Updated to support async saving
   newservice: {
     name: string;
     categoryId: string;
@@ -28,20 +28,30 @@ const AddserviceModal: React.FC<AddserviceModalProps> = ({
   onChange
 }) => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (isOpen) {
       axios
-        .get(`${BURL}/category`, {
-        })
+        .get(`${BURL}/category`)
         .then(res => {
           setCategories(res.data.data);
-          console.log('Fetched Categories:', res.data.data); // ✅ Move this inside the .then block
+          console.log('Fetched Categories:', res.data.data);
         })
         .catch(err => console.error('Error fetching categories:', err));
     }
   }, [isOpen]);
-  
+
+  const handleSave = async () => {
+    setLoading(true);
+    try {
+      await onSave(); // Wait for save to complete
+    } catch (error) {
+      console.error("Error saving service:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -96,10 +106,37 @@ const AddserviceModal: React.FC<AddserviceModalProps> = ({
           </div>
           <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
             <button
-              onClick={onSave}
-              className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
+              onClick={handleSave}
+              disabled={loading}
+              className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto flex items-center justify-center gap-2"
             >
-              Save
+              {loading ? (
+                <>
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                  />
+                </svg>
+                <span>Saving...</span>
+                </>
+              ) : (
+                "Save"
+              )}
             </button>
           </div>
         </div>

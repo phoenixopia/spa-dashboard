@@ -724,8 +724,10 @@ const DeleteUserModal = ({ isOpen, onClose, userId, onDeleted })=>{
     _s();
     const [responseMessage, setResponseMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [isSuccess, setIsSuccess] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const handleDelete = async ()=>{
         if (!userId) return;
+        setLoading(true);
         try {
             const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
             const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].delete(`${BURL}/user/delete/${userId}`, {
@@ -740,10 +742,12 @@ const DeleteUserModal = ({ isOpen, onClose, userId, onDeleted })=>{
             setTimeout(()=>{
                 setResponseMessage(null);
                 onClose();
-            }, 2000); // Close after showing success message
+            }, 2000);
         } catch (error) {
             setResponseMessage(error.response?.data?.message || "Failed to delete user. Please try again.");
             setIsSuccess(false);
+        } finally{
+            setLoading(false);
         }
     };
     if (!isOpen) return null;
@@ -752,12 +756,20 @@ const DeleteUserModal = ({ isOpen, onClose, userId, onDeleted })=>{
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "bg-white p-6 rounded-xl shadow-lg w-[90%] max-w-md",
             children: [
+                responseMessage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: `rounded-md px-4 py-2 mb-4 text-sm font-medium ${isSuccess ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`,
+                    children: responseMessage
+                }, void 0, false, {
+                    fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                    lineNumber: 65,
+                    columnNumber: 11
+                }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                     className: "text-lg font-semibold text-gray-800 mb-4",
                     children: "Confirm Delete"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
-                    lineNumber: 59,
+                    lineNumber: 74,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -765,57 +777,92 @@ const DeleteUserModal = ({ isOpen, onClose, userId, onDeleted })=>{
                     children: "Are you sure you want to delete this user? This action cannot be undone."
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
-                    lineNumber: 60,
+                    lineNumber: 75,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex justify-end space-x-3 mb-4",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: onClose,
+                            onClick: ()=>{
+                                setResponseMessage(null);
+                                setIsSuccess(null);
+                                onClose();
+                            },
                             className: "px-4 py-2 text-sm rounded-md bg-gray-200 hover:bg-gray-300",
+                            disabled: loading,
                             children: "Cancel"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
-                            lineNumber: 65,
+                            lineNumber: 80,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: handleDelete,
-                            className: "px-4 py-2 text-sm rounded-md bg-red-600 text-white hover:bg-red-700",
-                            children: "Delete"
+                            className: `px-4 py-2 text-sm rounded-md text-white flex items-center justify-center ${loading ? "bg-red-400 cursor-not-allowed" : "bg-red-600 hover:bg-red-700"}`,
+                            disabled: loading,
+                            children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                        className: "h-5 w-5 animate-spin text-white mr-2",
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        fill: "none",
+                                        viewBox: "0 0 24 24",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                className: "opacity-25",
+                                                cx: "12",
+                                                cy: "12",
+                                                r: "10",
+                                                stroke: "currentColor",
+                                                strokeWidth: "4"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                                                lineNumber: 106,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                className: "opacity-75",
+                                                fill: "currentColor",
+                                                d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                                                lineNumber: 114,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                                        lineNumber: 100,
+                                        columnNumber: 17
+                                    }, this),
+                                    "Deleting..."
+                                ]
+                            }, void 0, true) : "Delete"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
-                            lineNumber: 71,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
-                    lineNumber: 64,
+                    lineNumber: 79,
                     columnNumber: 9
-                }, this),
-                responseMessage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: `rounded-md px-4 py-2 text-sm font-medium ${isSuccess ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`,
-                    children: responseMessage
-                }, void 0, false, {
-                    fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
-                    lineNumber: 81,
-                    columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
-            lineNumber: 58,
+            lineNumber: 62,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
-        lineNumber: 57,
+        lineNumber: 61,
         columnNumber: 5
     }, this);
 };
-_s(DeleteUserModal, "/If0FdCQN3/IdeBJX4XX7oi8Mrs=");
+_s(DeleteUserModal, "hI0oP9XcDaqxLcXtLa+1i6RLn8o=");
 _c = DeleteUserModal;
 const __TURBOPACK__default__export__ = DeleteUserModal;
 var _c;
@@ -833,9 +880,24 @@ __turbopack_context__.s({
     "default": (()=>__TURBOPACK__default__export__)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
 ;
 const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
+    _s();
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const handleSave = async ()=>{
+        setIsLoading(true);
+        try {
+            await onSave(); // Ensure onSave sets newUser.message
+        } finally{
+            setIsLoading(false);
+        }
+    };
     if (!isOpen) return null;
+    // Message classification (simple logic: if it includes 'success' -> green, else red)
+    const isSuccessMessage = newUser.message.toLowerCase().includes('success');
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4 sm:px-6",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -849,7 +911,7 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                             children: "Add User"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                            lineNumber: 33,
+                            lineNumber: 47,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -858,14 +920,22 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                             children: "×"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                            lineNumber: 34,
+                            lineNumber: 48,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                    lineNumber: 32,
+                    lineNumber: 46,
                     columnNumber: 9
+                }, this),
+                newUser.message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: `mb-4 px-4 py-2 rounded-md text-sm font-medium ${isSuccessMessage ? 'bg-green-100 text-green-800 border border-green-300' : 'bg-red-100 text-red-800 border border-red-300'}`,
+                    children: newUser.message
+                }, void 0, false, {
+                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                    lineNumber: 58,
+                    columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "space-y-4",
@@ -877,7 +947,7 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     children: "First Name"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 43,
+                                    lineNumber: 71,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -888,13 +958,13 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 44,
+                                    lineNumber: 72,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                            lineNumber: 42,
+                            lineNumber: 70,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -904,7 +974,7 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     children: "Last Name"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 53,
+                                    lineNumber: 81,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -915,13 +985,13 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 54,
+                                    lineNumber: 82,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                            lineNumber: 52,
+                            lineNumber: 80,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -931,7 +1001,7 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     children: "Email"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 63,
+                                    lineNumber: 91,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -942,13 +1012,13 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 64,
+                                    lineNumber: 92,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                            lineNumber: 62,
+                            lineNumber: 90,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -958,7 +1028,7 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     children: "Phone Number"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 73,
+                                    lineNumber: 101,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -969,13 +1039,13 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 74,
+                                    lineNumber: 102,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                            lineNumber: 72,
+                            lineNumber: 100,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -985,7 +1055,7 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     children: "Password"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 83,
+                                    lineNumber: 111,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -996,49 +1066,88 @@ const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange })=>{
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                    lineNumber: 84,
+                                    lineNumber: 112,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                            lineNumber: 82,
+                            lineNumber: 110,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: onSave,
-                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
-                                children: "Save"
+                                onClick: handleSave,
+                                className: `px-4 py-2 rounded-lg text-white w-full sm:w-auto flex items-center justify-center ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`,
+                                disabled: isLoading,
+                                children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "h-5 w-5 animate-spin text-white",
+                                            xmlns: "http://www.w3.org/2000/svg",
+                                            fill: "none",
+                                            viewBox: "0 0 24 24",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                    className: "opacity-25",
+                                                    cx: "12",
+                                                    cy: "12",
+                                                    r: "10",
+                                                    stroke: "currentColor",
+                                                    strokeWidth: "4"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                                    lineNumber: 135,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                    className: "opacity-75",
+                                                    fill: "currentColor",
+                                                    d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                                    lineNumber: 143,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                            lineNumber: 129,
+                                            columnNumber: 20
+                                        }, this),
+                                        "Saving..."
+                                    ]
+                                }, void 0, true) : 'Save'
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                                lineNumber: 94,
+                                lineNumber: 122,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                            lineNumber: 93,
+                            lineNumber: 121,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-                    lineNumber: 41,
+                    lineNumber: 69,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-            lineNumber: 31,
+            lineNumber: 45,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/users/add.tsx",
-        lineNumber: 30,
+        lineNumber: 44,
         columnNumber: 5
     }, this);
 };
+_s(AddUserModal, "EmvgwIb3cHpoFpeP+WmEDbjx4y4=");
 _c = AddUserModal;
 const __TURBOPACK__default__export__ = AddUserModal;
 var _c;
@@ -1066,8 +1175,10 @@ const EditUserModal = ({ showModal, setShowModal, editForm, handleEditChange, us
     _s();
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [messageType, setMessageType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false); // New loading state
     if (!showModal) return null;
     const handleSave = async ()=>{
+        setLoading(true);
         try {
             const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || '';
             const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].put(`${BURL}/user/edit/${userId}`, {
@@ -1091,6 +1202,8 @@ const EditUserModal = ({ showModal, setShowModal, editForm, handleEditChange, us
             const errMsg = error.response?.data?.message || "Error updating user. Please try again.";
             setMessage(errMsg);
             setMessageType("error");
+        } finally{
+            setLoading(false);
         }
     };
     const handleClose = ()=>{
@@ -1111,7 +1224,7 @@ const EditUserModal = ({ showModal, setShowModal, editForm, handleEditChange, us
                             children: "Edit User"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                            lineNumber: 83,
+                            lineNumber: 86,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1121,13 +1234,13 @@ const EditUserModal = ({ showModal, setShowModal, editForm, handleEditChange, us
                             children: "×"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                            lineNumber: 86,
+                            lineNumber: 89,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                    lineNumber: 82,
+                    lineNumber: 85,
                     columnNumber: 9
                 }, this),
                 message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1135,7 +1248,7 @@ const EditUserModal = ({ showModal, setShowModal, editForm, handleEditChange, us
                     children: message
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                    lineNumber: 97,
+                    lineNumber: 100,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1154,7 +1267,7 @@ const EditUserModal = ({ showModal, setShowModal, editForm, handleEditChange, us
                                         children: field === "phoneNumber" ? "Phone Number" : field.charAt(0).toUpperCase() + field.slice(1)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                                        lineNumber: 111,
+                                        lineNumber: 114,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1166,50 +1279,88 @@ const EditUserModal = ({ showModal, setShowModal, editForm, handleEditChange, us
                                         className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                                        lineNumber: 114,
+                                        lineNumber: 117,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, field, true, {
                                 fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                                lineNumber: 110,
+                                lineNumber: 113,
                                 columnNumber: 13
                             }, this)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: handleSave,
-                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
-                                children: "Save"
+                                disabled: loading,
+                                className: `px-4 py-2 rounded-lg w-full sm:w-auto flex items-center justify-center gap-2 text-white 
+                ${loading ? 'bg-[#006d50] cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`,
+                                children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "animate-spin h-5 w-5 text-white",
+                                            viewBox: "0 0 24 24",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                    className: "opacity-25",
+                                                    cx: "12",
+                                                    cy: "12",
+                                                    r: "10",
+                                                    stroke: "currentColor",
+                                                    strokeWidth: "4",
+                                                    fill: "none"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                                    lineNumber: 138,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                    className: "opacity-75",
+                                                    fill: "currentColor",
+                                                    d: "M4 12a8 8 0 018-8v4l5-5-5-5v4a10 10 0 100 20v-4l-5 5 5 5v-4a8 8 0 01-8-8z"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                                    lineNumber: 147,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                            lineNumber: 137,
+                                            columnNumber: 19
+                                        }, this),
+                                        "Saving..."
+                                    ]
+                                }, void 0, true) : "Save"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                                lineNumber: 126,
+                                lineNumber: 129,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                            lineNumber: 125,
+                            lineNumber: 128,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-                    lineNumber: 108,
+                    lineNumber: 111,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-            lineNumber: 81,
+            lineNumber: 84,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
-        lineNumber: 80,
+        lineNumber: 83,
         columnNumber: 5
     }, this);
 };
-_s(EditUserModal, "sdwPAKokZfjy/SroTq8rn+QeIlQ=");
+_s(EditUserModal, "ed4wyMCxIJrrucP4GNVDnZoxPIY=");
 _c = EditUserModal;
 const __TURBOPACK__default__export__ = EditUserModal;
 var _c;

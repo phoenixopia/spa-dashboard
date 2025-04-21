@@ -714,19 +714,25 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
 ;
 ;
 const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 const DeleteblogModal = ({ isOpen, onClose, blogId, onDeleted })=>{
+    _s();
+    const [isDeleting, setIsDeleting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const handleDelete = async ()=>{
-        if (!blogId) return;
-        const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || '';
+        if (!blogId || isDeleting) return;
+        const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
         if (!token) {
             console.error("No token found in cookies.");
             return;
         }
         try {
+            setIsDeleting(true);
             await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].delete(`${BURL}/blog/delete/${blogId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -737,6 +743,8 @@ const DeleteblogModal = ({ isOpen, onClose, blogId, onDeleted })=>{
             onClose();
         } catch (error) {
             console.error("Error deleting blog:", error);
+        } finally{
+            setIsDeleting(false);
         }
     };
     if (!isOpen) return null;
@@ -750,7 +758,7 @@ const DeleteblogModal = ({ isOpen, onClose, blogId, onDeleted })=>{
                     children: "Confirm Delete"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
-                    lineNumber: 55,
+                    lineNumber: 58,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -758,7 +766,7 @@ const DeleteblogModal = ({ isOpen, onClose, blogId, onDeleted })=>{
                     children: "Are you sure you want to delete this blog? This action cannot be undone."
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
-                    lineNumber: 56,
+                    lineNumber: 59,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -766,40 +774,86 @@ const DeleteblogModal = ({ isOpen, onClose, blogId, onDeleted })=>{
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: onClose,
-                            className: "px-4 py-2 text-sm rounded-md bg-gray-200 hover:bg-gray-300",
+                            className: "px-4 py-2 text-sm rounded-md bg-gray-200 hover:bg-gray-300 disabled:opacity-50",
+                            disabled: isDeleting,
                             children: "Cancel"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
-                            lineNumber: 58,
+                            lineNumber: 63,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: handleDelete,
-                            className: "px-4 py-2 text-sm rounded-md bg-red-600 text-white hover:bg-red-700",
-                            children: "Delete"
+                            disabled: isDeleting,
+                            className: `px-4 py-2 text-sm rounded-md text-white flex items-center justify-center gap-2 ${isDeleting ? "bg-red-600 cursor-not-allowed" : "bg-red-600 hover:bg-red-700"}`,
+                            children: isDeleting ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                        className: "h-4 w-4 animate-spin text-white",
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        fill: "none",
+                                        viewBox: "0 0 24 24",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                className: "opacity-25",
+                                                cx: "12",
+                                                cy: "12",
+                                                r: "10",
+                                                stroke: "currentColor",
+                                                strokeWidth: "4"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
+                                                lineNumber: 87,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                className: "opacity-75",
+                                                fill: "currentColor",
+                                                d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
+                                                lineNumber: 95,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
+                                        lineNumber: 81,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: "Deleting..."
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
+                                        lineNumber: 101,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true) : "Delete"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
-                            lineNumber: 64,
+                            lineNumber: 70,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
-                    lineNumber: 57,
+                    lineNumber: 62,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
-            lineNumber: 54,
+            lineNumber: 57,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/blog/delete.tsx",
-        lineNumber: 53,
+        lineNumber: 56,
         columnNumber: 5
     }, this);
 };
+_s(DeleteblogModal, "PcvudgQ4pB1b8YUmRhNmcS3boU8=");
 _c = DeleteblogModal;
 const __TURBOPACK__default__export__ = DeleteblogModal;
 var _c;
@@ -827,48 +881,42 @@ var _s = __turbopack_context__.k.signature();
 const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 const AddblogModal = ({ isOpen, onClose, onSave, newblog, onChange })=>{
     _s();
-    const [categories, setCategories] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AddblogModal.useEffect": ()=>{
-            if (isOpen) {
-                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/blog`).then({
-                    "AddblogModal.useEffect": (res)=>{
-                        setCategories(res.data.data);
-                        console.log('Fetched Categories:', res.data.data);
-                        setError(null);
-                    }
-                }["AddblogModal.useEffect"]).catch({
-                    "AddblogModal.useEffect": (err)=>{
-                        console.error('Error fetching categories:', err);
-                        setError('Failed to fetch categories. Please try again.');
-                    }
-                }["AddblogModal.useEffect"]);
-            }
-        }
-    }["AddblogModal.useEffect"], [
-        isOpen
-    ]);
-    const onImageChange = async (e)=>{
+    const [imageFile, setImageFile] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [imagePreview, setImagePreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const onImageChange = (e)=>{
         const file = e.target.files?.[0];
         if (!file) return;
+        setImageFile(file);
+        setImagePreview(URL.createObjectURL(file));
+    };
+    const handleSave = async ()=>{
+        if (isLoading) return; // Prevent double submission
+        setIsLoading(true);
+        setError(null); // Clear any previous errors
         const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', 'YOUR_UPLOAD_PRESET'); // Replace with your preset
+        formData.append('title', newblog.title);
+        formData.append('content', newblog.content);
+        if (imageFile) {
+            formData.append('image', imageFile);
+        }
         try {
-            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload', formData);
-            const imageURL = res.data.secure_url;
-            // Update newblog with image URL
-            onChange({
-                target: {
-                    name: 'imageURL',
-                    value: imageURL
-                }
+            const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || '';
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/blog/create`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                },
+                withCredentials: true
             });
-            setError(null);
+            onSave();
+            onClose();
         } catch (err) {
-            console.error('Image upload failed:', err);
-            setError('Image upload failed. Please try again.');
+            console.error('Failed to save blog:', err);
+            setError('Failed to save blog. Please try again.');
+        } finally{
+            setIsLoading(false);
         }
     };
     if (!isOpen) return null;
@@ -882,10 +930,10 @@ const AddblogModal = ({ isOpen, onClose, onSave, newblog, onChange })=>{
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                             className: "text-lg sm:text-xl font-semibold text-gray-800 dark:text-white",
-                            children: "Add blog"
+                            children: "Add Blog"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                            lineNumber: 82,
+                            lineNumber: 89,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -894,13 +942,13 @@ const AddblogModal = ({ isOpen, onClose, onSave, newblog, onChange })=>{
                             children: "×"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                            lineNumber: 83,
+                            lineNumber: 90,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                    lineNumber: 81,
+                    lineNumber: 88,
                     columnNumber: 9
                 }, this),
                 error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -908,7 +956,7 @@ const AddblogModal = ({ isOpen, onClose, onSave, newblog, onChange })=>{
                     children: error
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                    lineNumber: 88,
+                    lineNumber: 94,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -921,7 +969,7 @@ const AddblogModal = ({ isOpen, onClose, onSave, newblog, onChange })=>{
                                     children: "Title"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                                    lineNumber: 96,
+                                    lineNumber: 101,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -932,51 +980,50 @@ const AddblogModal = ({ isOpen, onClose, onSave, newblog, onChange })=>{
                                     className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                                    lineNumber: 97,
+                                    lineNumber: 102,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                            lineNumber: 95,
+                            lineNumber: 100,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "Image"
+                                    children: "Upload Image"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                                    lineNumber: 107,
+                                    lineNumber: 112,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "imageURL",
-                                    type: "text",
-                                    placeholder: "insert the url after uploading the image in google drive",
-                                    value: newblog.imageURL,
-                                    onChange: onChange,
-                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                    name: "image",
+                                    type: "file",
+                                    accept: "image/*",
+                                    onChange: onImageChange,
+                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                                    lineNumber: 108,
+                                    lineNumber: 113,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                            lineNumber: 106,
+                            lineNumber: 111,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "message"
+                                    children: "Message"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                                    lineNumber: 134,
+                                    lineNumber: 124,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -987,50 +1034,95 @@ const AddblogModal = ({ isOpen, onClose, onSave, newblog, onChange })=>{
                                     className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                                    lineNumber: 135,
+                                    lineNumber: 125,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                            lineNumber: 133,
+                            lineNumber: 123,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
+                            className: "flex justify-end mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: onSave,
-                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
-                                children: "Save"
+                                onClick: handleSave,
+                                type: "button",
+                                disabled: isLoading,
+                                className: `px-4 py-2 rounded-lg text-white w-full sm:w-auto flex items-center justify-center gap-2 ${isLoading ? 'bg-[#008767] cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`,
+                                children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "h-5 w-5 animate-spin text-white",
+                                            xmlns: "http://www.w3.org/2000/svg",
+                                            fill: "none",
+                                            viewBox: "0 0 24 24",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                    className: "opacity-25",
+                                                    cx: "12",
+                                                    cy: "12",
+                                                    r: "10",
+                                                    stroke: "currentColor",
+                                                    strokeWidth: "4"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
+                                                    lineNumber: 151,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                    className: "opacity-75",
+                                                    fill: "currentColor",
+                                                    d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
+                                                    lineNumber: 159,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
+                                            lineNumber: 145,
+                                            columnNumber: 19
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            children: "Saving..."
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
+                                            lineNumber: 165,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, void 0, true) : 'Save'
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                                lineNumber: 146,
+                                lineNumber: 135,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                            lineNumber: 145,
+                            lineNumber: 134,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-                    lineNumber: 93,
+                    lineNumber: 99,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-            lineNumber: 80,
+            lineNumber: 87,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/blog/add.tsx",
-        lineNumber: 79,
+        lineNumber: 86,
         columnNumber: 5
     }, this);
 };
-_s(AddblogModal, "YNBtphbVBdwsDUa9nsdY+Mgc4Lo=");
+_s(AddblogModal, "JEMsrGvjdY6ZsvO5ag2Io5tnhqU=");
 _c = AddblogModal;
 const __TURBOPACK__default__export__ = AddblogModal;
 var _c;
@@ -1058,22 +1150,51 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
     _s();
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [messageType, setMessageType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [imageFile, setImageFile] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [imagePreview, setImagePreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     if (!showModal) return null;
+    const handleImageChange = (event)=>{
+        const file = event.target.files?.[0];
+        if (file) {
+            setImageFile(file);
+            const reader = new FileReader();
+            reader.onloadend = ()=>{
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
     const handleSave = async ()=>{
+        setIsLoading(true);
         try {
             const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
+            let uploadedImageUrl = editForm.imageURL;
+            if (imageFile) {
+                const formData = new FormData();
+                formData.append("image", imageFile);
+                // Upload image to backend, which will handle Cloudinary upload
+                const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/upload`, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                // Backend should return the URL of the uploaded image
+                uploadedImageUrl = response.data.imageUrl;
+            }
             await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].put(`${BURL}/blog/edit/${blogId}`, {
                 title: editForm.title,
                 content: editForm.content,
                 updatedAt: editForm.updatedAt,
-                imageURL: editForm.imageURL
+                imageURL: uploadedImageUrl
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
                 withCredentials: true
             });
-            setMessage("blog updated successfully.");
+            setMessage("Blog updated successfully.");
             setMessageType("success");
             setTimeout(()=>{
                 setShowModal(false);
@@ -1085,6 +1206,8 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
             const backendMessage = error.response?.data?.message || "Error updating blog.";
             setMessage(backendMessage);
             setMessageType("error");
+        } finally{
+            setIsLoading(false);
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1097,10 +1220,10 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                             className: "text-lg sm:text-xl font-semibold text-gray-800 dark:text-white",
-                            children: "Edit blog"
+                            children: "Edit Blog"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                            lineNumber: 83,
+                            lineNumber: 117,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1114,13 +1237,13 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
                             children: "×"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                            lineNumber: 86,
+                            lineNumber: 120,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                    lineNumber: 82,
+                    lineNumber: 116,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1130,10 +1253,10 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300",
-                                    children: "First Name"
+                                    children: "Title"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                                    lineNumber: 102,
+                                    lineNumber: 136,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1141,45 +1264,44 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
                                     type: "text",
                                     value: editForm.title,
                                     onChange: handleEditChange,
-                                    placeholder: "Enter first name",
+                                    placeholder: "Enter blog title",
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 139,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                            lineNumber: 101,
+                            lineNumber: 135,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300",
-                                    children: "Image URL"
+                                    children: "Upload Image"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                                    lineNumber: 119,
-                                    columnNumber: 13
+                                    lineNumber: 151,
+                                    columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "imageURL",
-                                    type: "text",
-                                    value: editForm.imageURL,
-                                    onChange: handleEditChange,
-                                    placeholder: "Enter image URL",
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                    name: "image",
+                                    type: "file",
+                                    accept: "image/*",
+                                    onChange: handleImageChange,
+                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                                    lineNumber: 122,
-                                    columnNumber: 13
+                                    lineNumber: 152,
+                                    columnNumber: 11
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                            lineNumber: 118,
+                            lineNumber: 150,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1189,7 +1311,7 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
                                     children: "Message"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                                    lineNumber: 134,
+                                    lineNumber: 164,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1200,13 +1322,13 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                                    lineNumber: 137,
+                                    lineNumber: 167,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                            lineNumber: 133,
+                            lineNumber: 163,
                             columnNumber: 11
                         }, this),
                         message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1214,44 +1336,88 @@ const EditblogModal = ({ showModal, setShowModal, editForm, handleEditChange, bl
                             children: message
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                            lineNumber: 148,
+                            lineNumber: 178,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: handleSave,
-                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
-                                children: "Save"
+                                disabled: isLoading,
+                                className: `px-4 py-2 rounded-lg ${isLoading ? "bg-[#008767] cursor-not-allowed" : "bg-[#008767] hover:bg-[#006d50]"} text-white w-full sm:w-auto flex items-center justify-center gap-2`,
+                                children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "h-5 w-5 animate-spin text-white",
+                                            xmlns: "http://www.w3.org/2000/svg",
+                                            fill: "none",
+                                            viewBox: "0 0 24 24",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                    className: "opacity-25",
+                                                    cx: "12",
+                                                    cy: "12",
+                                                    r: "10",
+                                                    stroke: "currentColor",
+                                                    strokeWidth: "4"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
+                                                    lineNumber: 206,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                    className: "opacity-75",
+                                                    fill: "currentColor",
+                                                    d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
+                                                    lineNumber: 214,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
+                                            lineNumber: 200,
+                                            columnNumber: 19
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            children: "Saving..."
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
+                                            lineNumber: 220,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, void 0, true) : "Save"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                                lineNumber: 159,
+                                lineNumber: 189,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                            lineNumber: 158,
+                            lineNumber: 188,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-                    lineNumber: 99,
+                    lineNumber: 133,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-            lineNumber: 81,
+            lineNumber: 115,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/blog/edit.tsx",
-        lineNumber: 80,
+        lineNumber: 114,
         columnNumber: 5
     }, this);
 };
-_s(EditblogModal, "/rrY/3Qid0csh5gAdegPaCFgpA4=");
+_s(EditblogModal, "7OlnvJjlvDrH3pgawtFnr5qZ71o=");
 _c = EditblogModal;
 const __TURBOPACK__default__export__ = EditblogModal;
 var _c;
@@ -1301,6 +1467,7 @@ function blog() {
     const [blogMap, setblogMap] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({});
     const [data, setData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [currentPage, setCurrentPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
+    const [blogcount, setBlogcount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0); // Add blogcount state
     const [showModal, setShowModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [editIndex, setEditIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [editForm, setEditForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
@@ -1381,7 +1548,8 @@ function blog() {
     const fetchData = async ()=>{
         try {
             const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/blog`);
-            console.log("API blog response:", res.data);
+            const blogcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+            setBlogcount(blogcount); // Update blogcount state
             // Confirm the actual response structure and access correctly:
             if (Array.isArray(res.data.data)) {
                 setData(res.data.data); // this is correct if the API returns { data: [...] }
@@ -1440,12 +1608,12 @@ function blog() {
                 className: "hidden md:block",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$sidebar$2f$page$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                    lineNumber: 171,
+                    lineNumber: 173,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                lineNumber: 170,
+                lineNumber: 172,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1458,7 +1626,7 @@ function blog() {
                             children: "blog Management"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                            lineNumber: 178,
+                            lineNumber: 180,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1478,12 +1646,12 @@ function blog() {
                                                             className: "text-2xl"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                            lineNumber: 186,
+                                                            lineNumber: 188,
                                                             columnNumber: 60
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                        lineNumber: 185,
+                                                        lineNumber: 187,
                                                         columnNumber: 15
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1493,32 +1661,32 @@ function blog() {
                                                                 children: "Total blogs"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                lineNumber: 189,
+                                                                lineNumber: 191,
                                                                 columnNumber: 17
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                 className: "text-4xl font-bold text-gray-900 dark:text-white",
-                                                                children: totalItems
+                                                                children: blogcount
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                lineNumber: 190,
+                                                                lineNumber: 192,
                                                                 columnNumber: 17
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                        lineNumber: 188,
+                                                        lineNumber: 190,
                                                         columnNumber: 15
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                lineNumber: 184,
+                                                lineNumber: 186,
                                                 columnNumber: 15
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                            lineNumber: 183,
+                                            lineNumber: 185,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1529,26 +1697,26 @@ function blog() {
                                                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["faPlus"]
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                    lineNumber: 199,
+                                                    lineNumber: 201,
                                                     columnNumber: 15
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "Add Blog"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                    lineNumber: 200,
+                                                    lineNumber: 202,
                                                     columnNumber: 15
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                            lineNumber: 195,
+                                            lineNumber: 197,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                    lineNumber: 182,
+                                    lineNumber: 184,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$blog$2f$add$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1559,7 +1727,7 @@ function blog() {
                                     onChange: handleAddblogChange
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                    lineNumber: 203,
+                                    lineNumber: 205,
                                     columnNumber: 13
                                 }, this)
                             ]
@@ -1575,7 +1743,7 @@ function blog() {
                                             children: "Blog List"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                            lineNumber: 217,
+                                            lineNumber: 219,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1585,18 +1753,18 @@ function blog() {
                                                 children: "Active blog"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                lineNumber: 219,
+                                                lineNumber: 221,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                            lineNumber: 218,
+                                            lineNumber: 220,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                    lineNumber: 216,
+                                    lineNumber: 218,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1614,7 +1782,7 @@ function blog() {
                                                                 children: "Blog Title"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                lineNumber: 232,
+                                                                lineNumber: 234,
                                                                 columnNumber: 7
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1622,7 +1790,7 @@ function blog() {
                                                                 children: "Content"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                lineNumber: 233,
+                                                                lineNumber: 235,
                                                                 columnNumber: 7
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1630,7 +1798,7 @@ function blog() {
                                                                 children: "Date"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                lineNumber: 235,
+                                                                lineNumber: 237,
                                                                 columnNumber: 7
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1638,7 +1806,7 @@ function blog() {
                                                                 children: "Picture"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                lineNumber: 236,
+                                                                lineNumber: 238,
                                                                 columnNumber: 7
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1646,18 +1814,18 @@ function blog() {
                                                                 children: "Actions"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                lineNumber: 237,
+                                                                lineNumber: 239,
                                                                 columnNumber: 7
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                        lineNumber: 231,
+                                                        lineNumber: 233,
                                                         columnNumber: 5
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                    lineNumber: 230,
+                                                    lineNumber: 232,
                                                     columnNumber: 3
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1669,7 +1837,7 @@ function blog() {
                                                                     children: item.title
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                    lineNumber: 246,
+                                                                    lineNumber: 248,
                                                                     columnNumber: 7
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1677,7 +1845,7 @@ function blog() {
                                                                     children: item.content
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                    lineNumber: 249,
+                                                                    lineNumber: 251,
                                                                     columnNumber: 1
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1685,7 +1853,7 @@ function blog() {
                                                                     children: item.updatedAt ? new Date(item.updatedAt).toLocaleDateString() : "N/A"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                    lineNumber: 254,
+                                                                    lineNumber: 256,
                                                                     columnNumber: 9
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1698,12 +1866,12 @@ function blog() {
                                                                         className: "w-12 h-12 object-cover rounded-full"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                        lineNumber: 258,
+                                                                        lineNumber: 260,
                                                                         columnNumber: 3
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                    lineNumber: 257,
+                                                                    lineNumber: 259,
                                                                     columnNumber: 9
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1712,25 +1880,19 @@ function blog() {
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                             className: "text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]",
                                                                             onClick: ()=>{
-                                                                                setEditForm({
-                                                                                    title: item.title,
-                                                                                    content: item.content,
-                                                                                    updatedAt: item.updatedAt,
-                                                                                    imageURL: item.imageURL || ""
-                                                                                });
-                                                                                setblogId(item.id); // Or whatever your blog ID key is
+                                                                                setEditIndex(index + (currentPage - 1) * itemsPerPage); // Calculate actual index
                                                                                 setShowModal(true);
                                                                             },
                                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__["Pencil"], {
-                                                                                size: 18
+                                                                                className: "w-5 h-5"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                                lineNumber: 283,
+                                                                                lineNumber: 277,
                                                                                 columnNumber: 3
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                            lineNumber: 268,
+                                                                            lineNumber: 270,
                                                                             columnNumber: 9
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$blog$2f$edit$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1743,7 +1905,7 @@ function blog() {
                                                                             refresh: fetchData
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                            lineNumber: 287,
+                                                                            lineNumber: 282,
                                                                             columnNumber: 7
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1756,35 +1918,35 @@ function blog() {
                                                                                 size: 18
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                                lineNumber: 304,
+                                                                                lineNumber: 299,
                                                                                 columnNumber: 13
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                            lineNumber: 297,
+                                                                            lineNumber: 292,
                                                                             columnNumber: 7
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                                    lineNumber: 267,
+                                                                    lineNumber: 269,
                                                                     columnNumber: 9
                                                                 }, this)
                                                             ]
                                                         }, index, true, {
                                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                            lineNumber: 242,
+                                                            lineNumber: 244,
                                                             columnNumber: 7
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                    lineNumber: 240,
+                                                    lineNumber: 242,
                                                     columnNumber: 3
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                            lineNumber: 229,
+                                            lineNumber: 231,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$blog$2f$delete$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1794,13 +1956,13 @@ function blog() {
                                             onDeleted: fetchData
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                            lineNumber: 312,
+                                            lineNumber: 307,
                                             columnNumber: 2
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                    lineNumber: 228,
+                                    lineNumber: 230,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1818,7 +1980,7 @@ function blog() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                            lineNumber: 323,
+                                            lineNumber: 318,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1831,7 +1993,7 @@ function blog() {
                                                     children: "Previous"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                    lineNumber: 327,
+                                                    lineNumber: 322,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1843,7 +2005,7 @@ function blog() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                    lineNumber: 334,
+                                                    lineNumber: 329,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1853,46 +2015,46 @@ function blog() {
                                                     children: "Next"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                                    lineNumber: 335,
+                                                    lineNumber: 330,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                            lineNumber: 326,
+                                            lineNumber: 321,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                                    lineNumber: 322,
+                                    lineNumber: 317,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                            lineNumber: 215,
+                            lineNumber: 217,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                    lineNumber: 177,
+                    lineNumber: 179,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-                lineNumber: 176,
+                lineNumber: 178,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/component/blog/page.tsx",
-        lineNumber: 169,
+        lineNumber: 171,
         columnNumber: 5
     }, this);
 }
-_s(blog, "0WxrkdmdOC9nhzpagYcx6tX13CA=");
+_s(blog, "D6B/Swd2/XS+LUA+zY5IZ4uVXQY=");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
 }

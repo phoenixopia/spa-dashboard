@@ -714,19 +714,25 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
 ;
 ;
 const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 const DeletetestimonialModal = ({ isOpen, onClose, testimonialId, onDeleted })=>{
+    _s();
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const handleDelete = async ()=>{
         if (!testimonialId) return;
-        const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || '';
+        const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
         if (!token) {
             console.error("No token found in cookies.");
             return;
         }
         try {
+            setLoading(true);
             await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].delete(`${BURL}/testimonial/delete/${testimonialId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -737,6 +743,8 @@ const DeletetestimonialModal = ({ isOpen, onClose, testimonialId, onDeleted })=>
             onClose();
         } catch (error) {
             console.error("Error deleting testimonial:", error);
+        } finally{
+            setLoading(false);
         }
     };
     if (!isOpen) return null;
@@ -750,7 +758,7 @@ const DeletetestimonialModal = ({ isOpen, onClose, testimonialId, onDeleted })=>
                     children: "Confirm Delete"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
-                    lineNumber: 55,
+                    lineNumber: 58,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -758,7 +766,7 @@ const DeletetestimonialModal = ({ isOpen, onClose, testimonialId, onDeleted })=>
                     children: "Are you sure you want to delete this testimonial? This action cannot be undone."
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
-                    lineNumber: 56,
+                    lineNumber: 59,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -767,39 +775,85 @@ const DeletetestimonialModal = ({ isOpen, onClose, testimonialId, onDeleted })=>
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: onClose,
                             className: "px-4 py-2 text-sm rounded-md bg-gray-200 hover:bg-gray-300",
+                            disabled: loading,
                             children: "Cancel"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
-                            lineNumber: 58,
+                            lineNumber: 63,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: handleDelete,
-                            className: "px-4 py-2 text-sm rounded-md bg-red-600 text-white hover:bg-red-700",
-                            children: "Delete"
+                            disabled: loading,
+                            className: `px-4 py-2 text-sm rounded-md text-white flex items-center gap-2 ${loading ? "bg-red-400 cursor-not-allowed" : "bg-red-600 hover:bg-red-700"}`,
+                            children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                        className: "h-5 w-5 animate-spin text-white",
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        fill: "none",
+                                        viewBox: "0 0 24 24",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                className: "opacity-25",
+                                                cx: "12",
+                                                cy: "12",
+                                                r: "10",
+                                                stroke: "currentColor",
+                                                strokeWidth: "4"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
+                                                lineNumber: 85,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                className: "opacity-75",
+                                                fill: "currentColor",
+                                                d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
+                                                lineNumber: 93,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
+                                        lineNumber: 79,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: "Deleting..."
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
+                                        lineNumber: 99,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true) : "Delete"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
-                            lineNumber: 64,
+                            lineNumber: 70,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
-                    lineNumber: 57,
+                    lineNumber: 62,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
-            lineNumber: 54,
+            lineNumber: 57,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/testimonials/delete.tsx",
-        lineNumber: 53,
+        lineNumber: 56,
         columnNumber: 5
     }, this);
 };
+_s(DeletetestimonialModal, "/Rjh5rPqCCqf0XYnTUk9ZNavw3Q=");
 _c = DeletetestimonialModal;
 const __TURBOPACK__default__export__ = DeletetestimonialModal;
 var _c;
@@ -829,66 +883,79 @@ const AddtestimonialModal = ({ isOpen, onClose, onSave, newtestimonial, onChange
     _s();
     const [categories, setCategories] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [success, setSuccess] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [imageFile, setImageFile] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false); // State to handle loading
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AddtestimonialModal.useEffect": ()=>{
             if (isOpen) {
                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/testimonial`).then({
                     "AddtestimonialModal.useEffect": (res)=>{
                         setCategories(res.data.data);
-                        console.log('Fetched Categories:', res.data.data);
                         setError(null);
                     }
                 }["AddtestimonialModal.useEffect"]).catch({
                     "AddtestimonialModal.useEffect": (err)=>{
-                        console.error('Error fetching categories:', err);
-                        setError('Failed to fetch categories. Please try again.');
+                        console.error('Error fetching testimonials:', err);
+                        setError('Failed to fetch testimonials.');
                     }
                 }["AddtestimonialModal.useEffect"]);
+            } else {
+                setError(null);
+                setSuccess(null);
+                setImageFile(null);
             }
         }
     }["AddtestimonialModal.useEffect"], [
         isOpen
     ]);
-    const onImageChange = async (e)=>{
+    const onImageChange = (e)=>{
         const file = e.target.files?.[0];
-        if (!file) return;
+    };
+    const handleSave = async ()=>{
+        setLoading(true); // Set loading to true when the save operation starts
         const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', 'YOUR_UPLOAD_PRESET'); // Replace with your preset
-    // try {
-    //   const res = await axios.post(
-    //     'https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload',
-    //     formData
-    //   );
-    //   const imageURL = res.data.secure_url;
-    //   // Update newtestimonial with image URL
-    //   onChange({
-    //     target: {
-    //       name: 'imageURL',
-    //       value: imageURL,
-    //     },
-    //   } as React.ChangeEvent<HTMLInputElement>);
-    //   setError(null);
-    // } catch (err) {
-    //   console.error('Image upload failed:', err);
-    //   setError('Image upload failed. Please try again.');
-    // }
+        formData.append('firstName', newtestimonial.firstName);
+        formData.append('lastName', newtestimonial.lastName);
+        formData.append('message', newtestimonial.message);
+        if (imageFile) {
+            formData.append('image', imageFile);
+        }
+        try {
+            const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || '';
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/testimonial/create`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                },
+                withCredentials: true
+            });
+            setSuccess('Testimonial added successfully!');
+            setError(null);
+            onSave(); // reload or close
+        } catch (err) {
+            console.error(err);
+            setError('Failed to save testimonial. Please try again.');
+            setSuccess(null);
+        } finally{
+            setLoading(false); // Set loading to false when the operation is complete
+        }
     };
     if (!isOpen) return null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4 sm:px-6",
+        className: "fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900",
+            className: "bg-white rounded-xl shadow-lg p-6 w-full max-w-md dark:bg-gray-900",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex justify-between items-center mb-4",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "text-lg sm:text-xl font-semibold text-gray-800 dark:text-white",
-                            children: "Add testimonial"
+                            className: "text-lg font-semibold text-gray-800 dark:text-white",
+                            children: "Add Testimonial"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                            lineNumber: 90,
+                            lineNumber: 106,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -897,170 +964,165 @@ const AddtestimonialModal = ({ isOpen, onClose, onSave, newtestimonial, onChange
                             children: "×"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                            lineNumber: 91,
+                            lineNumber: 109,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                    lineNumber: 89,
+                    lineNumber: 105,
                     columnNumber: 9
                 }, this),
                 error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "mb-4 p-2 rounded-md bg-red-100 border border-red-400 text-red-700 text-sm",
+                    className: "mb-4 p-3 rounded-md bg-red-100 border border-red-400 text-red-700 text-sm",
                     children: error
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                    lineNumber: 96,
+                    lineNumber: 118,
+                    columnNumber: 11
+                }, this),
+                success && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "mb-4 p-3 rounded-md bg-green-100 border border-green-400 text-green-700 text-sm",
+                    children: success
+                }, void 0, false, {
+                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                    lineNumber: 123,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "space-y-4",
                     children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "First Name"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                    lineNumber: 104,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "firstName",
-                                    type: "text",
-                                    value: newtestimonial.firstName,
-                                    onChange: onChange,
-                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                    lineNumber: 105,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                            name: "firstName",
+                            type: "text",
+                            placeholder: "First Name",
+                            value: newtestimonial.firstName,
+                            onChange: onChange,
+                            className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                        }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                            lineNumber: 103,
+                            lineNumber: 129,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                            name: "lastName",
+                            type: "text",
+                            placeholder: "Last Name",
+                            value: newtestimonial.lastName,
+                            onChange: onChange,
+                            className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                            lineNumber: 138,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                            type: "file",
+                            accept: "image/*",
+                            onChange: onImageChange,
+                            className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                            lineNumber: 147,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                            name: "message",
+                            placeholder: "Message",
+                            value: newtestimonial.message,
+                            onChange: onChange,
+                            rows: 3,
+                            className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                            lineNumber: 154,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "Last Name"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                    lineNumber: 115,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "lastName",
-                                    type: "text",
-                                    value: newtestimonial.lastName,
-                                    onChange: onChange,
-                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                    lineNumber: 116,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                            lineNumber: 114,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "Image"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                    lineNumber: 127,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "imageURL",
-                                    type: "text",
-                                    placeholder: "insert the image after uploading in google drive",
-                                    value: newtestimonial.imageURL,
-                                    onChange: onChange,
-                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                    lineNumber: 128,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                            lineNumber: 126,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "message"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                    lineNumber: 153,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                    name: "message",
-                                    value: newtestimonial.message,
-                                    onChange: onChange,
-                                    rows: 3,
-                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                    lineNumber: 154,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                            lineNumber: 152,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
+                            className: "flex justify-end gap-2 mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: onSave,
-                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
-                                children: "Save"
+                                onClick: handleSave,
+                                disabled: loading,
+                                className: `px-4 py-2 rounded-lg ${loading ? 'bg-[#008767]' : 'bg-[#008767]'} text-white hover:${loading ? 'bg-[006d50]' : 'bg-[#006d50]'} transition-all`,
+                                children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex items-center justify-center",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "h-5 w-5 animate-spin text-white",
+                                            xmlns: "http://www.w3.org/2000/svg",
+                                            fill: "none",
+                                            viewBox: "0 0 24 24",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                    className: "opacity-25",
+                                                    cx: "12",
+                                                    cy: "12",
+                                                    r: "10",
+                                                    stroke: "currentColor",
+                                                    strokeWidth: "4"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                                                    lineNumber: 177,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                    className: "opacity-75",
+                                                    fill: "currentColor",
+                                                    d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                                                    lineNumber: 185,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                                            lineNumber: 171,
+                                            columnNumber: 19
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "ml-2",
+                                            children: "Saving..."
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                                            lineNumber: 191,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
+                                    lineNumber: 170,
+                                    columnNumber: 17
+                                }, this) : 'Save'
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                                lineNumber: 165,
-                                columnNumber: 13
+                                lineNumber: 164,
+                                columnNumber: 11
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                            lineNumber: 164,
+                            lineNumber: 163,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-                    lineNumber: 101,
+                    lineNumber: 128,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-            lineNumber: 88,
+            lineNumber: 104,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/testimonials/add.tsx",
-        lineNumber: 87,
+        lineNumber: 103,
         columnNumber: 5
     }, this);
 };
-_s(AddtestimonialModal, "YNBtphbVBdwsDUa9nsdY+Mgc4Lo=");
+_s(AddtestimonialModal, "qJ1sUbttfakztP2ZIlagTC2Kuxo=");
 _c = AddtestimonialModal;
 const __TURBOPACK__default__export__ = AddtestimonialModal;
 var _c;
@@ -1086,35 +1148,58 @@ var _s = __turbopack_context__.k.signature();
 ;
 const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditChange, testimonialId, BURL, refresh })=>{
     _s();
+    const [imageFile, setImageFile] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [messageType, setMessageType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false); // New state for loading
+    // If the modal is not open, return null to prevent rendering
     if (!showModal) return null;
+    const handleFileChange = (e)=>{
+        if (e.target.files && e.target.files.length > 0) {
+            setImageFile(e.target.files[0]);
+        }
+    };
     const handleSave = async ()=>{
         try {
+            setIsLoading(true); // Set loading to true when save starts
             const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
-            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].put(`${BURL}/testimonial/edit/${testimonialId}`, {
-                firstName: editForm.firstName,
-                lastName: editForm.lastName,
-                imageURL: editForm.imageURL,
-                message: editForm.message
-            }, {
+            // Log token for debugging
+            console.log("Token:", token);
+            const formData = new FormData();
+            formData.append("firstName", editForm.firstName);
+            formData.append("lastName", editForm.lastName);
+            formData.append("message", editForm.message);
+            if (imageFile) {
+                formData.append("image", imageFile);
+            }
+            // Log FormData for debugging
+            console.log("Form Data:");
+            for (let [key, value] of formData.entries()){
+                console.log(key, value);
+            }
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].put(`${BURL}/testimonial/edit/${testimonialId}`, formData, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data"
                 },
                 withCredentials: true
             });
+            console.log("Response: edit testi", response); // Log the response for debugging
             setMessage("Testimonial updated successfully.");
             setMessageType("success");
             setTimeout(()=>{
                 setShowModal(false);
                 setMessage("");
                 setMessageType("");
-                refresh(); // ✅ Refresh after saving
+                refresh();
             }, 1500);
         } catch (error) {
+            console.error("Error during request:", error); // Log any request error
             const backendMessage = error.response?.data?.message || "Error updating testimonial.";
             setMessage(backendMessage);
             setMessageType("error");
+        } finally{
+            setIsLoading(false); // Reset loading when the operation is complete
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1130,7 +1215,7 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                             children: "Edit Testimonial"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                            lineNumber: 82,
+                            lineNumber: 106,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1144,13 +1229,13 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                             children: "×"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                            lineNumber: 85,
+                            lineNumber: 109,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                    lineNumber: 81,
+                    lineNumber: 105,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1163,7 +1248,7 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                                     children: "First Name"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                    lineNumber: 101,
+                                    lineNumber: 125,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1172,16 +1257,16 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                                     value: editForm.firstName,
                                     onChange: handleEditChange,
                                     placeholder: "Enter first name",
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                    lineNumber: 104,
+                                    lineNumber: 128,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                            lineNumber: 100,
+                            lineNumber: 124,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1191,7 +1276,7 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                                     children: "Last Name"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                    lineNumber: 116,
+                                    lineNumber: 140,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1200,44 +1285,53 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                                     value: editForm.lastName,
                                     onChange: handleEditChange,
                                     placeholder: "Enter last name",
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                    lineNumber: 119,
+                                    lineNumber: 143,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                            lineNumber: 115,
+                            lineNumber: 139,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300",
-                                    children: "Image URL"
+                                    children: "Upload Image"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                    lineNumber: 131,
+                                    lineNumber: 155,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "imageURL",
-                                    type: "text",
-                                    value: editForm.imageURL,
-                                    onChange: handleEditChange,
-                                    placeholder: "Enter image URL",
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                    type: "file",
+                                    accept: "image/*",
+                                    onChange: handleFileChange,
+                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                    lineNumber: 134,
+                                    lineNumber: 158,
                                     columnNumber: 13
+                                }, this),
+                                imageFile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-xs text-gray-500 mt-1",
+                                    children: [
+                                        "Selected: ",
+                                        imageFile.name
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
+                                    lineNumber: 165,
+                                    columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                            lineNumber: 130,
+                            lineNumber: 154,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1247,7 +1341,7 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                                     children: "Message"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                    lineNumber: 146,
+                                    lineNumber: 171,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1255,16 +1349,16 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                                     value: editForm.message,
                                     onChange: handleEditChange,
                                     placeholder: "Enter testimonial message",
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                    lineNumber: 149,
+                                    lineNumber: 174,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                            lineNumber: 145,
+                            lineNumber: 170,
                             columnNumber: 11
                         }, this),
                         message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1272,44 +1366,94 @@ const EdittestimonialModal = ({ showModal, setShowModal, editForm, handleEditCha
                             children: message
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                            lineNumber: 160,
+                            lineNumber: 185,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: handleSave,
+                                disabled: isLoading,
                                 className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
-                                children: "Save"
+                                children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex items-center justify-center",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "h-5 w-5 animate-spin text-white",
+                                            xmlns: "http://www.w3.org/2000/svg",
+                                            fill: "none",
+                                            viewBox: "0 0 24 24",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                    className: "opacity-25",
+                                                    cx: "12",
+                                                    cy: "12",
+                                                    r: "10",
+                                                    stroke: "currentColor",
+                                                    strokeWidth: "4"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
+                                                    lineNumber: 209,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                    className: "opacity-75",
+                                                    fill: "currentColor",
+                                                    d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
+                                                    lineNumber: 217,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
+                                            lineNumber: 203,
+                                            columnNumber: 19
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "ml-2",
+                                            children: "Saving..."
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
+                                            lineNumber: 223,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
+                                    lineNumber: 202,
+                                    columnNumber: 17
+                                }, this) : "Save"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                                lineNumber: 171,
+                                lineNumber: 196,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                            lineNumber: 170,
+                            lineNumber: 195,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-                    lineNumber: 98,
+                    lineNumber: 122,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-            lineNumber: 80,
+            lineNumber: 104,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/testimonials/edit.tsx",
-        lineNumber: 79,
+        lineNumber: 103,
         columnNumber: 5
     }, this);
 };
-_s(EdittestimonialModal, "/rrY/3Qid0csh5gAdegPaCFgpA4=");
+_s(EdittestimonialModal, "PmbwTD6DqKImKowOg3O1eQYiMzo=");
 _c = EdittestimonialModal;
 const __TURBOPACK__default__export__ = EdittestimonialModal;
 var _c;

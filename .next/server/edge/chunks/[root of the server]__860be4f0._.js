@@ -33,6 +33,7 @@ const protectedRoutes = [
     '/dashboard',
     '/services',
     '/category',
+    '/setting',
     '/landing',
     '/blog',
     '/testimonials',

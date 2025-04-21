@@ -828,16 +828,25 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
 const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
     const [categories, setCategories] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (isOpen) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/service`, {}).then((res)=>{
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/service`).then((res)=>{
                 setCategories(res.data.data);
-                console.log('Fetched Categories:', res.data.data); // ✅ Move this inside the .then block
+                console.log('Fetched Categories:', res.data.data);
             }).catch((err)=>console.error('Error fetching categories:', err));
         }
     }, [
         isOpen
     ]);
+    const handleSave = async ()=>{
+        setLoading(true);
+        try {
+            await onSave(); // call the prop save function
+        } finally{
+            setLoading(false);
+        }
+    };
     if (!isOpen) return null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4 sm:px-6",
@@ -852,7 +861,7 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                             children: "Add booking"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                            lineNumber: 52,
+                            lineNumber: 60,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -861,13 +870,13 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                             children: "×"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                            lineNumber: 53,
+                            lineNumber: 61,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                    lineNumber: 51,
+                    lineNumber: 59,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -880,7 +889,7 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                                     children: "booking Name"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                    lineNumber: 62,
+                                    lineNumber: 70,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -891,13 +900,13 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                    lineNumber: 63,
+                                    lineNumber: 71,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                            lineNumber: 61,
+                            lineNumber: 69,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -907,7 +916,7 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                                     children: "service"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                    lineNumber: 72,
+                                    lineNumber: 80,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -921,7 +930,7 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                                             children: "Select a service"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                            lineNumber: 79,
+                                            lineNumber: 87,
                                             columnNumber: 15
                                         }, this),
                                         categories.map((cat)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -929,19 +938,19 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                                                 children: cat.name
                                             }, cat.id, false, {
                                                 fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                                lineNumber: 81,
+                                                lineNumber: 89,
                                                 columnNumber: 17
                                             }, this))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                    lineNumber: 73,
+                                    lineNumber: 81,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                            lineNumber: 71,
+                            lineNumber: 79,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -951,7 +960,7 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                                     children: "Price"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                    lineNumber: 88,
+                                    lineNumber: 96,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -962,46 +971,79 @@ const AddbookingModal = ({ isOpen, onClose, onSave, newbooking, onChange })=>{
                                     className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                    lineNumber: 89,
+                                    lineNumber: 97,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                            lineNumber: 87,
+                            lineNumber: 95,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: onSave,
-                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto",
-                                children: "Save"
+                                onClick: handleSave,
+                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto flex items-center justify-center gap-2",
+                                disabled: loading,
+                                children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                    className: "h-5 w-5 animate-spin text-white",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    fill: "none",
+                                    viewBox: "0 0 24 24",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                            className: "opacity-25",
+                                            cx: "12",
+                                            cy: "12",
+                                            r: "10",
+                                            stroke: "currentColor",
+                                            strokeWidth: "4"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
+                                            lineNumber: 118,
+                                            columnNumber: 19
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                            className: "opacity-75",
+                                            fill: "currentColor",
+                                            d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
+                                            lineNumber: 126,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
+                                    lineNumber: 112,
+                                    columnNumber: 17
+                                }, this) : 'Save'
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                                lineNumber: 98,
+                                lineNumber: 106,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                            lineNumber: 97,
+                            lineNumber: 105,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-                    lineNumber: 60,
+                    lineNumber: 68,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-            lineNumber: 50,
+            lineNumber: 58,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/booking/add.tsx",
-        lineNumber: 49,
+        lineNumber: 57,
         columnNumber: 5
     }, this);
 };
@@ -1026,6 +1068,7 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
     const [status, setStatus] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(selectedItem?.status || "Pending");
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [messageType, setMessageType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (selectedItem) {
             setStatus(selectedItem.status);
@@ -1034,6 +1077,7 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
         selectedItem
     ]);
     const handleUpdateTime = async ()=>{
+        setLoading(true);
         try {
             const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
             await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].put(`${BURL}/booking/edit/${selectedItem?.id}`, {
@@ -1044,22 +1088,23 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                 },
                 withCredentials: true
             });
-            setMessage("Booking status updateTimed successfully!");
+            setMessage("Booking status updated successfully!");
             setMessageType("success");
             setTimeout(()=>{
                 setShowModal(false);
                 setMessage("");
                 setMessageType("");
+                setLoading(false);
                 if (refreshData) refreshData();
             }, 1500);
         } catch (error) {
             console.error("Error updating booking status:", error);
-            setMessage("Failed to updateTime status. Please try again.");
+            setMessage("Failed to update status. Please try again.");
             setMessageType("error");
+            setLoading(false);
         }
     };
     if (!showModal || !selectedItem) return null;
-    // Safely parse the dateTime string
     const bookingdateTime = selectedItem.dateTime ? new Date(selectedItem.dateTime) : null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6",
@@ -1074,7 +1119,7 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                             children: "Booking Details"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                            lineNumber: 88,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1083,30 +1128,30 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                             children: "×"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                            lineNumber: 91,
+                            lineNumber: 94,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                    lineNumber: 87,
+                    lineNumber: 90,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                     className: "mb-5 text-sm text-center text-gray-600 dark:text-gray-300",
                     children: [
-                        "UpdateTime status for ",
+                        "Update status for ",
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
                             children: selectedItem.customerName || "Customer"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                            lineNumber: 101,
-                            columnNumber: 33
+                            lineNumber: 104,
+                            columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                    lineNumber: 100,
+                    lineNumber: 103,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1119,7 +1164,7 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                                     children: "Date:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                                    lineNumber: 107,
+                                    lineNumber: 110,
                                     columnNumber: 13
                                 }, this),
                                 " ",
@@ -1127,7 +1172,7 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                            lineNumber: 106,
+                            lineNumber: 109,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1137,24 +1182,24 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                                     children: "Time:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                                    lineNumber: 111,
+                                    lineNumber: 116,
                                     columnNumber: 13
                                 }, this),
                                 " ",
                                 bookingdateTime ? bookingdateTime.toLocaleTimeString([], {
-                                    hour: '2-digit',
-                                    minute: '2-digit'
+                                    hour: "2-digit",
+                                    minute: "2-digit"
                                 }) : "N/A"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                            lineNumber: 110,
+                            lineNumber: 115,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                    lineNumber: 105,
+                    lineNumber: 108,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1166,7 +1211,7 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                             children: "Change Status"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                            lineNumber: 117,
+                            lineNumber: 128,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1180,7 +1225,7 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                                     children: "Approved"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 140,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1188,7 +1233,7 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                                     children: "Pending"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                                    lineNumber: 130,
+                                    lineNumber: 141,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1196,19 +1241,19 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                                     children: "Rejected"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                                    lineNumber: 131,
+                                    lineNumber: 142,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                            lineNumber: 123,
+                            lineNumber: 134,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                    lineNumber: 116,
+                    lineNumber: 127,
                     columnNumber: 9
                 }, this),
                 message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1216,34 +1261,78 @@ const EditBookingModal = ({ showModal, selectedItem, closeModal, setShowModal, r
                     children: message
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                    lineNumber: 137,
+                    lineNumber: 148,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "mt-6 flex justify-end",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: handleUpdateTime,
-                        className: "bg-[#008767] text-white px-4 py-2 rounded-lg hover:bg-[#006d50] transition",
-                        children: "Save Changes"
+                        disabled: loading,
+                        className: "bg-[#008767] text-white px-4 py-2 rounded-lg hover:bg-[#006d50] transition flex items-center justify-center gap-2 min-w-[120px]",
+                        children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                    className: "h-5 w-5 animate-spin text-white",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    fill: "none",
+                                    viewBox: "0 0 24 24",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                            className: "opacity-25",
+                                            cx: "12",
+                                            cy: "12",
+                                            r: "10",
+                                            stroke: "currentColor",
+                                            strokeWidth: "4"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
+                                            lineNumber: 172,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                            className: "opacity-75",
+                                            fill: "currentColor",
+                                            d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
+                                            lineNumber: 180,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
+                                    lineNumber: 166,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    children: "Saving..."
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
+                                    lineNumber: 186,
+                                    columnNumber: 33
+                                }, this)
+                            ]
+                        }, void 0, true) : "Save Changes"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                        lineNumber: 148,
+                        lineNumber: 159,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-                    lineNumber: 147,
+                    lineNumber: 158,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-            lineNumber: 85,
+            lineNumber: 88,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(admin)/component/booking/edit.tsx",
-        lineNumber: 84,
+        lineNumber: 87,
         columnNumber: 5
     }, this);
 };

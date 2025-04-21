@@ -1,30 +1,11 @@
-/** @type {import('next').NextConfig} */
+// next.config.js
 const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value: "frame-src 'self' https://www.youtube.com; object-src 'none';",
-          },
-        ],
-      },
-    ];
-  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        pathname: '/**',
+        hostname: '**', // Matches any host
       },
-      {
-        protocol: 'https',
-        hostname: 'drive.google.com',
-        pathname: '/**',
-      }
     ],
   },
 };

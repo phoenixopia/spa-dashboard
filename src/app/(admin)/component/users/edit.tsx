@@ -30,16 +30,18 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
 }) => {
   const [message, setMessage] = useState<string | null>(null);
   const [messageType, setMessageType] = useState<"success" | "error" | null>(null);
+  const [loading, setLoading] = useState(false); // New loading state
 
   if (!showModal) return null;
 
   const handleSave = async () => {
+    setLoading(true);
     try {
       const token = document.cookie
         .split('; ')
         .find(row => row.startsWith('token='))
         ?.split('=')[1] || '';
-  
+
       const response = await axios.put(
         `${BURL}/user/edit/${userId}`,
         {
@@ -56,7 +58,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
           withCredentials: true,
         }
       );
-  
+
       setMessage(response.data.message || "User updated successfully!");
       setMessageType("success");
       onUpdated();
@@ -66,9 +68,10 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
       const errMsg = error.response?.data?.message || "Error updating user. Please try again.";
       setMessage(errMsg);
       setMessageType("error");
+    } finally {
+      setLoading(false);
     }
   };
-  
 
   const handleClose = () => {
     setMessage(null);
@@ -125,9 +128,33 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
           <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
             <button
               onClick={handleSave}
-              className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
+              disabled={loading}
+              className={`px-4 py-2 rounded-lg w-full sm:w-auto flex items-center justify-center gap-2 text-white 
+                ${loading ? 'bg-[#006d50] cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`}
             >
-              Save
+              {loading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l5-5-5-5v4a10 10 0 100 20v-4l-5 5 5 5v-4a8 8 0 01-8-8z"
+                    />
+                  </svg>
+                  Saving...
+                </>
+              ) : (
+                "Save"
+              )}
             </button>
           </div>
         </div>
