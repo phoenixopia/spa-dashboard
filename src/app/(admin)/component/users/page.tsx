@@ -56,6 +56,9 @@ export default function User() {
     setNewUser((prev) => ({ ...prev, [name]: value }));
   };
 
+  
+  const [usercount, setuserCount] = useState(0);
+
   const handleAddSave = async () => {
     try {
       const token = document.cookie
@@ -69,12 +72,14 @@ export default function User() {
         },
         withCredentials: true,
       });
+      
 
       
     } catch (error) {
       console.error("Error adding user:", error);
       
     }
+    fetchData();
   };
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,7 +116,10 @@ export default function User() {
       const res = await axios.get(`${BURL}/user`);
       if (Array.isArray(res.data.data)) setData(res.data.data);
       else if (Array.isArray(res.data)) setData(res.data);
+
       else console.error("Unexpected data structure:", res.data);
+      const usercount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+      setuserCount(usercount); // Update the state with the booking count
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -139,7 +147,7 @@ export default function User() {
                 </div>
                 <div>
                   <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total Users</h5>
-                  <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
+                  <p className="text-4xl font-bold text-gray-900 dark:text-white">{usercount}</p>
                 </div>
               </div>
               {message && (

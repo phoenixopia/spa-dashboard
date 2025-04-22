@@ -811,105 +811,7 @@ const Sidebar = ()=>{
 };
 const __TURBOPACK__default__export__ = Sidebar;
 }}),
-"[project]/src/app/(admin)/component/category/delete.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-// components/category/delete.tsx
-__turbopack_context__.s({
-    "default": (()=>__TURBOPACK__default__export__)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
-;
-;
-const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
-const DeletecategoryModal = ({ isOpen, onClose, categoryId, onDeleted })=>{
-    const handleDelete = async ()=>{
-        if (!categoryId) return;
-        const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || '';
-        if (!token) {
-            console.error("No token found in cookies.");
-            return;
-        }
-        try {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].delete(`${BURL}/category/delete/${categoryId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-                withCredentials: true
-            });
-            onDeleted(); // Refresh or refetch data
-            onClose();
-        } catch (error) {
-            console.error("Error deleting category:", error);
-        }
-    };
-    if (!isOpen) return null;
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-50",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "bg-white p-6 rounded-xl shadow-lg w-[90%] max-w-md",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                    className: "text-lg font-semibold text-gray-800 mb-4",
-                    children: "Confirm Delete"
-                }, void 0, false, {
-                    fileName: "[project]/src/app/(admin)/component/category/delete.tsx",
-                    lineNumber: 55,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-gray-600 mb-6",
-                    children: "Are you sure you want to delete this category? This action cannot be undone."
-                }, void 0, false, {
-                    fileName: "[project]/src/app/(admin)/component/category/delete.tsx",
-                    lineNumber: 56,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex justify-end space-x-3",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: onClose,
-                            className: "px-4 py-2 text-sm rounded-md bg-gray-200 hover:bg-gray-300",
-                            children: "Cancel"
-                        }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/delete.tsx",
-                            lineNumber: 58,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: handleDelete,
-                            className: "px-4 py-2 text-sm rounded-md bg-red-600 text-white hover:bg-red-700",
-                            children: "Delete"
-                        }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/delete.tsx",
-                            lineNumber: 64,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/app/(admin)/component/category/delete.tsx",
-                    lineNumber: 57,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/app/(admin)/component/category/delete.tsx",
-            lineNumber: 54,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
-        fileName: "[project]/src/app/(admin)/component/category/delete.tsx",
-        lineNumber: 53,
-        columnNumber: 5
-    }, this);
-};
-const __TURBOPACK__default__export__ = DeletecategoryModal;
-}}),
-"[project]/src/app/(admin)/component/category/add.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/(admin)/component/users/delete.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -924,58 +826,175 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 ;
 ;
 const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
-const AddcategoryModal = ({ isOpen, onClose, onSave, newcategory, onChange })=>{
-    const [categories, setCategories] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
-    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
-    const [imageFile, setImageFile] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+const DeleteUserModal = ({ isOpen, onClose, userId, onDeleted })=>{
+    const [responseMessage, setResponseMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [isSuccess, setIsSuccess] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        if (isOpen) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/category`).then((res)=>{
-                setCategories(res.data.data);
-                setError(null);
-            }).catch((err)=>{
-                console.error('Error fetching categories:', err);
-                setError('Failed to fetch categories. Please try again.');
-            });
-        }
-    }, [
-        isOpen
-    ]);
-    const handleImageChange = (e)=>{
-        const file = e.target.files?.[0];
-        if (file) setImageFile(file);
-    };
-    const handleSubmit = async ()=>{
-        if (!newcategory.name || !newcategory.description || !imageFile) {
-            setError('Please fill all fields and select an image.');
-            return;
-        }
-        const formData = new FormData();
-        formData.append('name', newcategory.name);
-        formData.append('description', newcategory.description);
-        formData.append('image', imageFile);
+    const handleDelete = async ()=>{
+        if (!userId) return;
+        setLoading(true);
         try {
-            setLoading(true);
-            const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || '';
-            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/category/create`, formData, {
+            const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].delete(`${BURL}/user/delete/${userId}`, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
+                    Authorization: `Bearer ${token}`
                 },
                 withCredentials: true
             });
-            setError(null);
-            onSave();
-            onClose();
-        } catch (err) {
-            console.error('Failed to add category:', err);
-            setError('Failed to add category. Please try again.');
+            setResponseMessage(response.data?.message || "User deleted successfully.");
+            setIsSuccess(true);
+            onDeleted();
+            setTimeout(()=>{
+                setResponseMessage(null);
+                onClose();
+            }, 2000);
+        } catch (error) {
+            setResponseMessage(error.response?.data?.message || "Failed to delete user. Please try again.");
+            setIsSuccess(false);
         } finally{
             setLoading(false);
         }
     };
     if (!isOpen) return null;
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "fixed inset-0 z-50 flex items-center justify-center bg-black/70",
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "bg-white p-6 rounded-xl shadow-lg w-[90%] max-w-md",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                    className: "text-lg font-semibold text-gray-800 mb-4",
+                    children: "Confirm Delete"
+                }, void 0, false, {
+                    fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                    lineNumber: 65,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "text-gray-600 mb-6",
+                    children: "Are you sure you want to delete this user? This action cannot be undone."
+                }, void 0, false, {
+                    fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                    lineNumber: 66,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex justify-end space-x-3 mb-4",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            onClick: ()=>{
+                                setResponseMessage(null);
+                                setIsSuccess(null);
+                                onClose();
+                            },
+                            className: "px-4 py-2 text-sm rounded-md bg-gray-200 hover:bg-gray-300",
+                            disabled: loading,
+                            children: "Cancel"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                            lineNumber: 71,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            onClick: handleDelete,
+                            className: `px-4 py-2 text-sm rounded-md text-white flex items-center justify-center ${loading ? "bg-red-400 cursor-not-allowed" : "bg-red-600 hover:bg-red-700"}`,
+                            disabled: loading,
+                            children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                        className: "h-5 w-5 animate-spin text-white mr-2",
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        fill: "none",
+                                        viewBox: "0 0 24 24",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                className: "opacity-25",
+                                                cx: "12",
+                                                cy: "12",
+                                                r: "10",
+                                                stroke: "currentColor",
+                                                strokeWidth: "4"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                                                lineNumber: 97,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                className: "opacity-75",
+                                                fill: "currentColor",
+                                                d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                                                lineNumber: 105,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                                        lineNumber: 91,
+                                        columnNumber: 17
+                                    }, this),
+                                    "Deleting..."
+                                ]
+                            }, void 0, true) : "Delete"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                            lineNumber: 82,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+                    lineNumber: 70,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+            lineNumber: 62,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "[project]/src/app/(admin)/component/users/delete.tsx",
+        lineNumber: 61,
+        columnNumber: 5
+    }, this);
+};
+const __TURBOPACK__default__export__ = DeleteUserModal;
+}}),
+"[project]/src/app/(admin)/component/users/add.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
+;
+;
+;
+const AddUserModal = ({ isOpen, onClose, onSave, newUser, onChange, setNewUserMessage })=>{
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const handleSave = async ()=>{
+        setIsLoading(true);
+        try {
+            await onSave();
+        } catch (error) {
+            // ✅ Handle error from backend
+            if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].isAxiosError(error) && error.response) {
+                const msg = error.response.data?.message || 'Something went wrong while saving the user.';
+                setNewUserMessage(`Error: ${msg}`);
+            } else {
+                setNewUserMessage('Error: Failed to connect to the server. Please try again.');
+            }
+        } finally{
+            setIsLoading(false);
+        }
+    };
+    if (!isOpen) return null;
+    const isSuccessMessage = newUser.message.toLowerCase().includes('success');
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4 sm:px-6",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -986,10 +1005,10 @@ const AddcategoryModal = ({ isOpen, onClose, onSave, newcategory, onChange })=>{
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                             className: "text-lg sm:text-xl font-semibold text-gray-800 dark:text-white",
-                            children: "Add Category"
+                            children: "Add User"
                         }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                            lineNumber: 100,
+                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                            lineNumber: 57,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -997,22 +1016,22 @@ const AddcategoryModal = ({ isOpen, onClose, onSave, newcategory, onChange })=>{
                             className: "text-[#008767] hover:text-[#006d50] text-3xl font-bold",
                             children: "×"
                         }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                            lineNumber: 101,
+                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                            lineNumber: 58,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
-                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                    lineNumber: 99,
+                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                    lineNumber: 56,
                     columnNumber: 9
                 }, this),
-                error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "mb-4 p-2 rounded-md bg-red-100 border border-red-400 text-red-700 text-sm",
-                    children: error
+                newUser.message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: `mb-4 px-4 py-2 rounded-md text-sm font-medium ${isSuccessMessage ? 'bg-green-100 text-green-800 border border-green-300' : 'bg-red-100 text-red-800 border border-red-300'}`,
+                    children: newUser.message
                 }, void 0, false, {
-                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                    lineNumber: 105,
+                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                    lineNumber: 68,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1022,90 +1041,144 @@ const AddcategoryModal = ({ isOpen, onClose, onSave, newcategory, onChange })=>{
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "Category Name"
+                                    children: "First Name"
                                 }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 81,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    name: "firstName",
+                                    type: "text",
+                                    value: newUser.firstName,
+                                    onChange: onChange,
+                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 82,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                            lineNumber: 80,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                    children: "Last Name"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 91,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    name: "lastName",
+                                    type: "text",
+                                    value: newUser.lastName,
+                                    onChange: onChange,
+                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 92,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                            lineNumber: 90,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                    children: "Email"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 101,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    name: "email",
+                                    type: "email",
+                                    value: newUser.email,
+                                    onChange: onChange,
+                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 102,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                            lineNumber: 100,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
+                                    children: "Phone Number"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 111,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    name: "phoneNumber",
+                                    type: "text",
+                                    value: newUser.phoneNumber,
+                                    onChange: onChange,
+                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
                                     lineNumber: 112,
                                     columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "name",
-                                    type: "text",
-                                    value: newcategory.name,
-                                    onChange: onChange,
-                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                    lineNumber: 113,
-                                    columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                            lineNumber: 111,
+                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                            lineNumber: 110,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "Image"
+                                    children: "Password"
                                 }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                    lineNumber: 123,
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 121,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "image",
-                                    type: "file",
-                                    accept: "image/*",
-                                    onChange: handleImageChange,
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                    lineNumber: 124,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                            lineNumber: 122,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "Description"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                    lineNumber: 134,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                    name: "description",
-                                    value: newcategory.description,
+                                    name: "password",
+                                    type: "password",
+                                    value: newUser.password,
                                     onChange: onChange,
-                                    rows: 3,
-                                    className: "w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                    lineNumber: 135,
+                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                    lineNumber: 122,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                            lineNumber: 133,
+                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                            lineNumber: 120,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: handleSubmit,
-                                disabled: loading,
-                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto flex items-center justify-center gap-2",
-                                children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                                onClick: handleSave,
+                                className: `px-4 py-2 rounded-lg text-white w-full sm:w-auto flex items-center justify-center ${isLoading ? 'bg-[#008767] cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`,
+                                disabled: isLoading,
+                                children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                             className: "h-5 w-5 animate-spin text-white",
@@ -1121,8 +1194,8 @@ const AddcategoryModal = ({ isOpen, onClose, onSave, newcategory, onChange })=>{
                                                     stroke: "currentColor",
                                                     strokeWidth: "4"
                                                 }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                                    lineNumber: 158,
+                                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                                    lineNumber: 147,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
@@ -1130,56 +1203,50 @@ const AddcategoryModal = ({ isOpen, onClose, onSave, newcategory, onChange })=>{
                                                     fill: "currentColor",
                                                     d: "M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
                                                 }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                                    lineNumber: 166,
+                                                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                                    lineNumber: 155,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
-                                            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                            lineNumber: 152,
+                                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                            lineNumber: 141,
                                             columnNumber: 19
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            children: "Saving..."
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                            lineNumber: 172,
-                                            columnNumber: 19
-                                        }, this)
+                                        "Saving..."
                                     ]
                                 }, void 0, true) : 'Save'
                             }, void 0, false, {
-                                fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                                lineNumber: 145,
+                                fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                                lineNumber: 132,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                            lineNumber: 144,
+                            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                            lineNumber: 131,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
-                    fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-                    lineNumber: 110,
+                    fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+                    lineNumber: 79,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
-            fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-            lineNumber: 98,
+            fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+            lineNumber: 55,
             columnNumber: 7
         }, this)
     }, void 0, false, {
-        fileName: "[project]/src/app/(admin)/component/category/add.tsx",
-        lineNumber: 97,
+        fileName: "[project]/src/app/(admin)/component/users/add.tsx",
+        lineNumber: 54,
         columnNumber: 5
     }, this);
 };
-const __TURBOPACK__default__export__ = AddcategoryModal;
+const __TURBOPACK__default__export__ = AddUserModal;
 }}),
-"[project]/src/app/(admin)/component/category/edit.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/(admin)/component/users/edit.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -1193,62 +1260,47 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 ;
 ;
 ;
-const EditcategoryModal = ({ showModal, setShowModal, editForm, handleEditChange, categoryId, BURL })=>{
-    const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    const [messageType, setMessageType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+const EditUserModal = ({ showModal, setShowModal, editForm, handleEditChange, userId, BURL, onUpdated })=>{
+    const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [messageType, setMessageType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false); // New loading state
     if (!showModal) return null;
-    const handleFileChange = (e)=>{
-        if (e.target.files && e.target.files[0]) {
-            const customEvent = {
-                ...e,
-                target: {
-                    ...e.target,
-                    name: "image",
-                    value: e.target.files[0],
-                    files: e.target.files
-                }
-            };
-            handleEditChange(customEvent);
-        }
-    };
     const handleSave = async ()=>{
-        setIsLoading(true);
+        setLoading(true);
         try {
-            const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
-            const formData = new FormData();
-            formData.append("name", editForm.name);
-            formData.append("description", editForm.description);
-            if (editForm.imageFile) {
-                formData.append("image", editForm.imageFile);
-            }
-            console.log("cat tockentoken", token);
-            console.log("cat formData", editForm);
-            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].put(`${BURL}/category/edit/${categoryId}`, {
+            const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || '';
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].put(`${BURL}/user/edit/${userId}`, {
+                firstName: editForm.firstName,
+                lastName: editForm.lastName,
+                email: editForm.email,
+                phoneNumber: editForm.phoneNumber,
+                password: editForm.password
+            }, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data"
+                    Authorization: `Bearer ${token}`
                 },
-                withCredentials: true,
-                editForm
+                withCredentials: true
             });
-            setMessage("Category updated successfully!");
+            setMessage(response.data.message || "User updated successfully!");
             setMessageType("success");
-            setTimeout(()=>{
-                setShowModal(false);
-                setMessage("");
-                setMessageType("");
-            }, 1500);
+            onUpdated();
+            setShowModal(false);
         } catch (error) {
-            const backendMessage = error.response?.data?.message || "Error updating category.";
-            setMessage(backendMessage);
+            console.error("Failed to update user:", error);
+            const errMsg = error.response?.data?.message || "Error updating user. Please try again.";
+            setMessage(errMsg);
             setMessageType("error");
         } finally{
-            setIsLoading(false);
+            setLoading(false);
         }
     };
+    const handleClose = ()=>{
+        setMessage(null);
+        setMessageType(null);
+        setShowModal(false);
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4 sm:px-6",
+        className: "fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900",
             children: [
@@ -1257,138 +1309,84 @@ const EditcategoryModal = ({ showModal, setShowModal, editForm, handleEditChange
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                             className: "text-lg sm:text-xl font-semibold text-gray-800 dark:text-white",
-                            children: "Edit Category"
+                            children: "Edit User"
                         }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                            lineNumber: 102,
+                            fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                            lineNumber: 86,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: ()=>{
-                                setShowModal(false);
-                                setMessage("");
-                                setMessageType("");
-                            },
+                            onClick: handleClose,
                             className: "text-[#008767] hover:text-[#006d50] text-3xl font-bold",
                             "aria-label": "Close Modal",
                             children: "×"
                         }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                            lineNumber: 105,
+                            fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                            lineNumber: 89,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
-                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                    lineNumber: 101,
+                    fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                    lineNumber: 85,
                     columnNumber: 9
+                }, this),
+                message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: `mb-4 p-3 rounded-md text-sm ${messageType === "success" ? "bg-green-100 text-green-800 border border-green-300" : "bg-red-100 text-red-800 border border-red-300"}`,
+                    children: message
+                }, void 0, false, {
+                    fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                    lineNumber: 100,
+                    columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "space-y-4",
                     children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300",
-                                    children: "Name"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                    lineNumber: 121,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "name",
-                                    type: "text",
-                                    value: editForm.name,
-                                    onChange: handleEditChange,
-                                    placeholder: "Enter category name",
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                    lineNumber: 124,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                            lineNumber: 120,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300",
-                                    children: "Image"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                    lineNumber: 136,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    name: "image",
-                                    type: "file",
-                                    accept: "image/*",
-                                    onChange: handleFileChange,
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                    lineNumber: 137,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                            lineNumber: 135,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300",
-                                    children: "Description"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                    lineNumber: 148,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                    name: "description",
-                                    value: editForm.description,
-                                    onChange: handleEditChange,
-                                    placeholder: "Enter category description",
-                                    className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                    lineNumber: 151,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                            lineNumber: 147,
-                            columnNumber: 11
-                        }, this),
-                        message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: `text-sm ${messageType === "error" ? "text-red-600" : "text-green-600"}`,
-                            children: message
-                        }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                            lineNumber: 162,
-                            columnNumber: 13
-                        }, this),
+                        [
+                            "firstName",
+                            "lastName",
+                            "email",
+                            "phoneNumber",
+                            "password"
+                        ].map((field)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300",
+                                        children: field === "phoneNumber" ? "Phone Number" : field.charAt(0).toUpperCase() + field.slice(1)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                        lineNumber: 114,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        name: field,
+                                        type: field === "password" ? "password" : "text",
+                                        value: editForm[field],
+                                        onChange: handleEditChange,
+                                        placeholder: `Enter ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`,
+                                        className: "w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                        lineNumber: 117,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, field, true, {
+                                fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                lineNumber: 113,
+                                columnNumber: 13
+                            }, this)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col sm:flex-row justify-end gap-2 mt-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: handleSave,
-                                className: "px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto disabled:opacity-60",
-                                disabled: isLoading,
-                                children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "flex items-center justify-center gap-2",
+                                disabled: loading,
+                                className: `px-4 py-2 rounded-lg w-full sm:w-auto flex items-center justify-center gap-2 text-white 
+                ${loading ? 'bg-[#006d50] cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`,
+                                children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                            className: "animate-spin h-4 w-4 text-white",
-                                            xmlns: "http://www.w3.org/2000/svg",
-                                            fill: "none",
+                                            className: "animate-spin h-5 w-5 text-white",
                                             viewBox: "0 0 24 24",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
@@ -1397,83 +1395,80 @@ const EditcategoryModal = ({ showModal, setShowModal, editForm, handleEditChange
                                                     cy: "12",
                                                     r: "10",
                                                     stroke: "currentColor",
-                                                    strokeWidth: "4"
+                                                    strokeWidth: "4",
+                                                    fill: "none"
                                                 }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                                    lineNumber: 186,
+                                                    fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                                    lineNumber: 138,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                     className: "opacity-75",
                                                     fill: "currentColor",
-                                                    d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                                                    d: "M4 12a8 8 0 018-8v4l5-5-5-5v4a10 10 0 100 20v-4l-5 5 5 5v-4a8 8 0 01-8-8z"
                                                 }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                                    lineNumber: 194,
+                                                    fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                                    lineNumber: 147,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
-                                            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                            lineNumber: 180,
+                                            fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                            lineNumber: 137,
                                             columnNumber: 19
                                         }, this),
                                         "Saving..."
                                     ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                    lineNumber: 179,
-                                    columnNumber: 17
-                                }, this) : "Save"
+                                }, void 0, true) : "Save"
                             }, void 0, false, {
-                                fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                                lineNumber: 173,
+                                fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                                lineNumber: 129,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                            lineNumber: 172,
+                            fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                            lineNumber: 128,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
-                    fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-                    lineNumber: 118,
+                    fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+                    lineNumber: 111,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
-            fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-            lineNumber: 100,
+            fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+            lineNumber: 84,
             columnNumber: 7
         }, this)
     }, void 0, false, {
-        fileName: "[project]/src/app/(admin)/component/category/edit.tsx",
-        lineNumber: 99,
+        fileName: "[project]/src/app/(admin)/component/users/edit.tsx",
+        lineNumber: 83,
         columnNumber: 5
     }, this);
 };
-const __TURBOPACK__default__export__ = EditcategoryModal;
+const __TURBOPACK__default__export__ = EditUserModal;
 }}),
-"[project]/src/app/(admin)/component/category/page.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/(admin)/component/users/page.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "default": (()=>Category)
+    "default": (()=>User)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$sidebar$2f$page$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/(admin)/component/sidebar/page.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@fortawesome/react-fontawesome/index.es.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@fortawesome/free-solid-svg-icons/index.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/pencil.js [app-ssr] (ecmascript) <export default as Pencil>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/trash-2.js [app-ssr] (ecmascript) <export default as Trash2>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$category$2f$delete$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/(admin)/component/category/delete.tsx [app-ssr] (ecmascript)"); // Adjust path if needed
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$category$2f$add$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/(admin)/component/category/add.tsx [app-ssr] (ecmascript)"); // import the modal component
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$category$2f$edit$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/(admin)/component/category/edit.tsx [app-ssr] (ecmascript)"); // import the modal component
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$users$2f$delete$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/(admin)/component/users/delete.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$users$2f$add$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/(admin)/component/users/add.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$users$2f$edit$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/(admin)/component/users/edit.tsx [app-ssr] (ecmascript)");
 "use client";
 ;
 ;
@@ -1485,48 +1480,61 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$c
 ;
 ;
 ;
-;
 const BURL = ("TURBOPACK compile-time value", "https://spa-backend-test.vercel.app/api");
-function Category() {
-    const itemsPerPage = 3;
-    const [categoryMap, setCategoryMap] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({});
+function User() {
+    const itemsPerPage = 4;
     const [data, setData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [currentPage, setCurrentPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(1);
     const [showModal, setShowModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [editIndex, setEditIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [editForm, setEditForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
-        name: "",
-        imageURL: "",
-        description: "",
-        imageFile: null
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
+        email: "",
+        updatedAt: "",
+        password: ""
     });
+    const [userId, setUserId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    const [addModal, setAddModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [newUser, setNewUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        message: ""
+    });
+    const [showDeleteModal, setShowDeleteModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [deleteItemId, setDeleteItemId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const totalItems = data ? data.length : 0;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    // console.log("data:", data);
-    // console.log("type of data:", typeof data);
-    // console.log("isArray:", Array.isArray(data));
-    const currentItems = [];
-    for(let i = indexOfFirstItem; i < indexOfLastItem && data && i < data.length; i++){
-        currentItems.push(data[i]);
-    }
+    const currentItems = data?.slice(indexOfFirstItem, indexOfLastItem) || [];
     const handleNext = ()=>setCurrentPage((prev)=>Math.min(prev + 1, totalPages));
     const handlePrev = ()=>setCurrentPage((prev)=>Math.max(prev - 1, 1));
-    const handleEditClick = (index)=>{
-        const item = data ? data[index] : null;
-        setEditIndex(index);
-        if (typeof item === "object" && item !== null) {
-            if (typeof item === "object" && item !== null) {
-                setEditForm({
-                    ...item,
-                    name: "",
-                    imageURL: "",
-                    description: ""
-                });
-            }
+    const handleAddUserChange = (e)=>{
+        const { name, value } = e.target;
+        setNewUser((prev)=>({
+                ...prev,
+                [name]: value
+            }));
+    };
+    const [usercount, setuserCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const handleAddSave = async ()=>{
+        try {
+            const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/user/create`, newUser, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                withCredentials: true
+            });
+        } catch (error) {
+            console.error("Error adding user:", error);
         }
-        setShowModal(true);
+        fetchData();
     };
     const handleEditChange = (e)=>{
         setEditForm({
@@ -1534,80 +1542,39 @@ function Category() {
             [e.target.name]: e.target.value
         });
     };
-    const [addModal, setAddModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [newcategory, setNewcategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
-        name: "",
-        description: "",
-        imageURL: ""
-    });
-    const handleAddcategoryChange = (e)=>{
-        const { name, value } = e.target;
-        setNewcategory((prev)=>({
-                ...prev,
-                [name]: value
-            }));
-    };
-    const handleAddSave = async ()=>{
+    const handleEditSave = async ()=>{
         try {
-            const token = document.cookie.split('; ').find((row)=>row.startsWith('token='))?.split('=')[1] || ''; // Extract token from cookies
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(`${BURL}/category/create`, newcategory, {
+            const token = document.cookie.split("; ").find((row)=>row.startsWith("token="))?.split("=")[1] || "";
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].put(`${BURL}/user/${userId}`, editForm, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
                 withCredentials: true
             });
-            console.log('category added:', response?.data?.category);
-            setAddModal(false);
-            fetchData(); // refresh list
+            setMessage("✅ User updated successfully.");
+            setShowModal(false);
+            fetchData();
+            setTimeout(()=>setMessage(""), 3000);
         } catch (error) {
-            console.error('Error adding category:', error);
+            console.error("Error updating user:", error);
+            setMessage("❌ Failed to update user.");
+            setTimeout(()=>setMessage(""), 3000);
         }
-        fetchData(); // Refresh the data after adding a new category
     };
-    const [showDeleteModal, setShowDeleteModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false); // ✅ Keep this
-    const [deleteItemId, setDeleteItemId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null); // ✅ Keep this
-    const [categoryId, setcategoryId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const fetchData = async ()=>{
         try {
-            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/category`);
-            console.log("API category response:", res.data);
-            // Confirm the actual response structure and access correctly:
-            if (Array.isArray(res.data.data)) {
-                setData(res.data.data); // this is correct if the API returns { data: [...] }
-            } else if (Array.isArray(res.data)) {
-                setData(res.data); // if API returns an array directly
-            } else {
-                console.error("Unexpected data structure:", res.data);
-            }
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/user`);
+            if (Array.isArray(res.data.data)) setData(res.data.data);
+            else if (Array.isArray(res.data)) setData(res.data);
+            else console.error("Unexpected data structure:", res.data);
+            const usercount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+            setuserCount(usercount); // Update the state with the booking count
         } catch (error) {
-            console.error("Error fetching categorys:", error);
+            console.error("Error fetching users:", error);
         }
     };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         fetchData();
-    }, []);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        if (editIndex !== null && data && data[editIndex]) {
-            const item = data[editIndex];
-            setEditForm({
-                name: item.name || "",
-                imageURL: item.imageURL || "",
-                description: item.description || "",
-                imageFile: null
-            });
-        }
-    }, [
-        editIndex,
-        data
-    ]);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${BURL}/category`).then((res)=>{
-            const map = {};
-            res.data.data.forEach((cat)=>{
-                map[cat.id] = cat.name;
-            });
-            setCategoryMap(map);
-        }).catch((err)=>console.error("Failed to load categories", err));
     }, []);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "relative bg-cover bg-center min-h-screen",
@@ -1615,13 +1582,13 @@ function Category() {
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "hidden md:block",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$sidebar$2f$page$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
-                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                    lineNumber: 171,
+                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                    lineNumber: 135,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
-                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                lineNumber: 170,
+                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                lineNumber: 134,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1631,116 +1598,123 @@ function Category() {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                             className: "text-2xl font-semibold text-gray-800 mb-8",
-                            children: "Category Management"
+                            children: "User Management"
                         }, void 0, false, {
-                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                            lineNumber: 178,
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 140,
                             columnNumber: 11
                         }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8",
+                                    className: "w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border-gray-200 rounded-3xl shadow-sm dark:bg-gray-800 dark:border-gray-700",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "w-full sm:w-auto flex-grow sm:flex-grow-0 bg-white p-6 border-gray-200 rounded-3xl shadow-sm dark:bg-gray-800 dark:border-gray-700",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "flex items-center space-x-4",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "bg-green-100 text-green-600 p-3 rounded-full",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
-                                                            icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faSpa"],
-                                                            className: "text-2xl"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                            lineNumber: 186,
-                                                            columnNumber: 42
-                                                        }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                        lineNumber: 185,
-                                                        columnNumber: 15
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h5", {
-                                                                className: "font-semibold text-gray-400 dark:text-white mb-1",
-                                                                children: "Total categorys"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                lineNumber: 189,
-                                                                columnNumber: 17
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "text-4xl font-bold text-gray-900 dark:text-white",
-                                                                children: totalItems
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                lineNumber: 190,
-                                                                columnNumber: 17
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                        lineNumber: 188,
-                                                        columnNumber: 15
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                lineNumber: 184,
-                                                columnNumber: 15
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                            lineNumber: 183,
-                                            columnNumber: 13
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setAddModal(true),
-                                            className: "w-full sm:w-auto bg-[#008767] text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-[#006d50] transition",
+                                            className: "flex items-center space-x-4",
                                             children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
-                                                    icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faPlus"]
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "bg-green-100 text-green-600 p-3 rounded-full",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
+                                                        icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faUser"],
+                                                        className: "text-2xl"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                        lineNumber: 146,
+                                                        columnNumber: 19
+                                                    }, this)
                                                 }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                    lineNumber: 199,
-                                                    columnNumber: 15
+                                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                    lineNumber: 145,
+                                                    columnNumber: 17
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    children: "Add Category"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                    lineNumber: 200,
-                                                    columnNumber: 15
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h5", {
+                                                            className: "font-semibold text-gray-400 dark:text-white mb-1",
+                                                            children: "Total Users"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                            lineNumber: 149,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                            className: "text-4xl font-bold text-gray-900 dark:text-white",
+                                                            children: usercount
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                            lineNumber: 150,
+                                                            columnNumber: 19
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                    lineNumber: 148,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
-                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                            lineNumber: 195,
-                                            columnNumber: 13
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 144,
+                                            columnNumber: 15
+                                        }, this),
+                                        message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-sm text-green-600 mt-4",
+                                            children: message
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 154,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
-                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                    lineNumber: 182,
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 143,
                                     columnNumber: 13
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$category$2f$add$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                    isOpen: addModal,
-                                    onClose: ()=>setAddModal(false),
-                                    onSave: handleAddSave,
-                                    newcategory: newcategory,
-                                    onChange: handleAddcategoryChange,
-                                    onAdd: fetchData
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                    lineNumber: 203,
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>setAddModal(true),
+                                    className: "w-full sm:w-auto bg-[#008767] text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 hover:bg-[#006d50] transition",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$react$2d$fontawesome$2f$index$2e$es$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FontAwesomeIcon"], {
+                                            icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$fortawesome$2f$free$2d$solid$2d$svg$2d$icons$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["faPlus"]
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 162,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            children: "Add User"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 163,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 158,
                                     columnNumber: 13
                                 }, this)
                             ]
-                        }, void 0, true),
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 142,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$users$2f$add$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            isOpen: addModal,
+                            onClose: ()=>setAddModal(false),
+                            onSave: handleAddSave,
+                            newUser: newUser,
+                            onChange: handleAddUserChange,
+                            onAdd: ()=>fetchData(),
+                            setNewUserMessage: setMessage
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 167,
+                            columnNumber: 11
+                        }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "bg-white shadow-md rounded-2xl p-4 sm:p-6 dark:bg-gray-900",
                             children: [
@@ -1749,204 +1723,202 @@ function Category() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                             className: "text-2xl font-semibold text-gray-800 dark:text-white",
-                                            children: "category List"
+                                            children: "User List"
                                         }, void 0, false, {
-                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                            lineNumber: 219,
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 180,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex items-center gap-3 w-full sm:w-auto",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 className: "text-green-700 font-medium whitespace-nowrap",
-                                                children: "Active category"
+                                                children: "Active Users"
                                             }, void 0, false, {
-                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                lineNumber: 221,
+                                                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                lineNumber: 182,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
-                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                            lineNumber: 220,
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 181,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
-                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                    lineNumber: 218,
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 179,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "relative overflow-x-auto shadow-sm rounded-lg",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
-                                            className: "w-full text-sm text-left text-gray-500 dark:text-gray-400",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
-                                                    className: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400",
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
+                                        className: "w-full text-sm text-left text-gray-500 dark:text-gray-400",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
+                                                className: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                            className: "px-6 py-3",
+                                                            children: "User Name"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                            lineNumber: 195,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                            className: "px-6 py-3",
+                                                            children: "Phone Number"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                            lineNumber: 196,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                            className: "px-6 py-3",
+                                                            children: "Email"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                            lineNumber: 197,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                            className: "px-6 py-3",
+                                                            children: "Date"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                            lineNumber: 198,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                            className: "px-6 py-3 text-right",
+                                                            children: "Actions"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                            lineNumber: 199,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                    lineNumber: 194,
+                                                    columnNumber: 19
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                lineNumber: 193,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                                                children: currentItems.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                        className: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition",
                                                         children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                                className: "px-6 py-3",
-                                                                children: "category Name"
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
+                                                                children: item.firstName
                                                             }, void 0, false, {
-                                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                lineNumber: 234,
-                                                                columnNumber: 7
+                                                                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                lineNumber: 208,
+                                                                columnNumber: 23
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                                className: "px-6 py-3",
-                                                                children: "Picture"
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
+                                                                children: item.phoneNumber
                                                             }, void 0, false, {
-                                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                lineNumber: 235,
-                                                                columnNumber: 7
+                                                                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                lineNumber: 209,
+                                                                columnNumber: 23
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                                className: "px-6 py-3",
-                                                                children: "Description"
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
+                                                                children: item.email
                                                             }, void 0, false, {
-                                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                lineNumber: 236,
-                                                                columnNumber: 7
+                                                                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                lineNumber: 210,
+                                                                columnNumber: 23
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                                className: "px-6 py-3 text-right",
-                                                                children: "Actions"
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
+                                                                children: new Date(item.updatedAt).toLocaleDateString()
                                                             }, void 0, false, {
-                                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                lineNumber: 237,
-                                                                columnNumber: 7
+                                                                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                lineNumber: 211,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-4 text-right space-x-2",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                        className: "text-[#008767] hover:text-[#006d50]",
+                                                                        onClick: ()=>{
+                                                                            setEditForm({
+                                                                                firstName: item.firstName || "",
+                                                                                lastName: item.lastName || "",
+                                                                                email: item.email || "",
+                                                                                phoneNumber: item.phoneNumber || "",
+                                                                                updatedAt: item.updatedAt || "",
+                                                                                password: ""
+                                                                            });
+                                                                            setUserId(item.id);
+                                                                            setShowModal(true);
+                                                                        },
+                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__["Pencil"], {
+                                                                            size: 18
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                            lineNumber: 228,
+                                                                            columnNumber: 27
+                                                                        }, this)
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                        lineNumber: 213,
+                                                                        columnNumber: 25
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                        onClick: ()=>{
+                                                                            setDeleteItemId(item.id);
+                                                                            setShowDeleteModal(true);
+                                                                        },
+                                                                        className: "text-red-600 hover:text-red-800",
+                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
+                                                                            size: 18
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                            lineNumber: 238,
+                                                                            columnNumber: 27
+                                                                        }, this)
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                        lineNumber: 231,
+                                                                        columnNumber: 25
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                                lineNumber: 212,
+                                                                columnNumber: 23
                                                             }, this)
                                                         ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                        lineNumber: 233,
-                                                        columnNumber: 5
-                                                    }, this)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                    lineNumber: 232,
-                                                    columnNumber: 3
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
-                                                    children: currentItems.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                                                            className: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition",
-                                                            children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                    className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
-                                                                    children: item.name
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                    lineNumber: 246,
-                                                                    columnNumber: 9
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                    className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
-                                                                    children: item.imageURL && item.imageURL.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                                        src: item.imageURL,
-                                                                        alt: "Item",
-                                                                        height: 400,
-                                                                        width: 400,
-                                                                        className: "w-12 h-12 object-cover rounded-full"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                        lineNumber: 251,
-                                                                        columnNumber: 9
-                                                                    }, this) : null
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                    lineNumber: 249,
-                                                                    columnNumber: 9
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                    className: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
-                                                                    children: item.description
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                    lineNumber: 261,
-                                                                    columnNumber: 9
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                    className: "px-6 py-4 text-right space-x-2",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                            className: "text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]",
-                                                                            onClick: ()=>{
-                                                                                setEditForm({
-                                                                                    name: item.name || "",
-                                                                                    description: item.description || "",
-                                                                                    imageURL: item.imageURL || "",
-                                                                                    imageFile: null
-                                                                                });
-                                                                                setcategoryId(item.id); // Or whatever your category ID key is
-                                                                                setShowModal(true);
-                                                                            },
-                                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__["Pencil"], {
-                                                                                size: 18
-                                                                            }, void 0, false, {
-                                                                                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                                lineNumber: 279,
-                                                                                columnNumber: 3
-                                                                            }, this)
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                            lineNumber: 266,
-                                                                            columnNumber: 9
-                                                                        }, this),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$category$2f$edit$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                                            showModal: showModal,
-                                                                            setShowModal: setShowModal,
-                                                                            editForm: {
-                                                                                ...editForm,
-                                                                                imageFile: editForm.imageFile
-                                                                            },
-                                                                            handleEditChange: handleEditChange,
-                                                                            categoryId: item.id,
-                                                                            BURL: BURL || "",
-                                                                            onEdited: fetchData
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                            lineNumber: 283,
-                                                                            columnNumber: 7
-                                                                        }, this)
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                                    lineNumber: 265,
-                                                                    columnNumber: 9
-                                                                }, this)
-                                                            ]
-                                                        }, index, true, {
-                                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                            lineNumber: 242,
-                                                            columnNumber: 7
-                                                        }, this))
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                    lineNumber: 240,
-                                                    columnNumber: 3
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                            lineNumber: 231,
-                                            columnNumber: 13
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$category$2f$delete$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                            isOpen: showDeleteModal,
-                                            onClose: ()=>setShowDeleteModal(false),
-                                            categoryId: deleteItemId,
-                                            onDeleted: fetchData
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                            lineNumber: 299,
-                                            columnNumber: 2
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                    lineNumber: 230,
+                                                    }, index, true, {
+                                                        fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                        lineNumber: 204,
+                                                        columnNumber: 21
+                                                    }, this))
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                lineNumber: 202,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                        lineNumber: 192,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 191,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1963,8 +1935,8 @@ function Category() {
                                                 " entries"
                                             ]
                                         }, void 0, true, {
-                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                            lineNumber: 309,
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 248,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1976,8 +1948,8 @@ function Category() {
                                                     className: "px-3 py-1 border rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50",
                                                     children: "Previous"
                                                 }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                    lineNumber: 313,
+                                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                    lineNumber: 252,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1988,8 +1960,8 @@ function Category() {
                                                         totalPages
                                                     ]
                                                 }, void 0, true, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                    lineNumber: 320,
+                                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                    lineNumber: 259,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1998,43 +1970,70 @@ function Category() {
                                                     className: "px-3 py-1 border rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50",
                                                     children: "Next"
                                                 }, void 0, false, {
-                                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                                    lineNumber: 321,
+                                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                                    lineNumber: 260,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
-                                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                            lineNumber: 312,
+                                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                            lineNumber: 251,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
-                                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                                    lineNumber: 308,
+                                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                                    lineNumber: 247,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
-                            fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                            lineNumber: 217,
+                            fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                            lineNumber: 178,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
-                    fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                    lineNumber: 177,
+                    fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                    lineNumber: 139,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
-                fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-                lineNumber: 176,
+                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                lineNumber: 138,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$users$2f$edit$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                showModal: showModal,
+                setShowModal: setShowModal,
+                editForm: editForm,
+                handleEditChange: handleEditChange,
+                userId: userId,
+                BURL: BURL || "",
+                onUpdated: ()=>{
+                    fetchData();
+                    setMessage("✅ User updated successfully.");
+                    setTimeout(()=>setMessage(""), 3000);
+                }
+            }, void 0, false, {
+                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                lineNumber: 274,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$admin$292f$component$2f$users$2f$delete$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                isOpen: showDeleteModal,
+                onClose: ()=>setShowDeleteModal(false),
+                userId: deleteItemId,
+                onDeleted: ()=>fetchData()
+            }, void 0, false, {
+                fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+                lineNumber: 288,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
-        fileName: "[project]/src/app/(admin)/component/category/page.tsx",
-        lineNumber: 169,
+        fileName: "[project]/src/app/(admin)/component/users/page.tsx",
+        lineNumber: 133,
         columnNumber: 5
     }, this);
 }
@@ -2042,4 +2041,4 @@ function Category() {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__7d148308._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__9c2d9aca._.js.map

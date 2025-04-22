@@ -101,6 +101,7 @@ const handleAddSave = async () => {
   } catch (error) {
     console.error('Error adding category:', error);
   }
+  fetchData(); // Refresh the data after adding a new category
 };
 
 
@@ -329,12 +330,6 @@ useEffect(() => {
           </div>
         </div>
       </div>
-
-
-
-
-
-
     </div>
   );
 }
