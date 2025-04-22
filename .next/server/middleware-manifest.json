@@ -3,34 +3,35 @@
   "middleware": {
     "/": {
       "files": [
-        "server/edge-runtime-webpack.js",
-        "server/src/middleware.js"
+        "server/edge/chunks/_94a4b977._.js",
+        "server/edge/chunks/[root of the server]__860be4f0._.js",
+        "server/edge/chunks/edge-wrapper_1985d09c.js"
       ],
-      "name": "src/middleware",
+      "name": "middleware",
       "page": "/",
       "matchers": [
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/((?!api|trpc|_next|_vercel|.*\\..*).*))(\\.json)?[\\/#\\?]?$",
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/((?!api|trpc|_next|_vercel|.*\\..*).*))(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/((?!api|trpc|_next|_vercel|.*\\..*).*)"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/([\\w-]+))?\\/reset-password(?:\\/(.+))(\\.json)?[\\/#\\?]?$",
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/([\\w-]+))?\\/reset-password(?:\\/(.+))(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/([\\w-]+)?/reset-password/(.+)"
         }
       ],
       "wasm": [],
       "assets": [],
       "env": {
-        "__NEXT_BUILD_ID": "3a3xAHjq5R2QzPK2VJcMf",
+        "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "zmdhV7QMnvgZooPbN+lhe4Qsh8gWqQR3SN0jrdQhJ9M=",
-        "__NEXT_PREVIEW_MODE_ID": "783d1a7cfb4a6b843fcc47875f82fc9c",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "2aa7b6178232f069ae255b9948212a9eafb7cdc2dd4c4bf67dcf636b64e1f1d8",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "fe12a62431aea367fe30b9e6eb590b9d4acc8ea473c2a8d726dce1af8ea2cbcc"
+        "__NEXT_PREVIEW_MODE_ID": "bd27b7936fba30103b1ca336284be516",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "dc946799c03fcb50a1751715ad15a5123d48caf9ede9b1502f3f6908121464a5",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "b768d7168148cfeb1ee5aeef4eee67c9e80199ab39e7a5d3b3464ac9e4c81679"
       }
     }
   },
-  "functions": {},
   "sortedMiddleware": [
     "/"
-  ]
+  ],
+  "functions": {}
 }

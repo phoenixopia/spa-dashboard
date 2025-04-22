@@ -54,27 +54,21 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
       // Log token for debugging
       console.log("Token:", token);
 
-      const formData = new FormData();
-      formData.append("firstName", editForm.firstName);
-      formData.append("lastName", editForm.lastName);
-      formData.append("message", editForm.message);
-      if (imageFile) {
-        formData.append("image", imageFile);
-      }
+      
 
       // Log FormData for debugging
-      console.log("Form Data:");
-      for (let [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
+      console.log("edit Data:", editForm);
+      
 
-      const response = await axios.put(`${BURL}/testimonial/edit/${testimonialId}`, formData, {
+      const response = await axios.put(`${BURL}/testimonial/edit/${testimonialId}`, {
       
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
+        
+        editForm,
       });
 
       console.log("Response: edit testi", response); // Log the response for debugging

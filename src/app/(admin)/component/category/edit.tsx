@@ -40,7 +40,7 @@ const EditcategoryModal: React.FC<EditcategoryModalProps> = ({
         ...e,
         target: {
           ...e.target,
-          name: "imageFile",
+          name: "image",
           value: e.target.files[0],
           files: e.target.files,
         },
@@ -64,13 +64,16 @@ const EditcategoryModal: React.FC<EditcategoryModalProps> = ({
       if (editForm.imageFile) {
         formData.append("image", editForm.imageFile);
       }
-
-      await axios.put(`${BURL}/category/edit/${categoryId}`, formData, {
+console.log("cat tockentoken", token)
+console.log("cat formData", editForm)
+      await axios.put(`${BURL}/category/edit/${categoryId}`, {
+        
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
+        editForm
       });
       
 
