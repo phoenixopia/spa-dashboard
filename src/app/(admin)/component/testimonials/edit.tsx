@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 
 interface EditForm {
-  firstName: string;
-  lastName: string;
-  message: string;
+  firstName: any,
+      lastName: any,
+      message: any,
+      imageURL: any,
 }
 
 interface EdittestimonialModalProps {
@@ -28,68 +29,84 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
   BURL,
   refresh,
 }) => {
-  const [imageFile, setImageFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>("");
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
-  const [isLoading, setIsLoading] = useState<boolean>(false); // New state for loading
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  // If the modal is not open, return null to prevent rendering
   if (!showModal) return null;
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setImageFile(e.target.files[0]);
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   const handleSave = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true); // Set loading to true when save starts
       const token =
         document.cookie
           .split("; ")
           .find((row) => row.startsWith("token="))
           ?.split("=")[1] || "";
 
-      // Log token for debugging
-      console.log("Token:", token);
+      let uploadedImageUrl = editForm.imageURL;
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append("image", imageFile);
 
-      
+        // Upload image to backend, which will handle Cloudinary upload
+        const response = await axios.post(`${BURL}/upload`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      // Log FormData for debugging
-      console.log("edit Data:", editForm);
-      
+        // Backend should return the URL of the uploaded image
+        uploadedImageUrl = response.data.imageUrl;
+      }
 
-      const response = await axios.put(`${BURL}/testimonial/edit/${testimonialId}`, {
-      
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
+      await axios.put(
+        `${BURL}/testimonial/edit/${testimonialId}`,
+        {
+          firtName: editForm.firstName,
+          lastName: editForm.lastName,
+          message: editForm.message,
+          imageURL: uploadedImageUrl,
         },
-        withCredentials: true,
-        
-        editForm,
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
 
-      console.log("Response: edit testi", response); // Log the response for debugging
-
-      setMessage("Testimonial updated successfully.");
+      setMessage("testimonial updated successfully.");
       setMessageType("success");
 
       setTimeout(() => {
         setShowModal(false);
         setMessage("");
         setMessageType("");
-        refresh();
+        refresh(); // ✅ Refresh after saving
       }, 1500);
     } catch (error: any) {
-      console.error("Error during request:", error); // Log any request error
       const backendMessage =
         error.response?.data?.message || "Error updating testimonial.";
       setMessage(backendMessage);
       setMessageType("error");
     } finally {
-      setIsLoading(false); // Reset loading when the operation is complete
+      setIsLoading(false);
     }
   };
 
@@ -98,7 +115,7 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
       <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">
-            Edit Testimonial
+            Edit testimonial
           </h2>
           <button
             onClick={() => {
@@ -114,7 +131,7 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
         </div>
 
         <div className="space-y-4">
-          {/* First Name */}
+          {/* Title */}
           <div>
             <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
               First Name
@@ -124,12 +141,12 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
               type="text"
               value={editForm.firstName}
               onChange={handleEditChange}
-              placeholder="Enter first name"
-              className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              placeholder="Enter testimonial title"
+              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
             />
           </div>
 
-          {/* Last Name */}
+          {/* Title */}
           <div>
             <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
               Last Name
@@ -139,25 +156,22 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
               type="text"
               value={editForm.lastName}
               onChange={handleEditChange}
-              placeholder="Enter last name"
-              className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              placeholder="Enter testimonial title"
+              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
             />
           </div>
 
           {/* Image Upload */}
           <div>
-            <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
-              Upload Image
-            </label>
-            <input
+          <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">Upload Image</label> 
+          <input
+              name="image"
               type="file"
               accept="image/*"
-              onChange={handleFileChange}
-              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
+              onChange={handleImageChange}
+              className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#008767] file:text-white hover:file:bg-[#006d50]"
             />
-            {imageFile && (
-              <p className="text-xs text-gray-500 mt-1">Selected: {imageFile.name}</p>
-            )}
+            
           </div>
 
           {/* Message */}
@@ -170,7 +184,7 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
               value={editForm.message}
               onChange={handleEditChange}
               placeholder="Enter testimonial message"
-              className="w-full border px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
             />
           </div>
 
@@ -189,11 +203,15 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
           <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
             <button
               onClick={handleSave}
-              disabled={isLoading} // Disable button when loading
-              className="px-4 py-2 rounded-lg bg-[#008767] text-white hover:bg-[#006d50] w-full sm:w-auto"
+              disabled={isLoading}
+              className={`px-4 py-2 rounded-lg ${
+                isLoading
+                  ? "bg-[#008767] cursor-not-allowed"
+                  : "bg-[#008767] hover:bg-[#006d50]"
+              } text-white w-full sm:w-auto flex items-center justify-center gap-2`}
             >
               {isLoading ? (
-                <div className="flex items-center justify-center">
+                <>
                   <svg
                     className="h-5 w-5 animate-spin text-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -214,8 +232,8 @@ const EdittestimonialModal: React.FC<EdittestimonialModalProps> = ({
                       d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
                     />
                   </svg>
-                  <span className="ml-2">Saving...</span>
-                </div>
+                  <span>Saving...</span>
+                </>
               ) : (
                 "Save"
               )}

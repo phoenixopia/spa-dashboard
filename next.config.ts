@@ -1,22 +1,23 @@
-import { types } from "util";
+// next.config.js or next.config.ts
 import { NextConfig } from "next";
-// next.config.js
-const nextConfig:NextConfig = {
 
-
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**', // Matches any host
+        protocol: 'https', // allow only https protocol
+        hostname: '**', // allow any hostname
+        pathname: '**', // allow any image path
       },
     ],
+    dangerouslyAllowSVG: true, // if you want to allow SVGs too
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   typescript: {
-    ignoreBuildErrors: true, // Ignore TypeScript errors during build
+    ignoreBuildErrors: true,
   },
-  eslint:{
-    ignoreDuringBuilds: true, // Ignore ESLint errors during build
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 

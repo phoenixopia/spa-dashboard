@@ -53,27 +53,17 @@ const EditcategoryModal: React.FC<EditcategoryModalProps> = ({
     setIsLoading(true);
     try {
       const token =
-        document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("token="))
-          ?.split("=")[1] || "";
-
-      const formData = new FormData();
-      formData.append("name", editForm.name);
-      formData.append("description", editForm.description);
-      if (editForm.imageFile) {
-        formData.append("image", editForm.imageFile);
-      }
-console.log("cat tockentoken", token)
-console.log("cat formData", editForm)
-      await axios.put(`${BURL}/category/edit/${categoryId}`, {
+      document.cookie
+        .split('; ')
+        .find(row => row.startsWith('token='))?.split('=')[1] || '';
+      await axios.put(`${BURL}/category/edit/${categoryId}`, editForm, {
         
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
-        editForm
+        
       });
       
 

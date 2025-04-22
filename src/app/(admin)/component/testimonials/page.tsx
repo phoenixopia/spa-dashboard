@@ -12,13 +12,14 @@ import DeletetestimonialModal from './delete'; // Adjust path if needed
 import { Console } from "console";
 import AddtestimonialModal from './add'; // import the modal component
 import EdittestimonialModal from "./edit"; // import the modal component
+// Removed incorrect import of 'message' from "next/font/google"
 
 
 const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
 
 
-export default function Testimonial() {
+export default function testimonial() {
   const itemsPerPage = 3;
   
   const [testimonialMap, settestimonialMap] = useState<{ [key: string]: string }>({});
@@ -26,9 +27,10 @@ export default function Testimonial() {
   
   const [data, setData] = useState<any[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [testimonialcount, settestimonialcount] = useState(0); // Add testimonialcount state
   const [showModal, setShowModal] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [editForm, setEditForm] = useState({ firstName: "", imageURL: "", message: "", lastName: "" });
+  const [editForm, setEditForm] = useState({ title: "", firstName:"", lastName:"", imageURL: "", message: "",});
   const totalItems = data ? data.length : 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -53,7 +55,7 @@ export default function Testimonial() {
     if (typeof item === "object" && item !== null) {
       if (typeof item === "object" && item !== null) {
         setEditForm({
-          ...item, firstName: "", imageURL:"", message: "", lastName: "",
+          ...item, firstName: "", lastName:"", imageURL: "", message: "", updatedAt: new Date(),
         });
       }
     }
@@ -70,9 +72,8 @@ export default function Testimonial() {
 const [newtestimonial, setNewtestimonial] = useState({
   firstName: "",
   lastName: "",
-  message:"",
   imageURL: "",
-  
+  message: "",
 });
 
 const handleAddtestimonialChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
@@ -118,7 +119,8 @@ const handleAddSave = async () => {
 const fetchData = async () => {
   try {
     const res = await axios.get(`${BURL}/testimonial`);
-    console.log("API testimonial response:", res.data);
+    const testimonialcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
+    settestimonialcount(testimonialcount); // Update testimonialcount state
 
     // Confirm the actual response structure and access correctly:
     if (Array.isArray(res.data.data)) {
@@ -143,11 +145,11 @@ useEffect(() => {
   if (editIndex !== null && data && data[editIndex]) {
     const item = data[editIndex];
     setEditForm({
-      firstName: item.firstName || "",
-      lastName: item.lastName || "",
-      imageURL: item.imageURL || "",
-      message: item.message || "",
-      
+title: item.title || "",
+firstName: item.firstName || "",
+lastName: item.lastName || "",
+message: item.message || "",
+imageURL: item.imageURL || "",
     });
   }
 }, [editIndex, data]);
@@ -157,15 +159,15 @@ useEffect(() => {
   axios.get(`${BURL}/testimonial`)
       .then((res) => {
         const map: { [key: string]: string } = {};
-        res.data.data.forEach((cat: { id: string | number; firstName: string }) => {
-          map[cat.id] = cat.firstName;
+        res.data.data.forEach((cat: { id: string | number; title: string }) => {
+          map[cat.id] = cat.title;
         });
         settestimonialMap(map);
       })
       .catch((err) => console.error("Failed to load categories", err));
   }, []);
 
-
+console.log(currentItems,'gfhgfhgfg')
 
   return (
     <div className="relative bg-cover bg-center min-h-screen">
@@ -189,7 +191,7 @@ useEffect(() => {
               </div>
               <div>
                 <h5 className="font-semibold text-gray-400 dark:text-white mb-1">Total testimonials</h5>
-                <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalItems}</p>
+                <p className="text-4xl font-bold text-gray-900 dark:text-white">{testimonialcount}</p>
               </div>
               </div>
             </div>
@@ -216,7 +218,7 @@ useEffect(() => {
 
           <div className="bg-white shadow-md rounded-2xl p-4 sm:p-6 dark:bg-gray-900">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">testimonial List</h2>
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Testimonial List</h2>
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <p className="text-green-700 font-medium whitespace-nowrap">Active testimonial</p>
                 {/* <input
@@ -232,7 +234,9 @@ useEffect(() => {
   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
       <th className="px-6 py-3">Name</th>
-      <th className="px-6 py-3">Message</th>
+      <th className="px-6 py-3">message</th>
+
+      <th className="px-6 py-3">Date</th>
       <th className="px-6 py-3">Picture</th>
       <th className="px-6 py-3 text-right">Actions</th>
     </tr>
@@ -244,41 +248,38 @@ useEffect(() => {
         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
       >
       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-  {`${item.firstName} ${item.lastName}`}
+  <span>{item.firstName}</span> <span>{item.lastName}</span>
 </td>
 
+<td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {item.message}
+        </td>
         
 
         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          {item.message}
+          {item.updatedAt ? new Date(item.updatedAt).toLocaleDateString() : "N/A"}
         </td>
         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
   <Image 
-      src={item.imageURL} 
-      alt="Item" 
-      height={400}
-      width={400}
-      className="w-12 h-12 object-cover rounded-full"
-    />
+    src={item.imageURL} 
+    alt="Item" 
+    height={400}
+    width={400}
+    className="w-12 h-12 object-cover rounded-full"
+  />
 </td>
         
         <td className="px-6 py-4 text-right space-x-2">
         <button
   className="text-[#008767] dark:text-[#00b57e] hover:text-[#006d50] dark:hover:text-[#004f3a]"
   onClick={() => {
-    setEditForm({
-      firstName: item.firstName || "",
-      lastName: item.lastName || "",
-      message: item.message || "",
-      imageURL: item.imageURL || "",
-      
-    });
-    settestimonialId(item.id); // Or whatever your testimonial ID key is
+    setEditIndex(index + (currentPage - 1) * itemsPerPage); // Calculate actual index
     setShowModal(true);
   }}
 >
-  <Pencil size={18} />
+  <Pencil className="w-5 h-5" />
 </button>
+
 
 
       <EdittestimonialModal
@@ -341,12 +342,6 @@ useEffect(() => {
           </div>
         </div>
       </div>
-
-
-
-
-
-
     </div>
   );
 }
