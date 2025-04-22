@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
@@ -72,6 +72,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="relative h-screen w-screen">
       {/* Background Image */}
       <div
@@ -204,5 +205,6 @@ export default function ResetPasswordPage() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }

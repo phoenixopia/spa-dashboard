@@ -70,15 +70,10 @@ export default function User() {
         withCredentials: true,
       });
 
-      setMessage("✅ User added successfully.");
-      setAddModal(false);
-      setNewUser({ firstName: "", lastName: "", email: "", phoneNumber: "", password: "", message: "" });
-      fetchData();
-      setTimeout(() => setMessage(""), 3000);
+      
     } catch (error) {
       console.error("Error adding user:", error);
-      setMessage("❌ Failed to add user.");
-      setTimeout(() => setMessage(""), 3000);
+      
     }
   };
 
@@ -167,6 +162,9 @@ export default function User() {
             onSave={handleAddSave}
             newUser={newUser}
             onChange={handleAddUserChange}
+            onAdd={() => fetchData()}
+            setNewUserMessage={setMessage}
+
           />
 
           <div className="bg-white shadow-md rounded-2xl p-4 sm:p-6 dark:bg-gray-900">

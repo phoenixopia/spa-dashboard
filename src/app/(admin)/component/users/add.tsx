@@ -4,7 +4,7 @@ import axios from 'axios';
 interface AddUserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: () => Promise<void>; // Make sure this is async
+  onSave: () => Promise<void>; // async save function from parent
   newUser: {
     firstName: string;
     lastName: string;
@@ -15,6 +15,8 @@ interface AddUserModalProps {
     message: string;
   };
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onAdd: () => void;
+  setNewUserMessage: (message: string) => void; // ✅ added for setting error/success message
 }
 
 const AddUserModal: React.FC<AddUserModalProps> = ({
@@ -22,14 +24,23 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   onClose,
   onSave,
   newUser,
-  onChange
+  onChange,
+  setNewUserMessage,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSave = async () => {
     setIsLoading(true);
     try {
-      await onSave(); // Ensure onSave sets newUser.message
+      await onSave();
+    } catch (error) {
+      // ✅ Handle error from backend
+      if (axios.isAxiosError(error) && error.response) {
+        const msg = error.response.data?.message || 'Something went wrong while saving the user.';
+        setNewUserMessage(`Error: ${msg}`);
+      } else {
+        setNewUserMessage('Error: Failed to connect to the server. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -37,7 +48,6 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Message classification (simple logic: if it includes 'success' -> green, else red)
   const isSuccessMessage = newUser.message.toLowerCase().includes('success');
 
   return (
@@ -121,12 +131,14 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
           <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
             <button
               onClick={handleSave}
-              className={`px-4 py-2 rounded-lg text-white w-full sm:w-auto flex items-center justify-center ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`}
+              className={`px-4 py-2 rounded-lg text-white w-full sm:w-auto flex items-center justify-center ${
+                isLoading ? 'bg-[#008767] cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'
+              }`}
               disabled={isLoading}
             >
               {isLoading ? (
                 <>
-                   <svg
+                  <svg
                     className="h-5 w-5 animate-spin text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -148,7 +160,9 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                   </svg>
                   Saving...
                 </>
-              ) : 'Save'}
+              ) : (
+                'Save'
+              )}
             </button>
           </div>
         </div>

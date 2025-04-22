@@ -60,16 +60,7 @@ const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
       <div className="bg-white p-6 rounded-xl shadow-lg w-[90%] max-w-md">
-        {/* Response Message */}
-        {responseMessage && (
-          <div
-            className={`rounded-md px-4 py-2 mb-4 text-sm font-medium ${
-              isSuccess ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-            }`}
-          >
-            {responseMessage}
-          </div>
-        )}
+        
 
         <h2 className="text-lg font-semibold text-gray-800 mb-4">Confirm Delete</h2>
         <p className="text-gray-600 mb-6">
