@@ -79,6 +79,7 @@ export default function User() {
       console.error("Error adding user:", error);
       
     }
+    setShowModal(false);
     fetchData();
   };
 
@@ -166,12 +167,13 @@ export default function User() {
 
           <AddUserModal
             isOpen={addModal}
-            onClose={() => setAddModal(false)}
             onSave={handleAddSave}
             newUser={newUser}
             onChange={handleAddUserChange}
             onAdd={() => fetchData()}
             setNewUserMessage={setMessage}
+            onClose={() => setAddModal(false)}
+
 
           />
 
@@ -287,9 +289,10 @@ export default function User() {
 
       <DeleteUserModal
         isOpen={showDeleteModal}
-        onClose={() => setShowDeleteModal(false)}
         userId={deleteItemId}
         onDeleted={() => fetchData()}
+        onClose={() => setShowDeleteModal(false)}
+
       />
     </div>
   );

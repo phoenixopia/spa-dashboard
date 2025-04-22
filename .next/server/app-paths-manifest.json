@@ -1,5 +1,10 @@
 {
+  "/(admin)/landing/blog/page": "app/(admin)/landing/blog/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
   "/services/category/page": "app/services/category/page.js",
+  "/services/services/page": "app/services/services/page.js",
   "/user/page": "app/user/page.js"
 }

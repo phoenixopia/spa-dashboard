@@ -139,7 +139,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
               {isLoading ? (
                 <>
                   <svg
-                    className="h-5 w-5 animate-spin text-white"
+                    className="h-5 w-5 mr-2 animate-spin text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
