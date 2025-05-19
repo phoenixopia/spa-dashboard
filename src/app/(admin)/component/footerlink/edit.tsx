@@ -34,6 +34,8 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
   if (!showModal) return null;
+                console.log("footer id", serviceId)
+
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -46,6 +48,7 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
 
       const response = await axios.put(
         `${BURL}/footer-links/edit/${serviceId}`,
+
         {
           name: editForm.name,
           link: editForm.link,
@@ -57,6 +60,7 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
           withCredentials: true,
         }
       );
+
 
       setMessage("link updated successfully!");
       setMessageType("success");

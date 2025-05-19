@@ -243,7 +243,7 @@ useEffect(() => {
         {categoryMap[item.categoryId] || "Loading..."}
         </td> */}
         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          {item.link}
+  {item.link ? item.link : item.phone_number}
         </td>
         
         <td className="px-6 py-4 text-right space-x-2">
