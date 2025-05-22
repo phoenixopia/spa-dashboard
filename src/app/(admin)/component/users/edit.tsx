@@ -4,6 +4,7 @@ import axios from "axios";
 interface EditForm {
   firstName: string;
   lastName: string;
+  role: string;
   email: string;
   phoneNumber: string;
   password: string;
@@ -109,20 +110,23 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
         )}
 
         <div className="space-y-4">
-          {["firstName", "lastName", "email", "phoneNumber", "password"].map((field) => (
+          {["firstName", "lastName", "role", "email", "phoneNumber", "password"].map((field) => (
             <div key={field}>
-              <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
-                {field === "phoneNumber" ? "Phone Number" : field.charAt(0).toUpperCase() + field.slice(1)}
-              </label>
-              <input
-                name={field}
-                type={field === "password" ? "password" : "text"}
-                value={(editForm as any)[field]}
-                onChange={handleEditChange}
-                placeholder={`Enter ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`}
-                className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#008767]"
-              />
-            </div>
+      <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
+        {field === "phoneNumber" ? "Phone Number" : field.charAt(0).toUpperCase() + field.slice(1)}
+      </label>
+      <input
+        name={field}
+        type={field === "password" ? "password" : "text"}
+        value={(editForm as any)[field]}
+        onChange={handleEditChange}
+        placeholder={`Enter ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`}
+        disabled={field === "email"}
+        className={`w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 ${
+          field === "email" ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+        } border-gray-300 dark:border-gray-600 focus:ring-[#008767]`}
+      />
+    </div>
           ))}
 
           <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">

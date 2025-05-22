@@ -22,6 +22,7 @@ export default function User() {
   const [editForm, setEditForm] = useState({
     firstName: "",
     lastName: "",
+    role: "",
     phoneNumber: "",
     email: "",
     updatedAt: "",
@@ -32,6 +33,7 @@ export default function User() {
   const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
+    role: "",
     email: "",
     phoneNumber: "",
     password: "",
@@ -197,6 +199,8 @@ export default function User() {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th className="px-6 py-3">User Name</th>
+                                        <th className="px-6 py-3">Role</th>
+
                     <th className="px-6 py-3">Phone Number</th>
                     <th className="px-6 py-3">Email</th>
                     <th className="px-6 py-3">Date</th>
@@ -210,38 +214,54 @@ export default function User() {
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
                     >
                       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.firstName}</td>
+                                            <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.role}</td>
+
                       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.phoneNumber}</td>
                       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.email}</td>
                       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{new Date(item.updatedAt).toLocaleDateString()}</td>
-                      <td className="px-6 py-4 text-right space-x-2">
-                        <button
-                          className="text-[#008767] hover:text-[#006d50]"
-                          onClick={() => {
-                            setEditForm({
-                              firstName: item.firstName || "",
-                              lastName: item.lastName || "",
-                              email: item.email || "",
-                              phoneNumber: item.phoneNumber || "",
-                              updatedAt: item.updatedAt || "",
-                              password: "",
-                            });
-                            setUserId(item.id);
-                            setShowModal(true);
-                          }}
-                        >
-                          <Pencil size={18} />
-                        </button>
+                     <td className="px-6 py-4 text-right space-x-2">
+  <button
+    className={`${
+      item.role === "super-admin"
+        ? "text-gray-400 cursor-not-allowed"
+        : "text-[#008767] hover:text-[#006d50]"
+    }`}
+    onClick={() => {
+      if (item.role === "super-admin") return;
+      setEditForm({
+        firstName: item.firstName || "",
+        lastName: item.lastName || "",
+        role: item.role || "",
+        email: item.email || "",
+        phoneNumber: item.phoneNumber || "",
+        updatedAt: item.updatedAt || "",
+        password: "",
+      });
+      setUserId(item.id);
+      setShowModal(true);
+    }}
+    disabled={item.role === "super-admin"}
+  >
+    <Pencil size={18} />
+  </button>
 
-                        <button
-                          onClick={() => {
-                            setDeleteItemId(item.id);
-                            setShowDeleteModal(true);
-                          }}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <Trash2 size={18} />
-                        </button>
-                      </td>
+  <button
+    className={`${
+      item.role === "super-admin"
+        ? "text-gray-400 cursor-not-allowed"
+        : "text-red-600 hover:text-red-800"
+    }`}
+    onClick={() => {
+      if (item.role === "super-admin") return;
+      setDeleteItemId(item.id);
+      setShowDeleteModal(true);
+    }}
+    disabled={item.role === "super-admin"}
+  >
+    <Trash2 size={18} />
+  </button>
+</td>
+
                     </tr>
                   ))}
                 </tbody>

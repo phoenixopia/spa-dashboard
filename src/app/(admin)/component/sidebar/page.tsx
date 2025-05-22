@@ -54,7 +54,12 @@ const Sidebar = () => {
       } else if (pathname.includes("/landing/testimonials")) {
         setActiveNav("landing-testimonials");
         setIsLandingOpen(true);
-      } else if (pathname.includes("/landing")) {
+      }else if (pathname.includes("/landing/footerlink")) {
+        setActiveNav("landing-footerlink");
+        setIsLandingOpen(true);
+      }
+      
+      else if (pathname.includes("/landing")) {
         setActiveNav("landing");
         setIsLandingOpen(true);
       } else if (pathname.includes("/booking")) {
@@ -295,6 +300,23 @@ const Sidebar = () => {
                         }`}
                       >
                         Testimonials
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="/landing/footerlink"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick("landing-footerlink");
+                          window.location.href = "/landing/footerlink";
+                        }}
+                        className={`flex items-center w-full p-2 pl-11 rounded-lg ${
+                          activeNav === "landing-footerlink"
+                            ? "bg-[#008767] text-white"
+                            : "text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        Footer Link
                       </a>
                     </li>
                   </ul>

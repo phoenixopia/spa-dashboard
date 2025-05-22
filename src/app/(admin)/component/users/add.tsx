@@ -8,6 +8,7 @@ interface AddUserModalProps {
   newUser: {
     firstName: string;
     lastName: string;
+    role: string;
     phoneNumber: string;
     email: string;
     updatedAt?: string;
@@ -93,6 +94,16 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
               name="lastName"
               type="text"
               value={newUser.lastName}
+              onChange={onChange}
+              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Role</label>
+            <input
+              name="role"
+              type="text"
+              value={newUser.role}
               onChange={onChange}
               className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             />

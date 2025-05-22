@@ -8,11 +8,12 @@ import { Bell, Trash2, Menu } from "lucide-react";
 const BURL = process.env.NEXT_PUBLIC_APP_URL;
 
 interface Notification {
-  id: number;
-  title: string;
+  id: string;
   message: string;
-  time: string;
-  read: boolean;
+  isRead: boolean;
+  createdAt: string;
+  type: string;
+  status: string;
 }
 
 export default function NotificationPage() {
@@ -24,6 +25,7 @@ export default function NotificationPage() {
       try {
         const response = await axios.get(`${BURL}/notification`);
         setNotifications(response.data.data);
+        console.log(response.data.data, "notifications");
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }
@@ -32,35 +34,23 @@ export default function NotificationPage() {
     fetchNotifications();
   }, []);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     try {
       const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('token='))
-        ?.split('=')[1];
-    
+        .split("; ")
+        .find((row) => row.startsWith("token="))
+        ?.split("=")[1];
+
       if (!token) {
-        console.error('No auth token found. Redirecting or showing message...');
+        console.error("No auth token found.");
         return;
       }
-    
-      await axios.put(
-        `${BURL}/notification/edit/${id}`,
-        { status: "Archived" },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
-    
-      // Remove from UI
+
+      // Remove from UI only
       setNotifications((prev) => prev.filter((note) => note.id !== id));
     } catch (error) {
-      console.error("Error archiving notification:", error);
+      console.error("Error deleting notification:", error);
     }
-    
   };
 
   return (
@@ -94,7 +84,7 @@ export default function NotificationPage() {
                 <div
                   key={note.id}
                   className={`flex items-start justify-between p-4 rounded-xl border ${
-                    note.read ? "bg-gray-50 dark:bg-gray-800" : "bg-purple-50 dark:bg-purple-900"
+                    note.isRead ? "bg-gray-50 dark:bg-gray-800" : "bg-purple-50 dark:bg-purple-900"
                   }`}
                 >
                   <div className="flex items-start gap-4">
@@ -102,9 +92,11 @@ export default function NotificationPage() {
                       <Bell size={20} />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-800 dark:text-white">{note.title}</h4>
+                      <h4 className="font-semibold text-gray-800 dark:text-white">{note.type}</h4>
                       <p className="text-sm text-gray-600 dark:text-gray-300">{note.message}</p>
-                      <span className="text-xs text-gray-400 dark:text-gray-500">{note.time}</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500">
+                        {new Date(note.createdAt).toLocaleString()}
+                      </span>
                     </div>
                   </div>
                   <button
