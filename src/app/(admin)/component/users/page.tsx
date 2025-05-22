@@ -219,36 +219,49 @@ export default function User() {
                       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.phoneNumber}</td>
                       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.email}</td>
                       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{new Date(item.updatedAt).toLocaleDateString()}</td>
-                      <td className="px-6 py-4 text-right space-x-2">
-                        <button
-                          className="text-[#008767] hover:text-[#006d50]"
-                          onClick={() => {
-                            setEditForm({
-                              firstName: item.firstName || "",
-                              lastName: item.lastName || "",
-                              role: item.role || "",
-                              email: item.email || "",
-                              phoneNumber: item.phoneNumber || "",
-                              updatedAt: item.updatedAt || "",
-                              password: "",
-                            });
-                            setUserId(item.id);
-                            setShowModal(true);
-                          }}
-                        >
-                          <Pencil size={18} />
-                        </button>
+                     <td className="px-6 py-4 text-right space-x-2">
+  <button
+    className={`${
+      item.role === "super-admin"
+        ? "text-gray-400 cursor-not-allowed"
+        : "text-[#008767] hover:text-[#006d50]"
+    }`}
+    onClick={() => {
+      if (item.role === "super-admin") return;
+      setEditForm({
+        firstName: item.firstName || "",
+        lastName: item.lastName || "",
+        role: item.role || "",
+        email: item.email || "",
+        phoneNumber: item.phoneNumber || "",
+        updatedAt: item.updatedAt || "",
+        password: "",
+      });
+      setUserId(item.id);
+      setShowModal(true);
+    }}
+    disabled={item.role === "super-admin"}
+  >
+    <Pencil size={18} />
+  </button>
 
-                        <button
-                          onClick={() => {
-                            setDeleteItemId(item.id);
-                            setShowDeleteModal(true);
-                          }}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <Trash2 size={18} />
-                        </button>
-                      </td>
+  <button
+    className={`${
+      item.role === "super-admin"
+        ? "text-gray-400 cursor-not-allowed"
+        : "text-red-600 hover:text-red-800"
+    }`}
+    onClick={() => {
+      if (item.role === "super-admin") return;
+      setDeleteItemId(item.id);
+      setShowDeleteModal(true);
+    }}
+    disabled={item.role === "super-admin"}
+  >
+    <Trash2 size={18} />
+  </button>
+</td>
+
                     </tr>
                   ))}
                 </tbody>
