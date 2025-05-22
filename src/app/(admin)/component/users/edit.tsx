@@ -4,6 +4,7 @@ import axios from "axios";
 interface EditForm {
   firstName: string;
   lastName: string;
+  role: string;
   email: string;
   phoneNumber: string;
   password: string;
@@ -109,7 +110,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
         )}
 
         <div className="space-y-4">
-          {["firstName", "lastName", "email", "phoneNumber", "password"].map((field) => (
+          {["firstName", "lastName", "role", "email", "phoneNumber", "password"].map((field) => (
             <div key={field}>
               <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
                 {field === "phoneNumber" ? "Phone Number" : field.charAt(0).toUpperCase() + field.slice(1)}
