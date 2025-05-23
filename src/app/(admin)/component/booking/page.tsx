@@ -32,7 +32,6 @@ export default function Booking() {
   const fetchData = async () => {
     try {
       const res = await axios.get(`${BURL}/booking`);
-      console.log("API response:", res.data);
 
       if (Array.isArray(res.data.data)) {
         setData(res.data.data); // Assuming the response has a data array
@@ -130,7 +129,6 @@ export default function Booking() {
           withCredentials: true,
         }
       );
-      console.log('Booking added:', response?.data?.booking);
       setAddModal(false);
       fetchData(); // Refresh the list after adding
     } catch (error) {

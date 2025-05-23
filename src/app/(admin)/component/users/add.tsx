@@ -15,7 +15,7 @@ interface AddUserModalProps {
     password: string;
     message: string;
   };
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   onAdd: () => void;
   setNewUserMessage: (message: string) => void; // ✅ added for setting error/success message
 }
@@ -99,15 +99,18 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Role</label>
-            <input
-              name="role"
-              type="text"
-              value={newUser.role}
+  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Role</label>
+  <select
+    name="role"
+    value={newUser.role}
               onChange={onChange}
-              className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-            />
-          </div>
+    className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+  >
+    <option value="user">user</option>
+    <option value="admin">admin</option>
+  </select>
+</div>
+
           <div>
             <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Email</label>
             <input

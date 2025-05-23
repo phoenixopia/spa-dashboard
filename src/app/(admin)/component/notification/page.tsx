@@ -25,7 +25,6 @@ export default function NotificationPage() {
       try {
         const response = await axios.get(`${BURL}/notification`);
         setNotifications(response.data.data);
-        console.log(response.data.data, "notifications");
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }

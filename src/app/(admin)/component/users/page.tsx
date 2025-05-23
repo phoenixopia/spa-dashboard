@@ -53,7 +53,7 @@ export default function User() {
   const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
-  const handleAddUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAddUserChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewUser((prev) => ({ ...prev, [name]: value }));
   };
@@ -79,7 +79,8 @@ export default function User() {
 
       
     } catch (error) {
-      console.error("Error adding user:", error);
+      setMessage("❌ Failed to update user.");
+      setTimeout(() => setMessage(""), 3000);
       
     }
     setShowModal(false);
@@ -87,7 +88,7 @@ export default function User() {
     setAddModal(false);
   };
 
-  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 

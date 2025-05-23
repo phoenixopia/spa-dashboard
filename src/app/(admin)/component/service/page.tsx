@@ -34,9 +34,7 @@ export default function Service() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // console.log("data:", data);
-  // console.log("type of data:", typeof data);
-  // console.log("isArray:", Array.isArray(data));
+ 
   const currentItems = [];
   for (let i = indexOfFirstItem; i < indexOfLastItem && data && i < data.length; i++) {
     currentItems.push(data[i]);
@@ -98,7 +96,6 @@ const handleAddSave = async () => {
         withCredentials: true,
       }
     );
-    console.log('service added:', response?.data?.service);
     setAddModal(false);
     fetchData(); // refresh list
   } catch (error) {
@@ -119,7 +116,6 @@ const handleAddSave = async () => {
 const fetchData = async () => {
   try {
     const res = await axios.get(`${BURL}/service`);
-    console.log("API raw response:", res.data);
 
     // Confirm the actual response structure and access correctly:
     if (Array.isArray(res.data.data)) {

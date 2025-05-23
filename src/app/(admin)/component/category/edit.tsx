@@ -65,7 +65,6 @@ const EditcategoryModal: React.FC<EditcategoryModalProps> = ({
         withCredentials: true,
         
       });
-      console.log("cat id", categoryId);
 
       setMessage("Category updated successfully!");
       setMessageType("success");

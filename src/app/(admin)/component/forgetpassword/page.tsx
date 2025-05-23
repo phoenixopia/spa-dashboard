@@ -35,7 +35,6 @@ export default function ForgotPasswordPage() {
         setMessageType("success");
       }
     } catch (err: any) {
-      console.log(err);
       const backendMessage = err?.response?.data?.message;
 
       if (err.response && err.response.status === 404) {

@@ -36,9 +36,7 @@ export default function testimonial() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // console.log("data:", data);
-  // console.log("type of data:", typeof data);
-  // console.log("isArray:", Array.isArray(data));
+
   const currentItems = [];
   for (let i = indexOfFirstItem; i < indexOfLastItem && data && i < data.length; i++) {
     currentItems.push(data[i]);
@@ -87,7 +85,6 @@ const handleAddSave = async () => {
       .split('; ')
       .find(row => row.startsWith('token='))
       ?.split('=')[1] || ''; // Extract token from cookies
-      console.log(token)
     const response = await axios.post(
       `${BURL}/testimonial/create`,
       newtestimonial,
@@ -98,11 +95,9 @@ const handleAddSave = async () => {
         withCredentials: true,
       }
     );
-    console.log('testimonial added:', response?.data?.testimonial);
     setAddModal(false);
     fetchData(); // refresh list
   } catch (error) {
-    console.error('Error adding testimonial:', error);
   }
 };
 
@@ -167,7 +162,6 @@ useEffect(() => {
       .catch((err) => console.error("Failed to load categories", err));
   }, []);
 
-console.log(currentItems,'gfhgfhgfg')
 
   return (
     <div className="relative bg-cover bg-center min-h-screen">

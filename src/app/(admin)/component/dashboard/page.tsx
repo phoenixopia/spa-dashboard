@@ -31,7 +31,6 @@ export default function Dashboard() {
     }
   };
 
-  console.log("\n\n toaday booking", todaybooking)
 
 
   const [testimonialcount, settestimonialCount] = useState(0);
@@ -40,7 +39,6 @@ export default function Dashboard() {
   const fetchtestimonial = async () => {
     try {
       const res = await axios.get(`${BURL}/testimonial`);
-      console.log("testimonial data", res);
       const testimonialcount = res.data.pagination.total || 0; // Get the total number of services or default to 0
       settestimonialCount(testimonialcount); // Update the state with the booking count
     } catch (error) {

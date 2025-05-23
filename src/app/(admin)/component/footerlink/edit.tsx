@@ -34,7 +34,6 @@ const EditserviceModal: React.FC<EditserviceModalProps> = ({
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
   if (!showModal) return null;
-                console.log("footer id", serviceId)
 
 
   const handleSave = async () => {

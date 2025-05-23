@@ -14,7 +14,7 @@ export interface EditUserModalProps {
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   editForm: EditForm & { updatedAt: string };
-  handleEditChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleEditChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   userId: string;
   BURL: string;
   onUpdated: () => void;
@@ -81,90 +81,102 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
-      <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">
-            Edit User
-          </h2>
-          <button
-            onClick={handleClose}
-            className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
-            aria-label="Close Modal"
-          >
-            ×
-          </button>
+  <div className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-md dark:bg-gray-900">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">
+          Edit User
+        </h2>
+        <button
+          onClick={handleClose}
+          className="text-[#008767] hover:text-[#006d50] text-3xl font-bold"
+          aria-label="Close Modal"
+        >
+          ×
+        </button>
+      </div>
+
+      {/* Show backend message */}
+      {message && (
+        <div
+          className={`mb-4 p-3 rounded-md text-sm ${
+            messageType === "success"
+              ? "bg-green-100 text-green-800 border border-green-300"
+              : "bg-red-100 text-red-800 border border-red-300"
+          }`}
+        >
+          {message}
         </div>
+      )}
 
-        {/* Show backend message */}
-        {message && (
-          <div
-            className={`mb-4 p-3 rounded-md text-sm ${
-              messageType === "success"
-                ? "bg-green-100 text-green-800 border border-green-300"
-                : "bg-red-100 text-red-800 border border-red-300"
-            }`}
+      <div className="space-y-4">
+        {["firstName", "lastName", "role", "email", "phoneNumber", "password"].map((field) => (
+          <div key={field}>
+            <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
+              {field === "phoneNumber" ? "Phone Number" : field.charAt(0).toUpperCase() + field.slice(1)}
+            </label>
+            {field === "role" ? (
+              <select
+                name="role"
+                value={(editForm as any)[field]}
+                onChange={handleEditChange}
+                className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              >
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
+            ) : (
+              <input
+                name={field}
+                type={field === "password" ? "password" : "text"}
+                value={(editForm as any)[field]}
+                onChange={handleEditChange}
+                placeholder={`Enter ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`}
+                disabled={field === "email"}
+                className={`w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 ${
+                  field === "email"
+                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                    : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                } border-gray-300 dark:border-gray-600 focus:ring-[#008767]`}
+              />
+            )}
+          </div>
+        ))}
+
+        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
+          <button
+            onClick={handleSave}
+            disabled={loading}
+            className={`px-4 py-2 rounded-lg w-full sm:w-auto flex items-center justify-center gap-2 text-white 
+              ${loading ? 'bg-[#006d50] cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`}
           >
-            {message}
-          </div>
-        )}
-
-        <div className="space-y-4">
-          {["firstName", "lastName", "role", "email", "phoneNumber", "password"].map((field) => (
-            <div key={field}>
-      <label className="block text-sm font-medium mb-1 text-left text-gray-700 dark:text-gray-300">
-        {field === "phoneNumber" ? "Phone Number" : field.charAt(0).toUpperCase() + field.slice(1)}
-      </label>
-      <input
-        name={field}
-        type={field === "password" ? "password" : "text"}
-        value={(editForm as any)[field]}
-        onChange={handleEditChange}
-        placeholder={`Enter ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`}
-        disabled={field === "email"}
-        className={`w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 ${
-          field === "email" ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-        } border-gray-300 dark:border-gray-600 focus:ring-[#008767]`}
-      />
-    </div>
-          ))}
-
-          <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-            <button
-              onClick={handleSave}
-              disabled={loading}
-              className={`px-4 py-2 rounded-lg w-full sm:w-auto flex items-center justify-center gap-2 text-white 
-                ${loading ? 'bg-[#006d50] cursor-not-allowed' : 'bg-[#008767] hover:bg-[#006d50]'}`}
-            >
-              {loading ? (
-                <>
-                  <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      fill="none"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v4l5-5-5-5v4a10 10 0 100 20v-4l-5 5 5 5v-4a8 8 0 01-8-8z"
-                    />
-                  </svg>
-                  Saving...
-                </>
-              ) : (
-                "Save"
-              )}
-            </button>
-          </div>
+            {loading ? (
+              <>
+                <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    fill="none"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4l5-5-5-5v4a10 10 0 100 20v-4l-5 5 5 5v-4a8 8 0 01-8-8z"
+                  />
+                </svg>
+                Saving...
+              </>
+            ) : (
+              "Save"
+            )}
+          </button>
         </div>
       </div>
     </div>
-  );
-};
-
+  </div>
+)};
 export default EditUserModal;

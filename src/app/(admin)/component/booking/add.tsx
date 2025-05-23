@@ -36,7 +36,6 @@ const AddbookingModal: React.FC<AddbookingModalProps> = ({
         .get(`${BURL}/service`)
         .then(res => {
           setCategories(res.data.data);
-          console.log('Fetched Categories:', res.data.data);
         })
         .catch(err => console.error('Error fetching categories:', err));
     }

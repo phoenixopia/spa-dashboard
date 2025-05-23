@@ -80,7 +80,6 @@ const AddcategoryModal: React.FC<AddcategoryModalProps> = ({
         },
         withCredentials: true,
       });
-      console.log("go tocken", token);
       setError(null);
       onSave();
       onClose();

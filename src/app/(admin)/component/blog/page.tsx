@@ -36,9 +36,7 @@ export default function Blog() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // console.log("data:", data);
-  // console.log("type of data:", typeof data);
-  // console.log("isArray:", Array.isArray(data));
+ 
   const currentItems = [];
   for (let i = indexOfFirstItem; i < indexOfLastItem && data && i < data.length; i++) {
     currentItems.push(data[i]);
@@ -85,7 +83,6 @@ const handleAddSave = async () => {
       .split('; ')
       .find(row => row.startsWith('token='))
       ?.split('=')[1] || ''; // Extract token from cookies
-      console.log(token)
     const response = await axios.post(
       `${BURL}/blog/create`,
       newblog,
@@ -96,11 +93,9 @@ const handleAddSave = async () => {
         withCredentials: true,
       }
     );
-    console.log('blog added:', response?.data?.blog);
     setAddModal(false);
     fetchData(); // refresh list
   } catch (error) {
-    console.error('Error adding blog:', error);
   }
   fetchData(); // refresh list
 
@@ -128,10 +123,8 @@ const fetchData = async () => {
     } else if (Array.isArray(res.data)) {
       setData(res.data); // if API returns an array directly
     } else {
-      console.error("Unexpected data structure:", res.data);
     }
   } catch (error) {
-    console.error("Error fetching blogs:", error);
   }
 };
 
@@ -167,7 +160,6 @@ useEffect(() => {
       .catch((err) => console.error("Failed to load categories", err));
   }, []);
 
-console.log(currentItems,'gfhgfhgfg')
 
   return (
     <div className="relative bg-cover bg-center min-h-screen">
